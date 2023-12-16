@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "particle": "spmreborn:block/grinder_side",
+    "top": "spmreborn:block/grinder_top_we",
+    "bottom": "minecraft:block/blackstone",
+    "side": "spmreborn:block/grinder_side"
+  }
+}

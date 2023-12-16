@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "spmreborn",
+  "version": "${version}",
+
+  "name": "Sweet Potato Reborn",
+  "description": "Try new kinds of food, crops & magic in Sweet Potato Mod!",
+  "authors": [
+    "QWERTY770"
+  ],
+  "old_contributors": [
+    "teddyxlandlee",
+    "Rayawa",
+    "Peterice"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": "https://github.com/QWERTY770/SweetPotatoReborn",
+    "issues": "https://github.com/QWERTY770/SweetPotatoReborn/issues"
+  },
+
+  "license": "Apache-2.0",
+  "icon": "assets/spmreborn/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.qwerty770.mcmod.spmreborn.SPRMain"
+    ],
+    "client": [
+      "io.github.qwerty770.mcmod.spmreborn.client.SPRClient"
+    ],
+    "server": [
+      "io.github.qwerty770.mcmod.spmreborn.linkage.SPRLinkageServer::load"
+    ]
+  },
+  "mixins": [
+    "sweet_potato.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "fabric-api": ">=0.83.0",
+    "architectury": ">=9.1",
+    "minecraft": ">=1.20",
+    "java": ">=17"
+  },
+  "suggests": {
+    "shurlin": "*",
+    "enchlevel-langpatch": ">1.0.0"
+  },
+  "custom": {
+    "Pigeonia Linkage Standard": {
+      "url": "https://featurehouse.github.io/pigeonia-linkage-standard/v1.0.1/STANDARD.txt",
+      "version": "v1.0.1",
+      "strict": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "spmreborn:sugar_from_ench"
+    ]
+  },
+  "criteria": {
+    "r": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": ["spmreborn:enchanted_sugar_cane"]
+        }]
+      }
+    },
+    "_": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "spmreborn:sugar_from_ench"
+      }
+    }
+  },
+  "requirements": [[
+    "r", "_"
+  ]]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:generic",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "spmreborn:baked_purple_potato"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "spmreborn:baked_red_potato"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 9,
+          "name": "spmreborn:baked_white_potato"
+        }
+      ]
+    }
+  ]
+}

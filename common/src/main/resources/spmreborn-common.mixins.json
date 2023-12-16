@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.qwerty770.mcmod.spmreborn.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AdvancementTaskMixin",
+    "acc.AdvancementTaskAccessor",
+    "acc.IngredientAccessor",
+    "acc.LootTableBuilderAccessor",
+    "acc.ParrotEntityAccessor",
+    "ingredient.ChickenEntityMixin",
+    "ingredient.PigEntityMixin",
+    "modinfo.LevelPropertiesMixin",
+    "modinfo.ServerPropertiesMixin"
+  ],
+  "client": [
+    "WorldEventMixinC",
+    "modinfo.CreditsScreenMixinC",
+    "modinfo.TitleScreenMixinC"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "spmreborn:rabbit_stew_using_ench_carrot"
+    ]
+  },
+  "criteria": {
+    "ecrt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": ["spmreborn:enchanted_carrot"]
+        }]
+      }
+    },
+    "_": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "spmreborn:rabbit_stew_using_ench_carrot"
+      }
+    }
+  },
+  "requirements": [[
+    "ecrt", "_"
+  ]]
+}

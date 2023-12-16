@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "grinding=true": {
+	  "model": "spmreborn:block/grinder"
+	},
+    "grinding=false": {
+      "model": "spmreborn:block/grinder_not_grinding"
+    }
+  }
+}

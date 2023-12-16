@@ -1,0 +1,27 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "spmreborn:baked_red_potato"
+    ]
+  },
+  "criteria": {
+    "raw": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": ["spmreborn:red_potato"]
+        }]
+      }
+    },
+    "_": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "spmreborn:baked_red_potato"
+      }
+    }
+  },
+  "requirements": [[
+    "raw", "_"
+  ]]
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "spmreborn:enchanted_oak_sapling",
+    "spmreborn:enchanted_spruce_sapling",
+    "spmreborn:enchanted_birch_sapling",
+    "spmreborn:enchanted_jungle_sapling",
+    "spmreborn:enchanted_acacia_sapling",
+    "spmreborn:enchanted_dark_oak_sapling"
+  ]
+}

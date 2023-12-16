@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "spmreborn:enchanted_jungle_leaves",
+    "spmreborn:enchanted_oak_leaves",
+    "spmreborn:enchanted_spruce_leaves",
+    "spmreborn:enchanted_dark_oak_leaves",
+    "spmreborn:enchanted_acacia_leaves",
+    "spmreborn:enchanted_birch_leaves"
+  ]
+}

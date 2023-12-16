@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "spmreborn:block/seed_updater"
+    }
+  }
+}

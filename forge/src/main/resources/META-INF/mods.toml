@@ -1,0 +1,37 @@
+# Update to Minecraft 1.20 -- 2023/10/28
+modLoader = "javafml"
+loaderVersion = "[46,)"
+issueTrackerURL = "https://github.com/QWERTY770/SweetPotatoReborn/issues"
+license = "Apache-2.0"
+
+[[mods]]
+modId = "spmreborn"
+version = "1.0.0"
+displayName = "Sweet Potato Reborn"
+displayURL="https://github.com/QWERTY770/SweetPotatoReborn"
+authors = "QWERTY770"
+description = '''
+Try new kinds of food, crops & magic in Sweet Potato Mod!
+'''
+logoFile = "icon.png"
+
+[[dependencies.spmreborn]]
+modId = "forge"
+mandatory = true
+versionRange = "[46,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.spmreborn]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.spmreborn]]
+modId = "architectury"
+mandatory = true
+versionRange = "[9.1,)"
+ordering = "AFTER"
+side = "BOTH"

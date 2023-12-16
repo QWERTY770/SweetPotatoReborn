@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "activated=true": {
+      "model": "spmreborn:block/magic_cube_activated"
+	},
+	"activated=false": {
+	  "model": "spmreborn:block/magic_cube_unactivated"
+	}
+  }
+}

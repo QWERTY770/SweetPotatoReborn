@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/enchanting_table",
+  "textures": {
+    "particle": "spmreborn:block/seed_updater_side",
+    "bottom": "minecraft:block/blackstone_top",
+    "top": "spmreborn:block/seed_updater_top",
+    "side": "spmreborn:block/seed_updater_side"
+  }
+}

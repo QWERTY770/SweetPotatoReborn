@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "spmreborn:block/sweet_potato_stage0"
+    },
+    "age=1": {
+      "model": "spmreborn:block/sweet_potato_stage0"
+    },
+    "age=2": {
+      "model": "spmreborn:block/sweet_potato_stage1"
+    },
+    "age=3": {
+      "model": "spmreborn:block/sweet_potato_stage1"
+    },
+    "age=4": {
+      "model": "spmreborn:block/sweet_potato_stage2"
+    },
+    "age=5": {
+      "model": "spmreborn:block/sweet_potato_stage2"
+    },
+    "age=6": {
+      "model": "spmreborn:block/sweet_potato_stage2"
+    },
+    "age=7": {
+      "model": "spmreborn:block/sweet_potato_stage3"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "spmreborn:seed_updating",
+  "base": {
+    "item": "minecraft:oak_sapling"
+  },
+  "addition": {
+    "item": "spmreborn:potato_powder"
+  },
+  "result": {
+    "item": "spmreborn:enchanted_oak_sapling"
+  }
+}

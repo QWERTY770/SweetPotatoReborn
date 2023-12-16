@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "particle": "spmreborn:block/magic_cube_side_unactivated",
+	"top": "minecraft:block/polished_blackstone",
+	"bottom": "minecraft:block/obsidian",
+	"side": "spmreborn:block/magic_cube_side_unactivated"
+  }
+}

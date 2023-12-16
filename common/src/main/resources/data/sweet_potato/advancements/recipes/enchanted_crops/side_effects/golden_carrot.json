@@ -1,0 +1,27 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "spmreborn:golden_carrot"
+    ]
+  },
+  "criteria": {
+    "l": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": ["spmreborn:enchanted_carrot"]
+        }]
+      }
+    },
+    "_": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "spmreborn:golden_carrot"
+      }
+    }
+  },
+  "requirements": [[
+    "l", "_"
+  ]]
+}
