@@ -8,17 +8,11 @@
   "authors": [
     "QWERTY770"
   ],
-  "old_contributors": [
-    "teddyxlandlee",
-    "Rayawa",
-    "Peterice"
-  ],
   "contact": {
     "homepage": "",
     "sources": "https://github.com/QWERTY770/SweetPotatoReborn",
     "issues": "https://github.com/QWERTY770/SweetPotatoReborn/issues"
   },
-
   "license": "Apache-2.0",
   "icon": "assets/spmreborn/icon.png",
 
@@ -54,6 +48,11 @@
       "url": "https://featurehouse.github.io/pigeonia-linkage-standard/v1.0.1/STANDARD.txt",
       "version": "v1.0.1",
       "strict": true
-    }
+    },
+    "old_contributors": [
+      "teddyxlandlee",
+      "Rayawa",
+      "Peterice"
+    ]
   }
 }
