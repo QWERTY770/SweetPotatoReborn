@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity> {
-    public static BooleanProperty ACTIVATED = BooleanProperty.create("activated");
+    public static final BooleanProperty ACTIVATED = BooleanProperty.create("activated");
 
     @Override
     public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, InteractionHand hand, BlockHitResult blockHitResult) {
@@ -38,7 +38,7 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
 
     @Override
     public BlockEntityType<MagicCubeBlockEntity> getBlockEntityType() {
-        return SPRMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE;
+        return SPRMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE.get();
     }
 
     @Override

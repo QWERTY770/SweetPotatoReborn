@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.platform.api.reg;
+package io.github.qwerty770.mcmod.spmreborn.platform.api.deprecated.reg;
 
 import com.mojang.datafixers.types.Type;
 import com.mojang.serialization.Codec;
@@ -32,9 +32,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Supplier;
 
+@Deprecated
 final class RegistryImpl implements PlatformRegisterWrapper {
-    //static RegistryImpl getInstance() { return INSTANCE; }
-
     RegistryImpl(String modId) {
         this.modId = modId;
         this.registryContainer = RegistryContainer.of(modId);
@@ -132,4 +131,5 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     static final RegistryImpl SPR = new RegistryImpl(SPRMain.MODID);
 }
 
+@Deprecated
 interface PlatformRegisterWrapper extends PlatformRegister {}

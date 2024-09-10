@@ -58,7 +58,7 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
 
     @Override
     public @NotNull LootItemFunctionType getType() {
-        return SPRMain.SET_ENCHANTED_POTATO_EFFECT;
+        return SPRMain.SET_ENCHANTED_POTATO_EFFECT.get();
     }
 
     public static class Serializer

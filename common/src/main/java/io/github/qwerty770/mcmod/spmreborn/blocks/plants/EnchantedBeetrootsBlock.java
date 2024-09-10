@@ -17,7 +17,7 @@ public class EnchantedBeetrootsBlock extends BeetrootBlock {
 
     @Override
     protected @NotNull ItemLike getBaseSeedId() {
-        return SPRMain.ENCHANTED_BEETROOT_SEEDS;
+        return SPRMain.ENCHANTED_BEETROOT_SEEDS.get();
     }
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {

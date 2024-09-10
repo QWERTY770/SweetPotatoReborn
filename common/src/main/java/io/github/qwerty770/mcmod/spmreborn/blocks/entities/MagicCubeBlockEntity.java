@@ -32,6 +32,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -55,14 +56,14 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     private byte fireCountCache = 0;
     private final RandomSource random = this.level != null ? this.level.getRandom() : RandomSource.create();
 
-    protected BooleanStateManager stateHelper;
+    protected final BooleanStateManager stateHelper;
     protected short mainFuelTime;
     protected short viceFuelTime;
 
-    protected IntMagicCubeProperties propertyDelegate;
+    protected final IntMagicCubeProperties propertyDelegate;
 
     public MagicCubeBlockEntity(BlockPos pos, BlockState state) {
-        this(SPRMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE, 8, pos, state);
+        this(SPRMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE.get(), 8, pos, state);
     }
 
     public MagicCubeBlockEntity(BlockEntityType<?> type, int size, BlockPos pos, BlockState state) {
@@ -108,11 +109,11 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
                         MagicCubeBlockEntity.this.mainFuelTime = -1;
                         MagicCubeBlockEntity.this.viceFuelTime = 0;
                         MagicCubeBlockEntity.this.level.playSound(null, pos,
-                                SPRMain.MAGIC_CUBE_DEACTIVATE, SoundSource.BLOCKS,
+                                SPRMain.MAGIC_CUBE_DEACTIVATE.get(), SoundSource.BLOCKS,
                                 1.0F, 1.0F);
                     } else {
                         MagicCubeBlockEntity.this.level.playSound(null, pos,
-                                SPRMain.MAGIC_CUBE_ACTIVATE, SoundSource.BLOCKS,
+                                SPRMain.MAGIC_CUBE_ACTIVATE.get(), SoundSource.BLOCKS,
                                 1.0F, 1.0F);
                     }
                 }
@@ -164,7 +165,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             /*-* * PROPERTIES * *-*/
             if (!this.isProcessing()) {
                 // Check inventory
-                if (this.inventory.get(6).getItem() == SPRMain.PEEL) {
+                if (this.inventory.get(6).getItem() == SPRMain.PEEL.get()) {
                     boolean bl = false;
                     for (int i = 0; i < 3; ++i) {
                         if (SPRMain.RAW_SWEET_POTATOES.contains(this.inventory.get(i).getItem())) {
@@ -182,7 +183,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             }
             // CHECK VICE FUEL
             if (this.shouldUpdateViceFuel()) {
-                if (this.inventory.get(7).getItem() == SPRMain.POTATO_POWDER) {
+                if (this.inventory.get(7).getItem() == SPRMain.POTATO_POWDER.get()) {
                     this.viceFuelTime = 401;
                     this.inventory.get(7).shrink(1);
                     shallMarkDirty = true;
@@ -205,7 +206,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     @Override
-    protected Component getDefaultName() {
+    protected @NotNull Component getDefaultName() {
         return Component.translatable("container.spmreborn.magic_cube");
     }
 
@@ -278,7 +279,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+    protected @NotNull AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
         return new MagicCubeScreenHandler(syncId, playerInventory, Objects.requireNonNull(level), worldPosition, this, propertyDelegate);
     }
 
@@ -304,7 +305,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     @Override
-    public int[] getSlotsForFace(Direction side) {
+    public int @NotNull [] getSlotsForFace(Direction side) {
         return switch (side) {
             case DOWN -> BOTTOM_SLOTS;
             case UP -> TOP_SLOTS;
@@ -332,9 +333,9 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
         Item item = fromHopperStack.getItem();
         ItemStack toSlotStack = this.getItem(slot);
         if (slot == 6)
-            return item == SPRMain.PEEL;
+            return item == SPRMain.PEEL.get();
         if (slot == 7)
-            return item == SPRMain.POTATO_POWDER;
+            return item == SPRMain.POTATO_POWDER.get();
         if ((slot >= 3 && slot <= 5) || slot > 7 || slot < 0) return false;
         return SPRMain.RAW_SWEET_POTATOES.contains(item) && toSlotStack.isEmpty();
     }

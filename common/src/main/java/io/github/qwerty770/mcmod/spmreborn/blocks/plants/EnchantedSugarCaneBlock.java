@@ -76,7 +76,7 @@ public class EnchantedSugarCaneBlock extends Block {
 
     }
 
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
         if (!state.canSurvive(world, pos)) {
             world.scheduleTick(pos, this, 1);
         }

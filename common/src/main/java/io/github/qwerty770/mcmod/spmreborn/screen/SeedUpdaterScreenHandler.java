@@ -29,23 +29,23 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
     }
 
     public SeedUpdaterScreenHandler(int syncId, Inventory inventory, ContainerLevelAccess context) {
-        super(SPRMain.SEED_UPDATER_SCREEN_HANDLER_TYPE, syncId, inventory, context);
+        super(SPRMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), syncId, inventory, context);
         this.world = inventory.player.level();
-        this.list = this.world.getRecipeManager().getAllRecipesFor(SPRMain.SEED_UPDATING_RECIPE_TYPE);
+        this.list = this.world.getRecipeManager().getAllRecipesFor(SPRMain.SEED_UPDATING_RECIPE_TYPE.get());
     }
 
     protected boolean isValidBlock(@NotNull BlockState state) {
-        return state.is(SPRMain.SEED_UPDATER);
+        return state.is(SPRMain.SEED_UPDATER.get());
     }
 
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, SPRMain.SEED_UPDATER);
+        return stillValid(this.access, player, SPRMain.SEED_UPDATER.get());
     }
 
     @Override
     public void createResult() {
         List<SeedUpdatingRecipe> list1 = this.world.getRecipeManager().getRecipesFor(
-                SPRMain.SEED_UPDATING_RECIPE_TYPE, this.inputSlots, this.world
+                SPRMain.SEED_UPDATING_RECIPE_TYPE.get(), this.inputSlots, this.world
         );
         if (list1.isEmpty())
             this.resultSlots.setItem(0, ItemStack.EMPTY);
@@ -57,6 +57,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
         }
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     protected ItemCombinerMenuSlotDefinition createInputSlotDefinitions() {
         return null;
@@ -76,7 +77,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
         //output.markDirty();
         this.access.execute((world1, blockPos) -> {
             //world1.syncWorldEvent(1044, blockPos, 8844110));
-            world1.playSound(null, blockPos, SPRMain.AGROFORESTRY_TABLE_FINISH, SoundSource.BLOCKS, 1.0F, world1.getRandom().nextFloat() * 0.1F + 0.9F);
+            world1.playSound(null, blockPos, SPRMain.AGROFORESTRY_TABLE_FINISH.get(), SoundSource.BLOCKS, 1.0F, world1.getRandom().nextFloat() * 0.1F + 0.9F);
         });
         player.awardStat(SPRMain.CROP_UPGRADED);
         //return stack;

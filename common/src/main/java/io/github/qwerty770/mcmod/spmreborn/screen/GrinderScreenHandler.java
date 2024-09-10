@@ -20,7 +20,7 @@ public class GrinderScreenHandler extends AbstractContainerMenu {
     private final Container inventory;
     private final IntGrinderProperties properties;
 
-    protected Level world;
+    protected final Level world;
 
     /**
      * From: Registry
@@ -33,7 +33,7 @@ public class GrinderScreenHandler extends AbstractContainerMenu {
      * From: Grinder Block Entity
      */
     public GrinderScreenHandler(int syncId, Inventory playerInventory, Level world, Container inventory, IntGrinderProperties properties) {
-        super(SPRMain.GRINDER_SCREEN_HANDLER_TYPE, syncId);
+        super(SPRMain.GRINDER_SCREEN_HANDLER_TYPE.get(), syncId);
         this.inventory = inventory;
         this.properties = properties;
         this.addDataSlots(properties);

@@ -20,7 +20,7 @@ public class EnchantedWheatBlock extends CropBlock {
     @Environment(EnvType.CLIENT)
     @Override
     protected @NotNull ItemLike getBaseSeedId() {
-        return SPRMain.ENCHANTED_WHEAT_SEEDS;
+        return SPRMain.ENCHANTED_WHEAT_SEEDS.get();
     }
 
     @Override

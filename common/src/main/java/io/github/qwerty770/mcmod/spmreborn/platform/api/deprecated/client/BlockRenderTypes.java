@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.platform.api.client;
+package io.github.qwerty770.mcmod.spmreborn.platform.api.deprecated.client;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;
@@ -10,7 +10,6 @@ import java.util.function.Supplier;
 /**
  * @apiNote This must be wrapped in a client initialization event
  */
-// TODO
 @Deprecated
 public final class BlockRenderTypes {
     public static void register(RenderType type, Collection<Supplier<Block>> blocks) {

@@ -18,10 +18,10 @@ import java.util.function.BiPredicate;
 public class KeepPlayingSoundInstance extends SimpleSoundInstance implements TickableSoundInstance {
     public final LocalPlayer player;
     @NotNull
-    public ClientLevel world;
-    public BlockPos pos;
+    public final ClientLevel world;
+    public final BlockPos pos;
     protected boolean done = false;
-    protected BiPredicate<ClientLevel, BlockPos> playCondition;
+    protected final BiPredicate<ClientLevel, BlockPos> playCondition;
 
     public KeepPlayingSoundInstance(SoundEvent sound, float pitch, @NotNull ClientLevel world, BlockPos pos, LocalPlayer player, BiPredicate<ClientLevel, BlockPos> playCondition) {
         super(sound, SoundSource.BLOCKS, 1.0F, pitch, world.getRandom(), pos);

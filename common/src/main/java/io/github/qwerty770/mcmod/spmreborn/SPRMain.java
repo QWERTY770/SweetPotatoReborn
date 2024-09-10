@@ -2,6 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn;
 
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.ReloadListenerRegistry;
+import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.blocks.GrinderBlock;
 import io.github.qwerty770.mcmod.spmreborn.blocks.MagicCubeBlock;
 import io.github.qwerty770.mcmod.spmreborn.blocks.SeedUpdaterBlock;
@@ -21,6 +22,7 @@ import io.github.qwerty770.mcmod.spmreborn.screen.SeedUpdaterScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.AnimalIngredients;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.ComposterHelper;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
 import io.github.qwerty770.mcmod.spmreborn.world.gen.tree.*;
@@ -32,10 +34,7 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -60,100 +59,100 @@ public class SPRMain implements ModInitializer {
 			() -> new ItemStack(new EnchantedSweetPotatoItem(new Item.Properties(), SweetPotatoType.PURPLE)));
 
 	// Items
-	public static final Item PEEL;
+	public static final RegistrySupplier<Item> PEEL;
 	// Baked Potatoes
-	public static final Item BAKED_PURPLE_POTATO;
-	public static final Item BAKED_RED_POTATO;
-	public static final Item BAKED_WHITE_POTATO;
+	public static final RegistrySupplier<Item> BAKED_PURPLE_POTATO;
+	public static final RegistrySupplier<Item> BAKED_RED_POTATO;
+	public static final RegistrySupplier<Item> BAKED_WHITE_POTATO;
 	// Raw Potatoes
-	public static final Item PURPLE_POTATO;
-	public static final Item RED_POTATO;
-	public static final Item WHITE_POTATO;
+	public static final RegistrySupplier<Item> PURPLE_POTATO;
+	public static final RegistrySupplier<Item> RED_POTATO;
+	public static final RegistrySupplier<Item> WHITE_POTATO;
 	// Enchanted Potatoes
-	public static final Item ENCHANTED_PURPLE_POTATO;
-	public static final Item ENCHANTED_RED_POTATO;
-	public static final Item ENCHANTED_WHITE_POTATO;
+	public static final RegistrySupplier<Item> ENCHANTED_PURPLE_POTATO;
+	public static final RegistrySupplier<Item> ENCHANTED_RED_POTATO;
+	public static final RegistrySupplier<Item> ENCHANTED_WHITE_POTATO;
 	// Misc
-	public static final Item POTATO_POWDER;
-	public static final Item XMAS_TREATING_BOWL;
+	public static final RegistrySupplier<Item> POTATO_POWDER;
+	public static final RegistrySupplier<Item> XMAS_TREATING_BOWL;
 
 	// Blocks
-	public static final Block MAGIC_CUBE;
-	public static final Block GRINDER;
-	public static final Block SEED_UPDATER;
+	public static final RegistrySupplier<Block> MAGIC_CUBE;
+	public static final RegistrySupplier<Block> GRINDER;
+	public static final RegistrySupplier<Block> SEED_UPDATER;
 
 	// Crops
-	public static final Block PURPLE_POTATO_CROP;
-	public static final Block RED_POTATO_CROP;
-	public static final Block WHITE_POTATO_CROP;
+	public static final RegistrySupplier<Block> PURPLE_POTATO_CROP;
+	public static final RegistrySupplier<Block> RED_POTATO_CROP;
+	public static final RegistrySupplier<Block> WHITE_POTATO_CROP;
 
-	public static final Block ENCHANTED_WHEAT_CROP;
-	public static final Block ENCHANTED_BEETROOTS_CROP;
-	public static final Block ENCHANTED_VANILLA_POTATOES_CROP;
-	public static final Block ENCHANTED_CARROTS_CROP;
-	public static final Block ENCHANTED_SUGAR_CANE;
+	public static final RegistrySupplier<Block> ENCHANTED_WHEAT_CROP;
+	public static final RegistrySupplier<Block> ENCHANTED_BEETROOTS_CROP;
+	public static final RegistrySupplier<Block> ENCHANTED_VANILLA_POTATOES_CROP;
+	public static final RegistrySupplier<Block> ENCHANTED_CARROTS_CROP;
+	public static final RegistrySupplier<Block> ENCHANTED_SUGAR_CANE;
 
 	// Saplings
-	public static final Block ENCHANTED_OAK_SAPLING;
-	public static final Block ENCHANTED_SPRUCE_SAPLING;
-	public static final Block ENCHANTED_BIRCH_SAPLING;
-	public static final Block ENCHANTED_JUNGLE_SAPLING;
-	public static final Block ENCHANTED_ACACIA_SAPLING;
-	public static final Block ENCHANTED_DARK_OAK_SAPLING;
+	public static final RegistrySupplier<Block> ENCHANTED_OAK_SAPLING;
+	public static final RegistrySupplier<Block> ENCHANTED_SPRUCE_SAPLING;
+	public static final RegistrySupplier<Block> ENCHANTED_BIRCH_SAPLING;
+	public static final RegistrySupplier<Block> ENCHANTED_JUNGLE_SAPLING;
+	public static final RegistrySupplier<Block> ENCHANTED_ACACIA_SAPLING;
+	public static final RegistrySupplier<Block> ENCHANTED_DARK_OAK_SAPLING;
 
 	// Potted Saplings
-	public static final Block POTTED_ENCHANTED_SPRUCE_SAPLING;
-	public static final Block POTTED_ENCHANTED_BIRCH_SAPLING;
-	public static final Block POTTED_ENCHANTED_JUNGLE_SAPLING;
-	public static final Block POTTED_ENCHANTED_ACACIA_SAPLING;
-	public static final Block POTTED_ENCHANTED_OAK_SAPLING;
-	public static final Block POTTED_ENCHANTED_DARK_OAK_SAPLING;
+	public static final RegistrySupplier<Block> POTTED_ENCHANTED_SPRUCE_SAPLING;
+	public static final RegistrySupplier<Block> POTTED_ENCHANTED_BIRCH_SAPLING;
+	public static final RegistrySupplier<Block> POTTED_ENCHANTED_JUNGLE_SAPLING;
+	public static final RegistrySupplier<Block> POTTED_ENCHANTED_ACACIA_SAPLING;
+	public static final RegistrySupplier<Block> POTTED_ENCHANTED_OAK_SAPLING;
+	public static final RegistrySupplier<Block> POTTED_ENCHANTED_DARK_OAK_SAPLING;
 
 	// Enchanted Leaves
-	public static final Block ENCHANTED_OAK_LEAVES;
-	public static final Block ENCHANTED_ACACIA_LEAVES;
-	public static final Block ENCHANTED_BIRCH_LEAVES;
-	public static final Block ENCHANTED_DARK_OAK_LEAVES;
-	public static final Block ENCHANTED_JUNGLE_LEAVES;
-	public static final Block ENCHANTED_SPRUCE_LEAVES;
+	public static final RegistrySupplier<Block> ENCHANTED_OAK_LEAVES;
+	public static final RegistrySupplier<Block> ENCHANTED_ACACIA_LEAVES;
+	public static final RegistrySupplier<Block> ENCHANTED_BIRCH_LEAVES;
+	public static final RegistrySupplier<Block> ENCHANTED_DARK_OAK_LEAVES;
+	public static final RegistrySupplier<Block> ENCHANTED_JUNGLE_LEAVES;
+	public static final RegistrySupplier<Block> ENCHANTED_SPRUCE_LEAVES;
 
 	// Block Items
-	public static final Item MAGIC_CUBE_ITEM;
-	public static final Item GRINDER_ITEM;
-	public static final Item SEED_UPDATER_ITEM;
-	public static final Item ENCHANTED_OAK_SAPLING_ITEM;
-	public static final Item ENCHANTED_SPRUCE_SAPLING_ITEM;
-	public static final Item ENCHANTED_BIRCH_SAPLING_ITEM;
-	public static final Item ENCHANTED_JUNGLE_SAPLING_ITEM;
-	public static final Item ENCHANTED_ACACIA_SAPLING_ITEM;
-	public static final Item ENCHANTED_DARK_OAK_SAPLING_ITEM;
-	public static final Item ENCHANTED_WHEAT_SEEDS;
-	public static final Item ENCHANTED_BEETROOT_SEEDS;
-	public static final Item ENCHANTED_VANILLA_POTATO_ITEM;
-	public static final Item ENCHANTED_CARROT_ITEM;
-	public static final Item ENCHANTED_OAK_LEAVES_ITEM;
-	public static final Item ENCHANTED_ACACIA_LEAVES_ITEM;
-	public static final Item ENCHANTED_BIRCH_LEAVES_ITEM;
-	public static final Item ENCHANTED_DARK_OAK_LEAVES_ITEM;
-	public static final Item ENCHANTED_JUNGLE_LEAVES_ITEM;
-	public static final Item ENCHANTED_SPRUCE_LEAVES_ITEM;
-	public static final Item ENCHANTED_SUGAR_CANE_ITEM;
+	public static final RegistrySupplier<BlockItem> MAGIC_CUBE_ITEM;
+	public static final RegistrySupplier<BlockItem> GRINDER_ITEM;
+	public static final RegistrySupplier<BlockItem> SEED_UPDATER_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_OAK_SAPLING_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_SPRUCE_SAPLING_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_BIRCH_SAPLING_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_JUNGLE_SAPLING_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_ACACIA_SAPLING_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_DARK_OAK_SAPLING_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_WHEAT_SEEDS;
+	public static final RegistrySupplier<Item> ENCHANTED_BEETROOT_SEEDS;
+	public static final RegistrySupplier<Item> ENCHANTED_VANILLA_POTATO_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_CARROT_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_OAK_LEAVES_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_ACACIA_LEAVES_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_BIRCH_LEAVES_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_DARK_OAK_LEAVES_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_JUNGLE_LEAVES_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_SPRUCE_LEAVES_ITEM;
+	public static final RegistrySupplier<Item> ENCHANTED_SUGAR_CANE_ITEM;
 
 	// -*- -*- MISC -*- -*- //
 	// Screen Handlers
-	public static final MenuType<SeedUpdaterScreenHandler> SEED_UPDATER_SCREEN_HANDLER_TYPE;
-	public static final MenuType<GrinderScreenHandler> GRINDER_SCREEN_HANDLER_TYPE;
-	public static final MenuType<MagicCubeScreenHandler> MAGIC_CUBE_SCREEN_HANDLER_TYPE;
+	public static final RegistrySupplier<MenuType<SeedUpdaterScreenHandler>> SEED_UPDATER_SCREEN_HANDLER_TYPE;
+	public static final RegistrySupplier<MenuType<GrinderScreenHandler>> GRINDER_SCREEN_HANDLER_TYPE;
+	public static final RegistrySupplier<MenuType<MagicCubeScreenHandler>> MAGIC_CUBE_SCREEN_HANDLER_TYPE;
 
 	// Recipe Serializer
-	public static final RecipeSerializer<SeedUpdatingRecipe> SEED_UPDATING_RECIPE_SERIALIZER;
+	public static final RegistrySupplier<RecipeSerializer<SeedUpdatingRecipe>> SEED_UPDATING_RECIPE_SERIALIZER;
 
 	// Recipe Type
-	public static final RecipeType<SeedUpdatingRecipe> SEED_UPDATING_RECIPE_TYPE;
+	public static final RegistrySupplier<RecipeType<SeedUpdatingRecipe>> SEED_UPDATING_RECIPE_TYPE;
 
 	// Block Entities
-	public static final BlockEntityType<GrinderBlockEntity> GRINDER_BLOCK_ENTITY_TYPE;
-	public static final BlockEntityType<MagicCubeBlockEntity> MAGIC_CUBE_BLOCK_ENTITY_TYPE;
+	public static final RegistrySupplier<BlockEntityType<GrinderBlockEntity>> GRINDER_BLOCK_ENTITY_TYPE;
+	public static final RegistrySupplier<BlockEntityType<MagicCubeBlockEntity>> MAGIC_CUBE_BLOCK_ENTITY_TYPE;
 
 	// Item Tags
 	public static final TagContainer<Item> RAW_SWEET_POTATOES;
@@ -164,11 +163,11 @@ public class SPRMain implements ModInitializer {
     public static final TagContainer<Item> CHICKEN_BREEDING_INGREDIENTS;
 
 	// Sounds
-	public static final SoundEvent AGROFORESTRY_TABLE_FINISH;
-	public static final SoundEvent GRINDER_GRIND;
-	public static final SoundEvent MAGIC_CUBE_ACTIVATE;
-	public static final SoundEvent MAGIC_CUBE_DEACTIVATE;
-	public static final SoundEvent MAGIC_CUBE_AMBIENT;
+	public static final RegistrySupplier<SoundEvent> AGROFORESTRY_TABLE_FINISH;
+	public static final RegistrySupplier<SoundEvent> GRINDER_GRIND;
+	public static final RegistrySupplier<SoundEvent> MAGIC_CUBE_ACTIVATE;
+	public static final RegistrySupplier<SoundEvent> MAGIC_CUBE_DEACTIVATE;
+	public static final RegistrySupplier<SoundEvent> MAGIC_CUBE_AMBIENT;
 
 	// Stats
 	public static final ResourceLocation INTERACT_WITH_GRINDER;
@@ -178,21 +177,21 @@ public class SPRMain implements ModInitializer {
 	public static final ResourceLocation INTERACT_WITH_MAGIC_CUBE;
 
 	// Loot
-	public static final LootItemFunctionType SET_ENCHANTED_POTATO_EFFECT;
+	public static final RegistrySupplier<LootItemFunctionType> SET_ENCHANTED_POTATO_EFFECT;
 
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
 		LOGGER.info("This is for Minecraft 1.20 and above!");
 		FabricLoader.getInstance().getEntrypoints("spmreborn", SPRLinkage.class).forEach(SPRLinkage::init);
-
+		RegistryHelper.registerAll();
+		
 		ComposterHelper.register();
 		SPRLootTables.init();
 		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
 		TreeFeatures.init();
 		AnimalIngredients.configureParrot();
 	}
-
 
 	public static final Item.Properties defaultProp = new Item.Properties().arch$tab(SPR_ITEMS);
 
@@ -249,34 +248,34 @@ public class SPRMain implements ModInitializer {
 		ENCHANTED_SPRUCE_LEAVES = createLeaves("enchanted_spruce_leaves");
 
 		// Block Items
-		PURPLE_POTATO = item("purple_potato", new RawSweetPotatoBlockItem(PURPLE_POTATO_CROP, defaultProp, SweetPotatoType.PURPLE));
-		RED_POTATO = item("red_potato", new RawSweetPotatoBlockItem(RED_POTATO_CROP, defaultProp, SweetPotatoType.RED));
-		WHITE_POTATO = item("white_potato", new RawSweetPotatoBlockItem(WHITE_POTATO_CROP, defaultProp, SweetPotatoType.WHITE));
+		PURPLE_POTATO = item("purple_potato", () -> new RawSweetPotatoBlockItem(PURPLE_POTATO_CROP.get(), defaultProp, SweetPotatoType.PURPLE));
+		RED_POTATO = item("red_potato", () -> new RawSweetPotatoBlockItem(RED_POTATO_CROP.get(), defaultProp, SweetPotatoType.RED));
+		WHITE_POTATO = item("white_potato", () -> new RawSweetPotatoBlockItem(WHITE_POTATO_CROP.get(), defaultProp, SweetPotatoType.WHITE));
 
 		ENCHANTED_WHEAT_SEEDS = AliasedEnchantedItem.of("enchanted_wheat_seeds", ENCHANTED_WHEAT_CROP);
 		ENCHANTED_BEETROOT_SEEDS = AliasedEnchantedItem.of("enchanted_beetroot_seeds", ENCHANTED_BEETROOTS_CROP);
 		ENCHANTED_VANILLA_POTATO_ITEM = AliasedEnchantedItem.ofMiscFood("enchanted_potato", ENCHANTED_VANILLA_POTATOES_CROP, Foods.POTATO, defaultProp);
 		ENCHANTED_CARROT_ITEM = AliasedEnchantedItem.ofMiscFood("enchanted_carrot", ENCHANTED_CARROTS_CROP, Foods.CARROT, defaultProp);
 		//ENCHANTED_SUGAR_CANE_ITEM = AliasedEnchantedItem.of("enchanted_sugar_cane", ENCHANTED_SUGAR_CANE, ItemGroup.decorations());
-		ENCHANTED_SUGAR_CANE_ITEM = EnchantedBlockItem.of("enchanted_sugar_cane", ENCHANTED_SUGAR_CANE, defaultProp);
+		ENCHANTED_SUGAR_CANE_ITEM = EnchantedBlockItem.registerItem("enchanted_sugar_cane", ENCHANTED_SUGAR_CANE, defaultProp);
 
-		ENCHANTED_ACACIA_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_acacia_leaves", ENCHANTED_ACACIA_LEAVES, defaultProp);
-		ENCHANTED_BIRCH_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_birch_leaves", ENCHANTED_BIRCH_LEAVES, defaultProp);
-		ENCHANTED_DARK_OAK_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_dark_oak_leaves", ENCHANTED_DARK_OAK_LEAVES, defaultProp);
-		ENCHANTED_JUNGLE_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_jungle_leaves", ENCHANTED_JUNGLE_LEAVES, defaultProp);
-		ENCHANTED_OAK_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_oak_leaves", ENCHANTED_OAK_LEAVES, defaultProp);
-		ENCHANTED_SPRUCE_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_spruce_leaves", ENCHANTED_SPRUCE_LEAVES, defaultProp);
+		ENCHANTED_ACACIA_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_acacia_leaves", ENCHANTED_ACACIA_LEAVES, defaultProp);
+		ENCHANTED_BIRCH_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_birch_leaves", ENCHANTED_BIRCH_LEAVES, defaultProp);
+		ENCHANTED_DARK_OAK_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_dark_oak_leaves", ENCHANTED_DARK_OAK_LEAVES, defaultProp);
+		ENCHANTED_JUNGLE_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_jungle_leaves", ENCHANTED_JUNGLE_LEAVES, defaultProp);
+		ENCHANTED_OAK_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_oak_leaves", ENCHANTED_OAK_LEAVES, defaultProp);
+		ENCHANTED_SPRUCE_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_spruce_leaves", ENCHANTED_SPRUCE_LEAVES, defaultProp);
 
 		// Functional Blocks' Items
 		MAGIC_CUBE_ITEM = blockItem("magic_cube", MAGIC_CUBE, defaultProp);
 		GRINDER_ITEM = blockItem("grinder", GRINDER, defaultProp);
 		SEED_UPDATER_ITEM = blockItem("agroforestry_table", SEED_UPDATER, defaultProp);
-		ENCHANTED_OAK_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_oak_sapling", ENCHANTED_OAK_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_SPRUCE_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_spruce_sapling", ENCHANTED_SPRUCE_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_BIRCH_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_birch_sapling", ENCHANTED_BIRCH_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_JUNGLE_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_jungle_sapling", ENCHANTED_JUNGLE_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_ACACIA_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_acacia_sapling", ENCHANTED_ACACIA_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_DARK_OAK_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_dark_oak_sapling", ENCHANTED_DARK_OAK_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_OAK_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_oak_sapling", ENCHANTED_OAK_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_SPRUCE_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_spruce_sapling", ENCHANTED_SPRUCE_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_BIRCH_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_birch_sapling", ENCHANTED_BIRCH_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_JUNGLE_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_jungle_sapling", ENCHANTED_JUNGLE_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_ACACIA_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_acacia_sapling", ENCHANTED_ACACIA_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_DARK_OAK_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_dark_oak_sapling", ENCHANTED_DARK_OAK_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
 
 		// Screen Handler
 		SEED_UPDATER_SCREEN_HANDLER_TYPE = simpleMenuType("seed_updater", SeedUpdaterScreenHandler::new);
@@ -290,8 +289,8 @@ public class SPRMain implements ModInitializer {
 		SEED_UPDATING_RECIPE_TYPE = recipeType("seed_updating");
 
 		// Block Entity
-		GRINDER_BLOCK_ENTITY_TYPE = blockEntity("grinder", GrinderBlockEntity::new, GRINDER);
-		MAGIC_CUBE_BLOCK_ENTITY_TYPE = blockEntity("magic_cube", MagicCubeBlockEntity::new, MAGIC_CUBE);
+		GRINDER_BLOCK_ENTITY_TYPE = blockEntity("grinder", GrinderBlockEntity::new, GRINDER.getOrNull());
+		MAGIC_CUBE_BLOCK_ENTITY_TYPE = blockEntity("magic_cube", MagicCubeBlockEntity::new, MAGIC_CUBE.getOrNull());
 
 		// Item Tags
 		RAW_SWEET_POTATOES = itemTag("raw_sweet_potatoes");

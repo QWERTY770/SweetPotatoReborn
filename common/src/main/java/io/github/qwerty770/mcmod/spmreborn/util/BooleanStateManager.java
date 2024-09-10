@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class BooleanStateManager implements Runnable {
-    protected Property<Boolean> property;
+    protected final Property<Boolean> property;
 
     public BooleanStateManager(Property<Boolean> property) {
         this.property = property;

@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.platform.api.client;
+package io.github.qwerty770.mcmod.spmreborn.platform.api.deprecated.client;
 
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
@@ -11,7 +11,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-// TODO
 @Deprecated
 public final class ColorProviders<T, P> {
     private final Map<Supplier<T>, P> map = new LinkedHashMap<>();

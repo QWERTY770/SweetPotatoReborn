@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.platform.api.reg;
+package io.github.qwerty770.mcmod.spmreborn.platform.api.deprecated.reg;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import net.minecraft.core.Registry;
@@ -21,6 +21,7 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.*;
 
 @ApiStatus.Internal
+@Deprecated
 public final class RegistryContainer {
     // Update to Minecraft 1.20 -- 2023/12/10
     private RegistryContainer(String modId) {

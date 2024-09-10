@@ -17,7 +17,7 @@ public interface PeelInserter {
         int i;
         for (i = 0; i < inventory.items.size(); ++i) {
             eachStack = inventory.items.get(i);
-            if (eachStack.getItem().equals(SPRMain.PEEL) && eachStack.getCount() < SPRMain.PEEL.getMaxStackSize()) {
+            if (eachStack.getItem().equals(SPRMain.PEEL.get()) && eachStack.getCount() < SPRMain.PEEL.get().getMaxStackSize()) {
                 eachStack.grow(1);
                 return PeelActionResult.INSERT;
             }
@@ -25,7 +25,7 @@ public interface PeelInserter {
         for (i = 0; i < inventory.items.size(); ++i) {
             eachStack = inventory.items.get(i);
             if (eachStack.equals(ItemStack.EMPTY)) {
-                inventory.items.set(i, new ItemStack(SPRMain.PEEL, 1));
+                inventory.items.set(i, new ItemStack(SPRMain.PEEL.get(), 1));
                 return PeelActionResult.INSERT;
             }
         }
@@ -35,7 +35,7 @@ public interface PeelInserter {
 
     static void run(Player player) {
         if (insert(player).equals(PeelActionResult.SPAWN)) {
-            player.spawnAtLocation(SPRMain.PEEL);
+            player.spawnAtLocation(SPRMain.PEEL.get());
         } else {
             player.getInventory().setChanged();
         }

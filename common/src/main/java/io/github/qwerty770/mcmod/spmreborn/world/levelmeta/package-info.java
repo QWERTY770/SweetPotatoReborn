@@ -4,5 +4,5 @@
  *
  * @since 1.2.2
  */
-@Deprecated
+// @Deprecated
 package io.github.qwerty770.mcmod.spmreborn.world.levelmeta;

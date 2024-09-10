@@ -17,23 +17,23 @@ public final class AnimalIngredients {
 
     public static Stream<ItemStack> configurePig(ItemStack[] stacks) {
         ArrayList<ItemStack> stackList = new ArrayList<>(Arrays.asList(stacks));
-        stackList.add(SPRMain.ENCHANTED_CARROT_ITEM.getDefaultInstance());
-        stackList.add(SPRMain.ENCHANTED_VANILLA_POTATO_ITEM.getDefaultInstance());
-        stackList.add(SPRMain.PEEL.getDefaultInstance());
+        stackList.add(SPRMain.ENCHANTED_CARROT_ITEM.get().getDefaultInstance());
+        stackList.add(SPRMain.ENCHANTED_VANILLA_POTATO_ITEM.get().getDefaultInstance());
+        stackList.add(SPRMain.PEEL.get().getDefaultInstance());
 
         return stackList.stream();
     }
 
     public static void configureParrot() {
         Set<Item> parrotTamingIngredients = ParrotEntityAccessor.getTamingIngredients();
-        parrotTamingIngredients.add(SPRMain.ENCHANTED_BEETROOT_SEEDS);
-        parrotTamingIngredients.add(SPRMain.ENCHANTED_WHEAT_SEEDS);
+        parrotTamingIngredients.add(SPRMain.ENCHANTED_BEETROOT_SEEDS.get());
+        parrotTamingIngredients.add(SPRMain.ENCHANTED_WHEAT_SEEDS.get());  // TODO: check
     }
 
     public static Stream<ItemStack> configureChicken(ItemStack[] stacks) {
         ArrayList<ItemStack> stackList = new ArrayList<>(Arrays.asList(stacks));
-        stackList.add(SPRMain.ENCHANTED_WHEAT_SEEDS.getDefaultInstance());
-        stackList.add(SPRMain.ENCHANTED_BEETROOT_SEEDS.getDefaultInstance());
+        stackList.add(SPRMain.ENCHANTED_WHEAT_SEEDS.get().getDefaultInstance());
+        stackList.add(SPRMain.ENCHANTED_BEETROOT_SEEDS.get().getDefaultInstance());
 
         return stackList.stream();
     }

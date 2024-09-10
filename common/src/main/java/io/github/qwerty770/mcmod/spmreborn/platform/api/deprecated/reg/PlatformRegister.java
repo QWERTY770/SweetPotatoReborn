@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.platform.api.reg;
+package io.github.qwerty770.mcmod.spmreborn.platform.api.deprecated.reg;
 
 import com.mojang.serialization.Codec;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Supplier;
 
+@Deprecated
 public interface PlatformRegister {
     static PlatformRegister of(String modId) { return new RegistryImpl(modId); }
 

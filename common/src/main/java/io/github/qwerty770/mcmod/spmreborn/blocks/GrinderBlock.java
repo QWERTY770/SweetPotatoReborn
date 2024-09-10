@@ -21,7 +21,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import java.util.List;
 
 public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
-    public static BooleanProperty GRINDING = BooleanProperty.create("grinding");
+    public static final BooleanProperty GRINDING = BooleanProperty.create("grinding");
 
     public GrinderBlock(BlockBehaviour.Properties settings) {
         super(settings);
@@ -45,7 +45,7 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
 
     @Override
     public BlockEntityType<GrinderBlockEntity> getBlockEntityType() {
-        return SPRMain.GRINDER_BLOCK_ENTITY_TYPE;
+        return SPRMain.GRINDER_BLOCK_ENTITY_TYPE.get();
     }
 
     @Override

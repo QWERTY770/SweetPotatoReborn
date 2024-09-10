@@ -34,7 +34,7 @@ public class WorldEventMixinC {
     private void sprSounds(int eventId, BlockPos blockPos, int data, CallbackInfo ci) {
         if (eventId == 1132119 && data == 805) {
             assert minecraft.player != null;
-            minecraft.getSoundManager().play(new KeepPlayingSoundInstance(SPRMain.GRINDER_GRIND, 1.0F, level, blockPos, minecraft.player, (world1, blockPos1) -> {
+            minecraft.getSoundManager().play(new KeepPlayingSoundInstance(SPRMain.GRINDER_GRIND.get(), 1.0F, level, blockPos, minecraft.player, (world1, blockPos1) -> {
                 BlockState state = world1.getBlockState(blockPos1);
                 return state.getBlock() instanceof GrinderBlock // important
                         && state.getValue(GrinderBlock.GRINDING);

@@ -50,7 +50,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
 
     @Environment(EnvType.CLIENT)
     public @NotNull ItemStack getToastSymbol() {
-        return new ItemStack(SPRMain.SEED_UPDATER);
+        return new ItemStack(SPRMain.SEED_UPDATER.get());
     }
 
     @Override
@@ -60,12 +60,12 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
 
     @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
-        return SPRMain.SEED_UPDATING_RECIPE_SERIALIZER;
+        return SPRMain.SEED_UPDATING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public @NotNull RecipeType<?> getType() {
-        return SPRMain.SEED_UPDATING_RECIPE_TYPE;
+        return SPRMain.SEED_UPDATING_RECIPE_TYPE.get();
     }
 
     public boolean isAdditionIngredient(ItemStack itemStack) {
