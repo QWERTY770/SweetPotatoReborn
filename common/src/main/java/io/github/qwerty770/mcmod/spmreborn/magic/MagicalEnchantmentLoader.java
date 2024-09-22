@@ -1,6 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.magic;
 
 import com.google.gson.*;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -20,7 +21,6 @@ import java.util.Set;
 
 @ParametersAreNonnullByDefault
 public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener implements PreparableReloadListener {
-    // protected static final ResourceLocation FABRIC_ID = new ResourceLocation(SPRMain.MODID, "magical_enchantments");
     private static final Gson GSON = new GsonBuilder().create();
     private static final Logger LOGGER = LoggerFactory.getLogger("MagicalEnchantmentLoader");
 
@@ -37,7 +37,7 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener i
             int i = 0;
             for (JsonElement je: root) {
                 JsonObject eachObj = GsonHelper.convertToJsonObject(je, "Element #" + i);
-                ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(eachObj, "id"));
+                ResourceLocation id = ResourceLocationTool.create(GsonHelper.getAsString(eachObj, "id"));
                 if (!BuiltInRegistries.MOB_EFFECT.keySet().contains(id)) {
                     LOGGER.error("Invalid status effect id: " + id);
                     continue;

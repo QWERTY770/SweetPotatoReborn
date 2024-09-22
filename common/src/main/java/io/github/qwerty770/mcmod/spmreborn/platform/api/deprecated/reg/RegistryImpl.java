@@ -4,6 +4,7 @@ import com.mojang.datafixers.types.Type;
 import com.mojang.serialization.Codec;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
 import net.minecraft.Util;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
@@ -44,7 +45,7 @@ final class RegistryImpl implements PlatformRegisterWrapper {
 
     @Override
     public ResourceLocation id(String id) {
-        return new ResourceLocation(modId, id);
+        return ResourceLocationTool.create(modId, id);
     }
 
     @Override
@@ -60,7 +61,7 @@ final class RegistryImpl implements PlatformRegisterWrapper {
     @Override
     public <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Collection<Supplier<Block>> blocks) {
         return registryContainer.blockEntity.register(id, () -> {
-            ResourceLocation location = new ResourceLocation(modId, id);
+            ResourceLocation location = ResourceLocationTool.create(modId, id);
             Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, location.toString());
             assert type != null;
             return BlockEntityType.Builder.of(supplier, blocks.stream().map(Supplier::get).toArray(Block[]::new)).build(type);

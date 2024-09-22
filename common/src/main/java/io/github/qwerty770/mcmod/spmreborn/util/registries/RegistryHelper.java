@@ -24,6 +24,7 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public abstract class RegistryHelper {
     // Update to Minecraft 1.20 -- 2023/10/30  net.minecraft.core.Registry -> net.minecraft.core.registries.BuiltInRegistries.XXX
     // Update to Minecraft 1.20 -- 2023/12/16  Use DeferredRegister for cross-platform support
@@ -55,15 +57,15 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<SoundEvent> soundRegistry = ofModRegistry(Registries.SOUND_EVENT);
     public static final DeferredRegister<ParticleType<?>> particleTypeRegistry = ofModRegistry(Registries.PARTICLE_TYPE);
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
-
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
     public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
     public static final DeferredRegister<TreeDecoratorType<?>> treeDecoratorTypeRegistry = ofModRegistry(Registries.TREE_DECORATOR_TYPE);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
     public static final DeferredRegister<LootItemFunctionType> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
+    public static final DeferredRegister<CreativeModeTab> creativeTabRegistry = ofModRegistry(Registries.CREATIVE_MODE_TAB);
 
     public static ResourceLocation id(String id) {
-        return new ResourceLocation(SPRMain.MODID, id);
+        return ResourceLocationTool.create(SPRMain.MODID, id);
     }
 
     public static RegistrySupplier<Item> item(String id, Item item2) {
@@ -97,7 +99,7 @@ public abstract class RegistryHelper {
         return blockEntityRegistry.register(id, () -> BlockEntityType.Builder.of(supplier, blocks).build(type));
     }
 
-    //@Environment(EnvType.CLIENT)
+    // @Environment(EnvType.CLIENT)
     public static RegistrySupplier<SoundEvent> sound(String id) {
         return soundRegistry.register(id, () -> SoundEvent.createVariableRangeEvent(id(id)));
     }
@@ -140,6 +142,10 @@ public abstract class RegistryHelper {
 
     public static RegistrySupplier<LootItemFunctionType> lootFunction(String id, Serializer<? extends LootItemFunction> serializer) {
         return lootFunctionRegistry.register(id, () -> new LootItemFunctionType(serializer));
+    }
+
+    public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab){
+        return creativeTabRegistry.register(id, () -> tab);
     }
 
     private static <T> DeferredRegister<T> ofModRegistry(ResourceKey<Registry<T>> resourceKey) {

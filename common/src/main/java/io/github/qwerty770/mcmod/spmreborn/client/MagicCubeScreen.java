@@ -3,6 +3,7 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.screen.MagicCubeScreenHandler;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,7 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 @Environment(EnvType.CLIENT)
 public class MagicCubeScreen extends AbstractContainerScreen<MagicCubeScreenHandler> {
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(SPRMain.MODID, "textures/gui/container/magic_cube.png");
+    private static final ResourceLocation BACKGROUND = ResourceLocationTool.create(SPRMain.MODID, "textures/gui/container/magic_cube.png");
 
     public MagicCubeScreen(MagicCubeScreenHandler handler, Inventory inventory, Component title) {
         super(handler, inventory, title);

@@ -1,6 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.util.effects;
 
 import com.google.gson.JsonObject;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -30,7 +31,7 @@ public class StatusEffectInstances {
     }
 
     private static MobEffect fromId(String raw) {
-        ResourceLocation id = new ResourceLocation(raw);
+        ResourceLocation id = ResourceLocationTool.create(raw);
         if (!BuiltInRegistries.MOB_EFFECT.keySet().contains(id)) {
             LOGGER.error("Cannot apply status effect: {}", raw);
             return null;
