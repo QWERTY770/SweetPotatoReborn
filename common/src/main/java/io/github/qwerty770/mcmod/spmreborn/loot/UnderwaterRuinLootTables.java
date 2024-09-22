@@ -13,15 +13,13 @@ public class UnderwaterRuinLootTables {
         LootPool.Builder pool = LootPool.lootPool();
         pool.add(LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(10));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0,
-        //         LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(10));
+        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0, LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(10));
     }
 
     public static LootPool.Builder small() {
         LootPool.Builder pool = LootPool.lootPool();
         pool.add(LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(5));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0,
-        //         LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(5));
+        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0, LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(5));
     }
 }

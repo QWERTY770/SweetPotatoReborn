@@ -26,7 +26,6 @@ import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
 import io.github.qwerty770.mcmod.spmreborn.world.gen.tree.*;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -46,17 +45,34 @@ import org.slf4j.LoggerFactory;
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.BlockUtils.*;
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.*;
 
-@SuppressWarnings("unused")
 @StableApi
-public class SPRMain implements ModInitializer {
-	private static final Logger LOGGER = LoggerFactory.getLogger("Sweet Potato Reborn");
+public class SPRMain {
+	private SPRMain() {
+	}
 
+	private static final Logger LOGGER = LoggerFactory.getLogger("Sweet Potato Reborn");
 	public static final String MODID = "spmreborn";
+
+	public static Logger getLogger() {
+		return LOGGER;
+	}
+
+	public static void init() {
+		LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
+		LOGGER.info("This is for Minecraft 1.20 and above!");
+		FabricLoader.getInstance().getEntrypoints(MODID, SPRLinkage.class).forEach(SPRLinkage::init);
+		RegistryHelper.registerAll();
+		ComposterHelper.register();
+		SPRLootTables.init();
+		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
+		TreeFeatures.init();
+		AnimalIngredients.configureParrot();
+	}
 
 	// Update to Minecraft 1.20 -- 2023/10/30
 	// Creative mode tab
 	public static final CreativeModeTab SPR_ITEMS = CreativeTabRegistry.create(Component.translatable("tab.spmreborn"),
-			() -> new ItemStack(new EnchantedSweetPotatoItem(new Item.Properties(), SweetPotatoType.PURPLE)));
+					() -> new ItemStack(new EnchantedSweetPotatoItem(new Item.Properties(), SweetPotatoType.PURPLE)));
 
 	// Items
 	public static final RegistrySupplier<Item> PEEL;
@@ -160,7 +176,7 @@ public class SPRMain implements ModInitializer {
 	public static final TagContainer<Item> ALL_SWEET_POTATOES;
 	// About Pigs & Parrots
 	public static final TagContainer<Item> PIG_BREEDING_INGREDIENTS;
-    public static final TagContainer<Item> CHICKEN_BREEDING_INGREDIENTS;
+	public static final TagContainer<Item> CHICKEN_BREEDING_INGREDIENTS;
 
 	// Sounds
 	public static final RegistrySupplier<SoundEvent> AGROFORESTRY_TABLE_FINISH;
@@ -179,20 +195,7 @@ public class SPRMain implements ModInitializer {
 	// Loot
 	public static final RegistrySupplier<LootItemFunctionType> SET_ENCHANTED_POTATO_EFFECT;
 
-	@Override
-	public void onInitialize() {
-		LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
-		LOGGER.info("This is for Minecraft 1.20 and above!");
-		FabricLoader.getInstance().getEntrypoints("spmreborn", SPRLinkage.class).forEach(SPRLinkage::init);
-		RegistryHelper.registerAll();
-		
-		ComposterHelper.register();
-		SPRLootTables.init();
-		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
-		TreeFeatures.init();
-		AnimalIngredients.configureParrot();
-	}
-
+	// Properties
 	public static final Item.Properties defaultProp = new Item.Properties().arch$tab(SPR_ITEMS);
 
 	static {
@@ -200,11 +203,11 @@ public class SPRMain implements ModInitializer {
 		// Deleted util.objsettings.ItemSettings
 		// Item
 		PEEL = defaultItem("peel", defaultProp);
+		POTATO_POWDER = defaultItem("potato_powder", defaultProp);
+		XMAS_TREATING_BOWL = defaultItem("treating_bowl", new Item.Properties());
 		BAKED_PURPLE_POTATO = item("baked_purple_potato", new BakedSweetPotatoItem(defaultProp, SweetPotatoType.PURPLE));
 		BAKED_RED_POTATO = item("baked_red_potato", new BakedSweetPotatoItem(defaultProp, SweetPotatoType.RED));
 		BAKED_WHITE_POTATO = item("baked_white_potato", new BakedSweetPotatoItem(defaultProp, SweetPotatoType.WHITE));
-		POTATO_POWDER = defaultItem("potato_powder", defaultProp);
-		XMAS_TREATING_BOWL = defaultItem("treating_bowl", new Item.Properties());
 		ENCHANTED_PURPLE_POTATO = item("enchanted_purple_potato", new EnchantedSweetPotatoItem(defaultProp.stacksTo(1), SweetPotatoType.PURPLE));
 		ENCHANTED_RED_POTATO = item("enchanted_red_potato", new EnchantedSweetPotatoItem(defaultProp.stacksTo(1), SweetPotatoType.RED));
 		ENCHANTED_WHITE_POTATO = item("enchanted_white_potato", new EnchantedSweetPotatoItem(defaultProp.stacksTo(1), SweetPotatoType.WHITE));
@@ -254,28 +257,27 @@ public class SPRMain implements ModInitializer {
 
 		ENCHANTED_WHEAT_SEEDS = AliasedEnchantedItem.of("enchanted_wheat_seeds", ENCHANTED_WHEAT_CROP);
 		ENCHANTED_BEETROOT_SEEDS = AliasedEnchantedItem.of("enchanted_beetroot_seeds", ENCHANTED_BEETROOTS_CROP);
-		ENCHANTED_VANILLA_POTATO_ITEM = AliasedEnchantedItem.ofMiscFood("enchanted_potato", ENCHANTED_VANILLA_POTATOES_CROP, Foods.POTATO, defaultProp);
-		ENCHANTED_CARROT_ITEM = AliasedEnchantedItem.ofMiscFood("enchanted_carrot", ENCHANTED_CARROTS_CROP, Foods.CARROT, defaultProp);
-		//ENCHANTED_SUGAR_CANE_ITEM = AliasedEnchantedItem.of("enchanted_sugar_cane", ENCHANTED_SUGAR_CANE, ItemGroup.decorations());
-		ENCHANTED_SUGAR_CANE_ITEM = EnchantedBlockItem.registerItem("enchanted_sugar_cane", ENCHANTED_SUGAR_CANE, defaultProp);
+		ENCHANTED_VANILLA_POTATO_ITEM = AliasedEnchantedItem.ofFood("enchanted_potato", ENCHANTED_VANILLA_POTATOES_CROP, Foods.POTATO, defaultProp);
+		ENCHANTED_CARROT_ITEM = AliasedEnchantedItem.ofFood("enchanted_carrot", ENCHANTED_CARROTS_CROP, Foods.CARROT, defaultProp);
+		ENCHANTED_SUGAR_CANE_ITEM = EnchantedBlockItem.of("enchanted_sugar_cane", ENCHANTED_SUGAR_CANE, defaultProp);
 
-		ENCHANTED_ACACIA_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_acacia_leaves", ENCHANTED_ACACIA_LEAVES, defaultProp);
-		ENCHANTED_BIRCH_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_birch_leaves", ENCHANTED_BIRCH_LEAVES, defaultProp);
-		ENCHANTED_DARK_OAK_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_dark_oak_leaves", ENCHANTED_DARK_OAK_LEAVES, defaultProp);
-		ENCHANTED_JUNGLE_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_jungle_leaves", ENCHANTED_JUNGLE_LEAVES, defaultProp);
-		ENCHANTED_OAK_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_oak_leaves", ENCHANTED_OAK_LEAVES, defaultProp);
-		ENCHANTED_SPRUCE_LEAVES_ITEM = EnchantedBlockItem.registerItem("enchanted_spruce_leaves", ENCHANTED_SPRUCE_LEAVES, defaultProp);
+		ENCHANTED_ACACIA_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_acacia_leaves", ENCHANTED_ACACIA_LEAVES, defaultProp);
+		ENCHANTED_BIRCH_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_birch_leaves", ENCHANTED_BIRCH_LEAVES, defaultProp);
+		ENCHANTED_DARK_OAK_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_dark_oak_leaves", ENCHANTED_DARK_OAK_LEAVES, defaultProp);
+		ENCHANTED_JUNGLE_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_jungle_leaves", ENCHANTED_JUNGLE_LEAVES, defaultProp);
+		ENCHANTED_OAK_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_oak_leaves", ENCHANTED_OAK_LEAVES, defaultProp);
+		ENCHANTED_SPRUCE_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_spruce_leaves", ENCHANTED_SPRUCE_LEAVES, defaultProp);
 
 		// Functional Blocks' Items
 		MAGIC_CUBE_ITEM = blockItem("magic_cube", MAGIC_CUBE, defaultProp);
 		GRINDER_ITEM = blockItem("grinder", GRINDER, defaultProp);
 		SEED_UPDATER_ITEM = blockItem("agroforestry_table", SEED_UPDATER, defaultProp);
-		ENCHANTED_OAK_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_oak_sapling", ENCHANTED_OAK_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_SPRUCE_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_spruce_sapling", ENCHANTED_SPRUCE_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_BIRCH_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_birch_sapling", ENCHANTED_BIRCH_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_JUNGLE_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_jungle_sapling", ENCHANTED_JUNGLE_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_ACACIA_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_acacia_sapling", ENCHANTED_ACACIA_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
-		ENCHANTED_DARK_OAK_SAPLING_ITEM = EnchantedBlockItem.registerItem("enchanted_dark_oak_sapling", ENCHANTED_DARK_OAK_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_OAK_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_oak_sapling", ENCHANTED_OAK_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_SPRUCE_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_spruce_sapling", ENCHANTED_SPRUCE_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_BIRCH_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_birch_sapling", ENCHANTED_BIRCH_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_JUNGLE_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_jungle_sapling", ENCHANTED_JUNGLE_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_ACACIA_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_acacia_sapling", ENCHANTED_ACACIA_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
+		ENCHANTED_DARK_OAK_SAPLING_ITEM = EnchantedBlockItem.of("enchanted_dark_oak_sapling", ENCHANTED_DARK_OAK_SAPLING, defaultProp.rarity(Rarity.UNCOMMON));
 
 		// Screen Handler
 		SEED_UPDATER_SCREEN_HANDLER_TYPE = simpleMenuType("seed_updater", SeedUpdaterScreenHandler::new);

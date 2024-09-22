@@ -52,12 +52,12 @@ public final class GrindingUtils {
             this(new Object2DoubleLinkedOpenHashMap<>());
         }
 
-        public double put(Item key, double value) {
-            return map.put(TagLike.asItem(key), value);
+        public void put(Item key, double value) {
+            map.put(TagLike.asItem(key), value);
         }
 
-        public double put(TagContainer<Item> key, double value) {
-            return map.put(TagLike.asTag(key), value);
+        public void put(TagContainer<Item> key, double value) {
+            map.put(TagLike.asTag(key), value);
         }
 
         private OptionalDouble get0(Item key) {

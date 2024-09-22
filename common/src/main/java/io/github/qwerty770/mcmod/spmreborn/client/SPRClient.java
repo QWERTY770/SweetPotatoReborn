@@ -5,7 +5,6 @@ import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import dev.architectury.registry.menu.MenuRegistry;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.linkage.SPRLinkageClient;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
@@ -13,11 +12,9 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.FoliageColor;
 
-@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
-public class SPRClient implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
+public class SPRClient {
+    public static void init() {
         /* Client Screens */
         // Update to Minecraft 1.20 -- 2023/12/3
         MenuRegistry.registerScreenFactory(SPRMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), SeedUpdaterScreen::new);

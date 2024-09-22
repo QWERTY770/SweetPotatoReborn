@@ -13,15 +13,13 @@ public class StrongholdLootTables {
         LootPool.Builder pool = LootPool.lootPool();
         pool.add(LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(11));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0,
-        //         LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(11));
+        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0, LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(11));
     }
 
     public static LootPool.Builder crossing() {
         LootPool.Builder pool = LootPool.lootPool();
         pool.add(LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(12));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0,
-        //         LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(12));
+        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0, LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(12));
     }
 }

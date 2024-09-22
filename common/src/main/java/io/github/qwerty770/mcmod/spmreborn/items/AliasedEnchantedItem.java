@@ -36,7 +36,7 @@ public class AliasedEnchantedItem extends ItemNameBlockItem {
     }
 
     @ApiStatus.Internal
-    public static RegistrySupplier<Item> ofMiscFood(String id, RegistrySupplier<Block> original, FoodProperties foodComponent, Properties properties) {
+    public static RegistrySupplier<Item> ofFood(String id, RegistrySupplier<Block> original, FoodProperties foodComponent, Properties properties) {
         return RegistryHelper.item(id, () -> new AliasedEnchantedItem(original.get(), properties.food(foodComponent)));
     }
 }

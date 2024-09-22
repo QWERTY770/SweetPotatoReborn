@@ -19,17 +19,17 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.qwerty770.mcmod.spmreborn.SPRMain"
+      "io.github.qwerty770.fabricmod.spmreborn.SPRFabric"
     ],
     "client": [
-      "io.github.qwerty770.mcmod.spmreborn.client.SPRClient"
+      "io.github.qwerty770.fabricmod.spmreborn.SPRClientFabric"
     ],
     "server": [
       "io.github.qwerty770.mcmod.spmreborn.linkage.SPRLinkageServer::load"
     ]
   },
   "mixins": [
-    "sweet_potato.mixins.json"
+    "spmreborn.mixins.json"
   ],
 
   "depends": {
