@@ -3,6 +3,7 @@ package io.github.qwerty770.mcmod.spmreborn.world.gen.tree;
 import com.google.common.collect.ImmutableList;
 import dev.architectury.registry.registries.DeferredRegister;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -41,14 +42,14 @@ import static io.github.qwerty770.mcmod.spmreborn.world.gen.tree.TreeFeatures.Co
 public final class TreeFeatures {
     public static final DeferredRegister<ConfiguredFeature<?, ?>> featureRegister = DeferredRegister.create(SPRMain.MODID, Registries.CONFIGURED_FEATURE);
 
-    private static <FC extends TreeConfiguration> ResourceKey<ConfiguredFeature<TreeConfiguration, Feature<TreeConfiguration>>> register(String id, FC featureConfig) {
+    private static <FC extends TreeConfiguration> ResourceKey<ConfiguredFeature<?, ?>> register(String id, FC featureConfig) {
         // Temporary solution
-        return featureRegister.register(id, () -> new ConfiguredFeature<>(Feature.TREE, featureConfig)).getKey();
+        featureRegister.register(id, () -> new ConfiguredFeature<>(Feature.TREE, featureConfig));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocationTool.create(SPRMain.MODID, id));
     }
 
     // Update to Minecraft 1.20 -- 2023/12/16
-    // TODO: Search for better ways to register (avoid raw use of ResourceKey)
-    public static final ResourceKey
+    public static final ResourceKey<ConfiguredFeature<?, ?>>
             FANCY_OAK, FANCY_OAK_BEES_005, OAK, OAK_BEES_005,
             SPRUCE, MEGA_SPRUCE, MEGA_PINE,
             BIRCH, BIRCH_BEES_005,
@@ -56,12 +57,12 @@ public final class TreeFeatures {
             ACACIA, DARK_OAK;
 
     static {
-        FANCY_OAK = register("fancy_oak", (largeOak().build()));
+        FANCY_OAK = register("fancy_oak", largeOak().build());
         FANCY_OAK_BEES_005 = register("fancy_oak_bees_005",
-                (largeOak().decorators(List.of(MORE_BEEHIVES_TREES)).build()));
+                largeOak().decorators(List.of(MORE_BEEHIVES_TREES)).build());
         OAK = register("oak", (oak().build()));
         OAK_BEES_005 = register("oak_bees_005",
-                (oak().decorators(List.of(MORE_BEEHIVES_TREES)).build()));
+                oak().decorators(List.of(MORE_BEEHIVES_TREES)).build());
         SPRUCE = register("spruce",
                 ((new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(SPRUCE_LOG),
@@ -90,9 +91,9 @@ public final class TreeFeatures {
                         .build()));
         BIRCH = register("birch", (birch().build()));
         BIRCH_BEES_005 = register("birch_bees_005",
-                (birch().decorators(List.of(MORE_BEEHIVES_TREES)).build()));
+                birch().decorators(List.of(MORE_BEEHIVES_TREES)).build());
         JUNGLE_TREE_NO_VINE = register("jungle_tree_no_vine",
-                (jungle().ignoreVines().build()));
+                jungle().ignoreVines().build());
         MEGA_JUNGLE_TREE = register("mega_jungle_tree",
                 ((new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(JUNGLE_LOG),
@@ -208,7 +209,7 @@ public final class TreeFeatures {
         return tree(Blocks.JUNGLE_LOG, ENCHANTED_JUNGLE_LEAVES, 4, 8);
     }
 
-    public static void init() {
+    public static void register() {
         featureRegister.register();
     }
 }
