@@ -11,7 +11,6 @@ import io.github.qwerty770.mcmod.spmreborn.blocks.entities.GrinderBlockEntity;
 import io.github.qwerty770.mcmod.spmreborn.blocks.entities.MagicCubeBlockEntity;
 import io.github.qwerty770.mcmod.spmreborn.blocks.plants.*;
 import io.github.qwerty770.mcmod.spmreborn.items.*;
-import io.github.qwerty770.mcmod.spmreborn.linkage.SPRLinkage;
 import io.github.qwerty770.mcmod.spmreborn.loot.SPRLootTables;
 import io.github.qwerty770.mcmod.spmreborn.loot.SetEnchantedPotatoEffectFunction;
 import io.github.qwerty770.mcmod.spmreborn.recipe.SeedUpdatingRecipe;
@@ -26,7 +25,6 @@ import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
 import io.github.qwerty770.mcmod.spmreborn.world.gen.tree.*;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -57,22 +55,27 @@ public class SPRMain {
 		return LOGGER;
 	}
 
-	public static void init() {
-		LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
-		LOGGER.info("This is for Minecraft 1.20 and above!");
-		FabricLoader.getInstance().getEntrypoints(MODID, SPRLinkage.class).forEach(SPRLinkage::init);
+	public static void register(){
 		RegistryHelper.registerAll();
+	}
+
+	public static void init() {
+		// TODO: Is it necessary?
+		// FabricLoader.getInstance().getEntrypoints(MODID, SPRLinkage.class).forEach(SPRLinkage::init);
+		TreeFeatures.register();
+		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
 		ComposterHelper.register();
 		SPRLootTables.init();
-		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
-		TreeFeatures.init();
 		AnimalIngredients.configureParrot();
+		LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
+		LOGGER.info("This is for Minecraft 1.20 and above!");
 	}
 
 	// Update to Minecraft 1.20 -- 2023/10/30
 	// Creative mode tab
 	public static final CreativeModeTab SPR_ITEMS = CreativeTabRegistry.create(Component.translatable("tab.spmreborn"),
 					() -> new ItemStack(new EnchantedSweetPotatoItem(new Item.Properties(), SweetPotatoType.PURPLE)));
+	public static final RegistrySupplier<CreativeModeTab> SPR_ITEMS_SUPPLIER = creativeModeTab("spr_items", SPR_ITEMS);
 
 	// Items
 	public static final RegistrySupplier<Item> PEEL;
@@ -196,7 +199,7 @@ public class SPRMain {
 	public static final RegistrySupplier<LootItemFunctionType> SET_ENCHANTED_POTATO_EFFECT;
 
 	// Properties
-	public static final Item.Properties defaultProp = new Item.Properties().arch$tab(SPR_ITEMS);
+	public static final Item.Properties defaultProp = new Item.Properties().arch$tab(SPR_ITEMS_SUPPLIER);
 
 	static {
 		// Update to Minecraft 1.20 -- 2023/10/30

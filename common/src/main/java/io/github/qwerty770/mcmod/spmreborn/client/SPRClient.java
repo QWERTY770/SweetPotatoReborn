@@ -4,10 +4,8 @@ import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import dev.architectury.registry.menu.MenuRegistry;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
-import io.github.qwerty770.mcmod.spmreborn.linkage.SPRLinkageClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.FoliageColor;
@@ -37,7 +35,8 @@ public class SPRClient {
         ColorHandlerRegistry.registerItemColors((stack, tintIndex) -> FoliageColor.getEvergreenColor(), SPRMain.ENCHANTED_SPRUCE_LEAVES_ITEM.get());
 
         /* Linkage */
-        FabricLoader.getInstance().getEntrypoints("spmreborn.client", SPRLinkageClient.class).forEach(SPRLinkageClient::initClient);
+        // TODO: Is it necessary?
+        // FabricLoader.getInstance().getEntrypoints("spmreborn.client", SPRLinkageClient.class).forEach(SPRLinkageClient::initClient);
 
         /* Rendering */
         // Update to Minecraft 1.20 -- 2023/12/3 and 2023/12/16
@@ -47,7 +46,6 @@ public class SPRClient {
                 SPRMain.ENCHANTED_ACACIA_SAPLING.get(), SPRMain.ENCHANTED_BIRCH_SAPLING.get(),
                 SPRMain.ENCHANTED_DARK_OAK_SAPLING.get(), SPRMain.ENCHANTED_OAK_SAPLING.get(),
                 SPRMain.ENCHANTED_JUNGLE_SAPLING.get(), SPRMain.ENCHANTED_SPRUCE_SAPLING.get(),
-                //SPMMain.GRINDER,
                 SPRMain.POTTED_ENCHANTED_ACACIA_SAPLING.get(),
                 SPRMain.POTTED_ENCHANTED_BIRCH_SAPLING.get(),
                 SPRMain.POTTED_ENCHANTED_DARK_OAK_SAPLING.get(),

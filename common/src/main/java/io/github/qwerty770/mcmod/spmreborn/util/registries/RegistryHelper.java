@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
@@ -134,7 +133,8 @@ public abstract class RegistryHelper {
     public static ResourceLocation stat(String id, StatFormatter statFormatter) {
         ResourceLocation id2 = id(id);
         statRegistry.register(id, () -> id2);
-        Stats.CUSTOM.get(id2, statFormatter);
+        // TODO: Update the next line
+        // Stats.CUSTOM.get(id2, statFormatter);
         return id2;
     }
 
