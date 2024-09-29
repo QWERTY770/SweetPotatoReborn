@@ -1,7 +1,11 @@
-package io.github.qwerty770.mcmod.spmreborn.screen;
+package io.github.qwerty770.mcmod.spmreborn.client.handlers;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
+import io.github.qwerty770.mcmod.spmreborn.client.SweetPotatoMenuTypes;
 import io.github.qwerty770.mcmod.spmreborn.recipe.SeedUpdatingRecipe;
+import io.github.qwerty770.mcmod.spmreborn.recipe.SweetPotatoRecipes;
+import io.github.qwerty770.mcmod.spmreborn.sound.SweetPotatoSoundEvents;
+import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,23 +33,23 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
     }
 
     public SeedUpdaterScreenHandler(int syncId, Inventory inventory, ContainerLevelAccess context) {
-        super(SPRMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), syncId, inventory, context);
+        super(SweetPotatoMenuTypes.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), syncId, inventory, context);
         this.world = inventory.player.level();
-        this.list = this.world.getRecipeManager().getAllRecipesFor(SPRMain.SEED_UPDATING_RECIPE_TYPE.get());
+        this.list = this.world.getRecipeManager().getAllRecipesFor(SweetPotatoRecipes.SEED_UPDATING_RECIPE_TYPE.get());
     }
 
     protected boolean isValidBlock(@NotNull BlockState state) {
-        return state.is(SPRMain.SEED_UPDATER.get());
+        return state.is(SweetPotatoBlocks.SEED_UPDATER.get());
     }
 
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, SPRMain.SEED_UPDATER.get());
+        return stillValid(this.access, player, SweetPotatoBlocks.SEED_UPDATER.get());
     }
 
     @Override
     public void createResult() {
         List<SeedUpdatingRecipe> list1 = this.world.getRecipeManager().getRecipesFor(
-                SPRMain.SEED_UPDATING_RECIPE_TYPE.get(), this.inputSlots, this.world
+                SweetPotatoRecipes.SEED_UPDATING_RECIPE_TYPE.get(), this.inputSlots, this.world
         );
         if (list1.isEmpty())
             this.resultSlots.setItem(0, ItemStack.EMPTY);
@@ -77,9 +81,9 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
         //output.markDirty();
         this.access.execute((world1, blockPos) -> {
             //world1.syncWorldEvent(1044, blockPos, 8844110));
-            world1.playSound(null, blockPos, SPRMain.AGROFORESTRY_TABLE_FINISH.get(), SoundSource.BLOCKS, 1.0F, world1.getRandom().nextFloat() * 0.1F + 0.9F);
+            world1.playSound(null, blockPos, SweetPotatoSoundEvents.AGROFORESTRY_TABLE_FINISH.get(), SoundSource.BLOCKS, 1.0F, world1.getRandom().nextFloat() * 0.1F + 0.9F);
         });
-        player.awardStat(SPRMain.CROP_UPGRADED);
+        player.awardStat(SweetPotatoStats.CROP_UPGRADED);
         //return stack;
     }
 

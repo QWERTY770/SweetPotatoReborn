@@ -1,7 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks;
 
 import com.google.common.collect.ImmutableList;
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.entities.GrinderBlockEntity;
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractBlockWithEntity;
 import net.minecraft.core.BlockPos;
@@ -19,6 +18,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
+
+import io.github.qwerty770.mcmod.spmreborn.blocks.entities.SweetPotatoBlockEntityTypes;
+import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 
 public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
     public static final BooleanProperty GRINDING = BooleanProperty.create("grinding");
@@ -40,12 +42,12 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
 
     @Override
     public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, InteractionHand hand, BlockHitResult blockHitResult) {
-        return ImmutableList.of(SPRMain.INTERACT_WITH_GRINDER);
+        return ImmutableList.of(SweetPotatoStats.INTERACT_WITH_GRINDER);
     }
 
     @Override
     public BlockEntityType<GrinderBlockEntity> getBlockEntityType() {
-        return SPRMain.GRINDER_BLOCK_ENTITY_TYPE.get();
+        return SweetPotatoBlockEntityTypes.GRINDER_BLOCK_ENTITY_TYPE.get();
     }
 
     @Override

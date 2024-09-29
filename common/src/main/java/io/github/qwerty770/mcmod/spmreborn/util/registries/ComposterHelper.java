@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.util.registries;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoComponent;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoStatus;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
@@ -13,27 +13,27 @@ public final class ComposterHelper {
 
     @ApiStatus.Internal
     public static void register() {
-        registerCompostableItem(0.3f, SPRMain.PEEL.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_OAK_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_SPRUCE_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_BIRCH_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_JUNGLE_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_ACACIA_SAPLING_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_DARK_OAK_SAPLING_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.PEEL.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_OAK_SAPLING_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_SPRUCE_SAPLING_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_BIRCH_SAPLING_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_JUNGLE_SAPLING_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_ACACIA_SAPLING_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_DARK_OAK_SAPLING_ITEM.get());
 
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_ACACIA_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_BIRCH_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_DARK_OAK_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_JUNGLE_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_OAK_LEAVES_ITEM.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_SPRUCE_LEAVES_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_ACACIA_LEAVES_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_BIRCH_LEAVES_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_DARK_OAK_LEAVES_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_JUNGLE_LEAVES_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_OAK_LEAVES_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_SPRUCE_LEAVES_ITEM.get());
 
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_WHEAT_SEEDS.get());
-        registerCompostableItem(0.3f, SPRMain.ENCHANTED_BEETROOT_SEEDS.get());
-        registerCompostableItem(0.65f, SPRMain.ENCHANTED_CARROT_ITEM.get());
-        registerCompostableItem(0.65f, SPRMain.ENCHANTED_VANILLA_POTATO_ITEM.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_WHEAT_SEEDS.get());
+        registerCompostableItem(0.3f, SweetPotatoItems.ENCHANTED_BEETROOT_SEEDS.get());
+        registerCompostableItem(0.65f, SweetPotatoItems.ENCHANTED_CARROT_ITEM.get());
+        registerCompostableItem(0.65f, SweetPotatoItems.ENCHANTED_VANILLA_POTATO_ITEM.get());
 
-        registerCompostableItem(0.5f, SPRMain.ENCHANTED_SUGAR_CANE_ITEM.get());
+        registerCompostableItem(0.5f, SweetPotatoItems.ENCHANTED_SUGAR_CANE_ITEM.get());
 
 
         for (SweetPotatoType type: SweetPotatoType.values()) {

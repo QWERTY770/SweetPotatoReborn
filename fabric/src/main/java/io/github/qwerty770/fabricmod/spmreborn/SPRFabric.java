@@ -7,7 +7,6 @@ import net.fabricmc.api.ModInitializer;
 public class SPRFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        SPRMain.register();
         SPRMain.getLogger().info("Sweet Potato Reborn (Fabric platform) loading!");
         SPRMain.init();
     }

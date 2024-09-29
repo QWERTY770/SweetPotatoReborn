@@ -4,9 +4,11 @@ import com.mojang.logging.LogUtils;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.MagicCubeBlock;
 import io.github.qwerty770.mcmod.spmreborn.items.RawSweetPotatoBlockItem;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractLockableContainerBlockEntity;
 import io.github.qwerty770.mcmod.spmreborn.magic.WeightedStatusEffect;
-import io.github.qwerty770.mcmod.spmreborn.screen.MagicCubeScreenHandler;
+import io.github.qwerty770.mcmod.spmreborn.client.handlers.MagicCubeScreenHandler;
+import io.github.qwerty770.mcmod.spmreborn.sound.SweetPotatoSoundEvents;
 import io.github.qwerty770.mcmod.spmreborn.util.BooleanStateManager;
 import io.github.qwerty770.mcmod.spmreborn.util.effects.StatusEffectInstances;
 import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntMagicCubeProperties;
@@ -63,7 +65,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     protected final IntMagicCubeProperties propertyDelegate;
 
     public MagicCubeBlockEntity(BlockPos pos, BlockState state) {
-        this(SPRMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE.get(), 8, pos, state);
+        this(SweetPotatoBlockEntityTypes.MAGIC_CUBE_BLOCK_ENTITY_TYPE.get(), 8, pos, state);
     }
 
     public MagicCubeBlockEntity(BlockEntityType<?> type, int size, BlockPos pos, BlockState state) {
@@ -109,11 +111,11 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
                         MagicCubeBlockEntity.this.mainFuelTime = -1;
                         MagicCubeBlockEntity.this.viceFuelTime = 0;
                         MagicCubeBlockEntity.this.level.playSound(null, pos,
-                                SPRMain.MAGIC_CUBE_DEACTIVATE.get(), SoundSource.BLOCKS,
+                                SweetPotatoSoundEvents.MAGIC_CUBE_DEACTIVATE.get(), SoundSource.BLOCKS,
                                 1.0F, 1.0F);
                     } else {
                         MagicCubeBlockEntity.this.level.playSound(null, pos,
-                                SPRMain.MAGIC_CUBE_ACTIVATE.get(), SoundSource.BLOCKS,
+                                SweetPotatoSoundEvents.MAGIC_CUBE_ACTIVATE.get(), SoundSource.BLOCKS,
                                 1.0F, 1.0F);
                     }
                 }
@@ -165,7 +167,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             /*-* * PROPERTIES * *-*/
             if (!this.isProcessing()) {
                 // Check inventory
-                if (this.inventory.get(6).getItem() == SPRMain.PEEL.get()) {
+                if (this.inventory.get(6).getItem() == SweetPotatoItems.PEEL.get()) {
                     boolean bl = false;
                     for (int i = 0; i < 3; ++i) {
                         if (SPRMain.RAW_SWEET_POTATOES.contains(this.inventory.get(i).getItem())) {
@@ -183,7 +185,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             }
             // CHECK VICE FUEL
             if (this.shouldUpdateViceFuel()) {
-                if (this.inventory.get(7).getItem() == SPRMain.POTATO_POWDER.get()) {
+                if (this.inventory.get(7).getItem() == SweetPotatoItems.POTATO_POWDER.get()) {
                     this.viceFuelTime = 401;
                     this.inventory.get(7).shrink(1);
                     shallMarkDirty = true;
@@ -333,9 +335,9 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
         Item item = fromHopperStack.getItem();
         ItemStack toSlotStack = this.getItem(slot);
         if (slot == 6)
-            return item == SPRMain.PEEL.get();
+            return item == SweetPotatoItems.PEEL.get();
         if (slot == 7)
-            return item == SPRMain.POTATO_POWDER.get();
+            return item == SweetPotatoItems.POTATO_POWDER.get();
         if ((slot >= 3 && slot <= 5) || slot > 7 || slot < 0) return false;
         return SPRMain.RAW_SWEET_POTATOES.contains(item) && toSlotStack.isEmpty();
     }

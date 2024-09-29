@@ -1,6 +1,6 @@
-package io.github.qwerty770.mcmod.spmreborn.screen;
+package io.github.qwerty770.mcmod.spmreborn.client.handlers;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.client.SweetPotatoMenuTypes;
 import io.github.qwerty770.mcmod.spmreborn.util.inventory.UniversalResultSlot;
 import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntGrinderProperties;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.GrindingUtils;
@@ -33,7 +33,7 @@ public class GrinderScreenHandler extends AbstractContainerMenu {
      * From: Grinder Block Entity
      */
     public GrinderScreenHandler(int syncId, Inventory playerInventory, Level world, Container inventory, IntGrinderProperties properties) {
-        super(SPRMain.GRINDER_SCREEN_HANDLER_TYPE.get(), syncId);
+        super(SweetPotatoMenuTypes.GRINDER_SCREEN_HANDLER_TYPE.get(), syncId);
         this.inventory = inventory;
         this.properties = properties;
         this.addDataSlots(properties);

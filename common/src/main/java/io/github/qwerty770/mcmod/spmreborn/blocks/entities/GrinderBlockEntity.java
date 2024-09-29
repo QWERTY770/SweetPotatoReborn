@@ -1,9 +1,9 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks.entities;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.GrinderBlock;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractLockableContainerBlockEntity;
-import io.github.qwerty770.mcmod.spmreborn.screen.GrinderScreenHandler;
+import io.github.qwerty770.mcmod.spmreborn.client.handlers.GrinderScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.util.BooleanStateManager;
 import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntGrinderProperties;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.GrindingUtils;
@@ -38,7 +38,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
     protected final BooleanStateManager stateHelper;
 
     public GrinderBlockEntity(BlockPos pos, BlockState state) {
-        this(SPRMain.GRINDER_BLOCK_ENTITY_TYPE.get(), pos, state);
+        this(SweetPotatoBlockEntityTypes.GRINDER_BLOCK_ENTITY_TYPE.get(), pos, state);
     }
 
     protected GrinderBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
@@ -201,7 +201,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
 
     //@HardCoded
     private void craftRecipe() {
-        this.craftRecipe(new ItemStack(SPRMain.POTATO_POWDER.get()));
+        this.craftRecipe(new ItemStack(SweetPotatoItems.POTATO_POWDER.get()));
     }
 
     //@HardCoded
@@ -210,7 +210,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
 
         if (notSameItem(invOutput, shallOutput))
             this.inventory.set(1, shallOutput.copy());
-        else if (invOutput.getItem() == SPRMain.POTATO_POWDER.get())
+        else if (invOutput.getItem() == SweetPotatoItems.POTATO_POWDER.get())
             invOutput.grow(1);
     }
 
@@ -237,7 +237,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
 
     //@HardCoded
     protected boolean canAcceptRecipeOutput() {
-        return canAcceptRecipeOutput(SPRMain.POTATO_POWDER.get());
+        return canAcceptRecipeOutput(SweetPotatoItems.POTATO_POWDER.get());
     }
 
     /**
@@ -247,7 +247,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
      * <s>Actually, it's a feature.</s></p>
      *
      * <p>Besides, we use the {@link ItemLike} interface
-     * instead of inline {@link SPRMain#POTATO_POWDER} because
+     * instead of inline {@link SweetPotatoItems#POTATO_POWDER} because
      * {@link GrinderBlockEntity} can be changed upside-down
      * at any time. This method can be a great API.</p>
      *

@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.util.inventory;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +17,7 @@ public interface PeelInserter {
         int i;
         for (i = 0; i < inventory.items.size(); ++i) {
             eachStack = inventory.items.get(i);
-            if (eachStack.getItem().equals(SPRMain.PEEL.get()) && eachStack.getCount() < SPRMain.PEEL.get().getMaxStackSize()) {
+            if (eachStack.getItem().equals(SweetPotatoItems.PEEL.get()) && eachStack.getCount() < SweetPotatoItems.PEEL.get().getMaxStackSize()) {
                 eachStack.grow(1);
                 return PeelActionResult.INSERT;
             }
@@ -25,7 +25,7 @@ public interface PeelInserter {
         for (i = 0; i < inventory.items.size(); ++i) {
             eachStack = inventory.items.get(i);
             if (eachStack.equals(ItemStack.EMPTY)) {
-                inventory.items.set(i, new ItemStack(SPRMain.PEEL.get(), 1));
+                inventory.items.set(i, new ItemStack(SweetPotatoItems.PEEL.get(), 1));
                 return PeelActionResult.INSERT;
             }
         }
@@ -35,7 +35,7 @@ public interface PeelInserter {
 
     static void run(Player player) {
         if (insert(player).equals(PeelActionResult.SPAWN)) {
-            player.spawnAtLocation(SPRMain.PEEL.get());
+            player.spawnAtLocation(SweetPotatoItems.PEEL.get());
         } else {
             player.getInventory().setChanged();
         }

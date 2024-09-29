@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks.plants;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import io.github.qwerty770.mcmod.spmreborn.util.tick.RandomTickHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -17,7 +17,7 @@ public class EnchantedVanillaPotatoesBlock extends PotatoBlock {
 
     @Override
     protected @NotNull ItemLike getBaseSeedId() {
-        return SPRMain.ENCHANTED_VANILLA_POTATO_ITEM.get();
+        return SweetPotatoItems.ENCHANTED_VANILLA_POTATO_ITEM.get();
     }
 
     @Override

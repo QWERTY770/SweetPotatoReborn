@@ -9,7 +9,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 public final class ModEventSubscribers {
     @SubscribeEvent
     public static void init(FMLCommonSetupEvent event) {
-        SPRMain.register();
         SPRMain.getLogger().info("Sweet Potato Reborn (Forge platform) loading!");
         SPRMain.init();
     }

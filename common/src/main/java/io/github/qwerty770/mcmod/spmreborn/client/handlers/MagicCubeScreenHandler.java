@@ -1,7 +1,9 @@
-package io.github.qwerty770.mcmod.spmreborn.screen;
+package io.github.qwerty770.mcmod.spmreborn.client.handlers;
 
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.MagicCubeBlock;
+import io.github.qwerty770.mcmod.spmreborn.client.SweetPotatoMenuTypes;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import io.github.qwerty770.mcmod.spmreborn.util.inventory.MagicCubeInputSlot;
 import io.github.qwerty770.mcmod.spmreborn.util.inventory.UniversalResultSlot;
 import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntMagicCubeProperties;
@@ -35,7 +37,7 @@ public class MagicCubeScreenHandler extends AbstractContainerMenu {
     }
 
     public MagicCubeScreenHandler(int syncId, Inventory playerInventory, Level world, BlockPos pos, Container inventory, IntMagicCubeProperties properties) {
-        super(SPRMain.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), syncId);
+        super(SweetPotatoMenuTypes.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), syncId);
         this.playerInventory = playerInventory;
         this.world = world;
         this.inventory = inventory;
@@ -49,8 +51,8 @@ public class MagicCubeScreenHandler extends AbstractContainerMenu {
         this.addSlot(new UniversalResultSlot(playerInventory.player, inventory, 3, 56, 66));
         this.addSlot(new UniversalResultSlot(playerInventory.player, inventory, 4, 79, 73));
         this.addSlot(new UniversalResultSlot(playerInventory.player, inventory, 5, 102, 66));
-        mainFuelSlot = this.addSlot(new FuelSlot(SPRMain.PEEL.get(), inventory, 6, 12, 32));
-        viceFuelSlot = this.addSlot(new FuelSlot(SPRMain.POTATO_POWDER.get(), inventory, 7, 139, 30));
+        mainFuelSlot = this.addSlot(new FuelSlot(SweetPotatoItems.PEEL.get(), inventory, 6, 12, 32));
+        viceFuelSlot = this.addSlot(new FuelSlot(SweetPotatoItems.POTATO_POWDER.get(), inventory, 7, 139, 30));
 
         int k;
         for (k = 0; k < 3; ++k) for (int j = 0; j < 9; ++j)

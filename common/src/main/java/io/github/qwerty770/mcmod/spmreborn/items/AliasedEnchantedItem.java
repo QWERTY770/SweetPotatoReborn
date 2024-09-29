@@ -1,7 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.items;
 
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import net.minecraft.world.food.FoodProperties;
@@ -22,11 +21,6 @@ public class AliasedEnchantedItem extends ItemNameBlockItem {
     @Override
     public boolean isFoil(ItemStack stack) {
         return true;
-    }
-
-    @ApiStatus.Internal
-    public static RegistrySupplier<Item> of(String id, RegistrySupplier<Block> original) {
-        return of(id, original, SPRMain.defaultProp);
     }
 
     // Update to Minecraft 1.20 -- 2023/12/16  RegistrySupplier

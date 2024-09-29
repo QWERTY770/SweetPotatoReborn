@@ -1,9 +1,10 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks;
 
 import com.google.common.collect.ImmutableList;
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.entities.MagicCubeBlockEntity;
+import io.github.qwerty770.mcmod.spmreborn.blocks.entities.SweetPotatoBlockEntityTypes;
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractBlockWithEntity;
+import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,7 +29,7 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
 
     @Override
     public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, InteractionHand hand, BlockHitResult blockHitResult) {
-        return ImmutableList.of(SPRMain.INTERACT_WITH_MAGIC_CUBE);
+        return ImmutableList.of(SweetPotatoStats.INTERACT_WITH_MAGIC_CUBE);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
 
     @Override
     public BlockEntityType<MagicCubeBlockEntity> getBlockEntityType() {
-        return SPRMain.MAGIC_CUBE_BLOCK_ENTITY_TYPE.get();
+        return SweetPotatoBlockEntityTypes.MAGIC_CUBE_BLOCK_ENTITY_TYPE.get();
     }
 
     @Override

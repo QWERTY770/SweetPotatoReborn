@@ -1,7 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.recipe;
 
 import com.google.gson.JsonObject;
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.NonNullList;
@@ -50,7 +50,7 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
 
     @Environment(EnvType.CLIENT)
     public @NotNull ItemStack getToastSymbol() {
-        return new ItemStack(SPRMain.SEED_UPDATER.get());
+        return new ItemStack(SweetPotatoBlocks.SEED_UPDATER.get());
     }
 
     @Override
@@ -60,12 +60,12 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
 
     @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
-        return SPRMain.SEED_UPDATING_RECIPE_SERIALIZER.get();
+        return SweetPotatoRecipes.SEED_UPDATING_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public @NotNull RecipeType<?> getType() {
-        return SPRMain.SEED_UPDATING_RECIPE_TYPE.get();
+        return SweetPotatoRecipes.SEED_UPDATING_RECIPE_TYPE.get();
     }
 
     public boolean isAdditionIngredient(ItemStack itemStack) {

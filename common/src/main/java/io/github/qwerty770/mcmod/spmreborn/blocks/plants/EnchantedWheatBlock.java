@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks.plants;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import io.github.qwerty770.mcmod.spmreborn.util.tick.RandomTickHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,7 +20,7 @@ public class EnchantedWheatBlock extends CropBlock {
     @Environment(EnvType.CLIENT)
     @Override
     protected @NotNull ItemLike getBaseSeedId() {
-        return SPRMain.ENCHANTED_WHEAT_SEEDS.get();
+        return SweetPotatoItems.ENCHANTED_WHEAT_SEEDS.get();
     }
 
     @Override

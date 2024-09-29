@@ -3,6 +3,7 @@ package io.github.qwerty770.mcmod.spmreborn.world.gen.tree;
 import com.google.common.collect.ImmutableList;
 import dev.architectury.registry.registries.DeferredRegister;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -148,29 +149,29 @@ public final class TreeFeatures {
 
         static {
             OAK_LOG = Blocks.OAK_LOG.defaultBlockState();
-            ENCHANTED_OAK_LEAVES = SPRMain.ENCHANTED_OAK_LEAVES.get().defaultBlockState();
-            ENCHANTED_OAK_SAPLING = SPRMain.ENCHANTED_OAK_SAPLING.get().defaultBlockState();
+            ENCHANTED_OAK_LEAVES = SweetPotatoBlocks.ENCHANTED_OAK_LEAVES.get().defaultBlockState();
+            ENCHANTED_OAK_SAPLING = SweetPotatoBlocks.ENCHANTED_OAK_SAPLING.get().defaultBlockState();
 
             SPRUCE_LOG = Blocks.SPRUCE_LOG.defaultBlockState();
-            ENCHANTED_SPRUCE_LEAVES = SPRMain.ENCHANTED_SPRUCE_LEAVES.get().defaultBlockState();
-            ENCHANTED_SPRUCE_SAPLING = SPRMain.ENCHANTED_SPRUCE_SAPLING.get().defaultBlockState();
+            ENCHANTED_SPRUCE_LEAVES = SweetPotatoBlocks.ENCHANTED_SPRUCE_LEAVES.get().defaultBlockState();
+            ENCHANTED_SPRUCE_SAPLING = SweetPotatoBlocks.ENCHANTED_SPRUCE_SAPLING.get().defaultBlockState();
             PODZOL = Blocks.PODZOL.defaultBlockState();
 
             BIRCH_LOG = Blocks.BIRCH_LOG.defaultBlockState();
-            ENCHANTED_BIRCH_LEAVES = SPRMain.ENCHANTED_BIRCH_LEAVES.get().defaultBlockState();
-            ENCHANTED_BIRCH_SAPLING = SPRMain.ENCHANTED_BIRCH_SAPLING.get().defaultBlockState();
+            ENCHANTED_BIRCH_LEAVES = SweetPotatoBlocks.ENCHANTED_BIRCH_LEAVES.get().defaultBlockState();
+            ENCHANTED_BIRCH_SAPLING = SweetPotatoBlocks.ENCHANTED_BIRCH_SAPLING.get().defaultBlockState();
 
             JUNGLE_LOG = Blocks.JUNGLE_LOG.defaultBlockState();
-            ENCHANTED_JUNGLE_LEAVES = SPRMain.ENCHANTED_JUNGLE_LEAVES.get().defaultBlockState();
-            ENCHANTED_JUNGLE_SAPLING = SPRMain.ENCHANTED_JUNGLE_SAPLING.get().defaultBlockState();
+            ENCHANTED_JUNGLE_LEAVES = SweetPotatoBlocks.ENCHANTED_JUNGLE_LEAVES.get().defaultBlockState();
+            ENCHANTED_JUNGLE_SAPLING = SweetPotatoBlocks.ENCHANTED_JUNGLE_SAPLING.get().defaultBlockState();
 
             ACACIA_LOG = Blocks.ACACIA_LOG.defaultBlockState();
-            ENCHANTED_ACACIA_LEAVES = SPRMain.ENCHANTED_ACACIA_LEAVES.get().defaultBlockState();
-            ENCHANTED_ACACIA_SAPLING = SPRMain.ENCHANTED_ACACIA_SAPLING.get().defaultBlockState();
+            ENCHANTED_ACACIA_LEAVES = SweetPotatoBlocks.ENCHANTED_ACACIA_LEAVES.get().defaultBlockState();
+            ENCHANTED_ACACIA_SAPLING = SweetPotatoBlocks.ENCHANTED_ACACIA_SAPLING.get().defaultBlockState();
 
             DARK_OAK_LOG = Blocks.DARK_OAK_LOG.defaultBlockState();
-            ENCHANTED_DARK_OAK_LEAVES = SPRMain.ENCHANTED_DARK_OAK_LEAVES.get().defaultBlockState();
-            ENCHANTED_DARK_OAK_SAPLING = SPRMain.ENCHANTED_DARK_OAK_SAPLING.get().defaultBlockState();
+            ENCHANTED_DARK_OAK_LEAVES = SweetPotatoBlocks.ENCHANTED_DARK_OAK_LEAVES.get().defaultBlockState();
+            ENCHANTED_DARK_OAK_SAPLING = SweetPotatoBlocks.ENCHANTED_DARK_OAK_SAPLING.get().defaultBlockState();
         }
 
         public static final BeehiveDecorator MORE_BEEHIVES_TREES = new BeehiveDecorator(0.05F);

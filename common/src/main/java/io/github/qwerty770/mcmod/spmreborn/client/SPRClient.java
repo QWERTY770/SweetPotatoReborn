@@ -3,7 +3,8 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import dev.architectury.registry.menu.MenuRegistry;
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.BiomeColors;
@@ -15,24 +16,24 @@ public class SPRClient {
     public static void init() {
         /* Client Screens */
         // Update to Minecraft 1.20 -- 2023/12/3
-        MenuRegistry.registerScreenFactory(SPRMain.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), SeedUpdaterScreen::new);
-        MenuRegistry.registerScreenFactory(SPRMain.GRINDER_SCREEN_HANDLER_TYPE.get(), GrinderScreen::new);
-        MenuRegistry.registerScreenFactory(SPRMain.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), MagicCubeScreen::new);
+        MenuRegistry.registerScreenFactory(SweetPotatoMenuTypes.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), SeedUpdaterScreen::new);
+        MenuRegistry.registerScreenFactory(SweetPotatoMenuTypes.GRINDER_SCREEN_HANDLER_TYPE.get(), GrinderScreen::new);
+        MenuRegistry.registerScreenFactory(SweetPotatoMenuTypes.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), MagicCubeScreen::new);
 
         /* Color Providers */
         // Update to Minecraft 1.20 -- 2023/11/26 and 2023/12/16
         ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.getDefaultColor(),
-                SPRMain.ENCHANTED_ACACIA_LEAVES.get(), SPRMain.ENCHANTED_DARK_OAK_LEAVES.get(),
-                SPRMain.ENCHANTED_JUNGLE_LEAVES.get(), SPRMain.ENCHANTED_OAK_LEAVES.get()
+                SweetPotatoBlocks.ENCHANTED_ACACIA_LEAVES.get(), SweetPotatoBlocks.ENCHANTED_DARK_OAK_LEAVES.get(),
+                SweetPotatoBlocks.ENCHANTED_JUNGLE_LEAVES.get(), SweetPotatoBlocks.ENCHANTED_OAK_LEAVES.get()
         );
-        ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> FoliageColor.getBirchColor(), SPRMain.ENCHANTED_BIRCH_LEAVES.get());
-        ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> FoliageColor.getEvergreenColor(), SPRMain.ENCHANTED_SPRUCE_LEAVES.get());
+        ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> FoliageColor.getBirchColor(), SweetPotatoBlocks.ENCHANTED_BIRCH_LEAVES.get());
+        ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> FoliageColor.getEvergreenColor(), SweetPotatoBlocks.ENCHANTED_SPRUCE_LEAVES.get());
         ColorHandlerRegistry.registerItemColors((stack, tintIndex) -> FoliageColor.getDefaultColor(),
-                SPRMain.ENCHANTED_ACACIA_LEAVES_ITEM.get(), SPRMain.ENCHANTED_DARK_OAK_LEAVES_ITEM.get(),
-                SPRMain.ENCHANTED_JUNGLE_LEAVES_ITEM.get(), SPRMain.ENCHANTED_OAK_LEAVES_ITEM.get()
+                SweetPotatoItems.ENCHANTED_ACACIA_LEAVES_ITEM.get(), SweetPotatoItems.ENCHANTED_DARK_OAK_LEAVES_ITEM.get(),
+                SweetPotatoItems.ENCHANTED_JUNGLE_LEAVES_ITEM.get(), SweetPotatoItems.ENCHANTED_OAK_LEAVES_ITEM.get()
         );
-        ColorHandlerRegistry.registerItemColors((stack, tintIndex) -> FoliageColor.getBirchColor(), SPRMain.ENCHANTED_BIRCH_LEAVES_ITEM.get());
-        ColorHandlerRegistry.registerItemColors((stack, tintIndex) -> FoliageColor.getEvergreenColor(), SPRMain.ENCHANTED_SPRUCE_LEAVES_ITEM.get());
+        ColorHandlerRegistry.registerItemColors((stack, tintIndex) -> FoliageColor.getBirchColor(), SweetPotatoItems.ENCHANTED_BIRCH_LEAVES_ITEM.get());
+        ColorHandlerRegistry.registerItemColors((stack, tintIndex) -> FoliageColor.getEvergreenColor(), SweetPotatoItems.ENCHANTED_SPRUCE_LEAVES_ITEM.get());
 
         /* Linkage */
         // TODO: Is it necessary?
@@ -41,20 +42,20 @@ public class SPRClient {
         /* Rendering */
         // Update to Minecraft 1.20 -- 2023/12/3 and 2023/12/16
         RenderTypeRegistry.register(RenderType.cutout(),
-                SPRMain.PURPLE_POTATO_CROP.get(), SPRMain.RED_POTATO_CROP.get(),
-                SPRMain.WHITE_POTATO_CROP.get(), SPRMain.SEED_UPDATER.get(),
-                SPRMain.ENCHANTED_ACACIA_SAPLING.get(), SPRMain.ENCHANTED_BIRCH_SAPLING.get(),
-                SPRMain.ENCHANTED_DARK_OAK_SAPLING.get(), SPRMain.ENCHANTED_OAK_SAPLING.get(),
-                SPRMain.ENCHANTED_JUNGLE_SAPLING.get(), SPRMain.ENCHANTED_SPRUCE_SAPLING.get(),
-                SPRMain.POTTED_ENCHANTED_ACACIA_SAPLING.get(),
-                SPRMain.POTTED_ENCHANTED_BIRCH_SAPLING.get(),
-                SPRMain.POTTED_ENCHANTED_DARK_OAK_SAPLING.get(),
-                SPRMain.POTTED_ENCHANTED_JUNGLE_SAPLING.get(),
-                SPRMain.POTTED_ENCHANTED_OAK_SAPLING.get(),
-                SPRMain.POTTED_ENCHANTED_SPRUCE_SAPLING.get(),
-                SPRMain.ENCHANTED_BEETROOTS_CROP.get(), SPRMain.ENCHANTED_CARROTS_CROP.get(),
-                SPRMain.ENCHANTED_VANILLA_POTATOES_CROP.get(), SPRMain.ENCHANTED_WHEAT_CROP.get(),
-                SPRMain.ENCHANTED_SUGAR_CANE.get()
+                SweetPotatoBlocks.PURPLE_POTATO_CROP.get(), SweetPotatoBlocks.RED_POTATO_CROP.get(),
+                SweetPotatoBlocks.WHITE_POTATO_CROP.get(), SweetPotatoBlocks.SEED_UPDATER.get(),
+                SweetPotatoBlocks.ENCHANTED_ACACIA_SAPLING.get(), SweetPotatoBlocks.ENCHANTED_BIRCH_SAPLING.get(),
+                SweetPotatoBlocks.ENCHANTED_DARK_OAK_SAPLING.get(), SweetPotatoBlocks.ENCHANTED_OAK_SAPLING.get(),
+                SweetPotatoBlocks.ENCHANTED_JUNGLE_SAPLING.get(), SweetPotatoBlocks.ENCHANTED_SPRUCE_SAPLING.get(),
+                SweetPotatoBlocks.POTTED_ENCHANTED_ACACIA_SAPLING.get(),
+                SweetPotatoBlocks.POTTED_ENCHANTED_BIRCH_SAPLING.get(),
+                SweetPotatoBlocks.POTTED_ENCHANTED_DARK_OAK_SAPLING.get(),
+                SweetPotatoBlocks.POTTED_ENCHANTED_JUNGLE_SAPLING.get(),
+                SweetPotatoBlocks.POTTED_ENCHANTED_OAK_SAPLING.get(),
+                SweetPotatoBlocks.POTTED_ENCHANTED_SPRUCE_SAPLING.get(),
+                SweetPotatoBlocks.ENCHANTED_BEETROOTS_CROP.get(), SweetPotatoBlocks.ENCHANTED_CARROTS_CROP.get(),
+                SweetPotatoBlocks.ENCHANTED_VANILLA_POTATOES_CROP.get(), SweetPotatoBlocks.ENCHANTED_WHEAT_CROP.get(),
+                SweetPotatoBlocks.ENCHANTED_SUGAR_CANE.get()
         );
     }
 }

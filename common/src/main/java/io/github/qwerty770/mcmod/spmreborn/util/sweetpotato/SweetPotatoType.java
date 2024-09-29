@@ -1,6 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.util.sweetpotato;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
@@ -45,33 +46,33 @@ public enum SweetPotatoType {
 
     public ItemLike getRaw() {
         return switch (this) {
-            case PURPLE -> SPRMain.PURPLE_POTATO.get();
-            case RED -> SPRMain.RED_POTATO.get();
-            case WHITE -> SPRMain.WHITE_POTATO.get();
+            case PURPLE -> SweetPotatoItems.PURPLE_POTATO.get();
+            case RED -> SweetPotatoItems.RED_POTATO.get();
+            case WHITE -> SweetPotatoItems.WHITE_POTATO.get();
         };
     }
 
     public ItemLike getBaked() {
         return switch (this) {
-            case PURPLE -> SPRMain.BAKED_PURPLE_POTATO.get();
-            case RED -> SPRMain.BAKED_RED_POTATO.get();
-            case WHITE -> SPRMain.BAKED_WHITE_POTATO.get();
+            case PURPLE -> SweetPotatoItems.BAKED_PURPLE_POTATO.get();
+            case RED -> SweetPotatoItems.BAKED_RED_POTATO.get();
+            case WHITE -> SweetPotatoItems.BAKED_WHITE_POTATO.get();
         };
     }
 
     public Block getCrop() {
         return switch (this) {
-            case PURPLE -> SPRMain.PURPLE_POTATO_CROP.get();
-            case RED -> SPRMain.RED_POTATO_CROP.get();
-            case WHITE -> SPRMain.WHITE_POTATO_CROP.get();
+            case PURPLE -> SweetPotatoBlocks.PURPLE_POTATO_CROP.get();
+            case RED -> SweetPotatoBlocks.RED_POTATO_CROP.get();
+            case WHITE -> SweetPotatoBlocks.WHITE_POTATO_CROP.get();
         };
     }
 
     public ItemLike getEnchanted() {
         return switch (this) {
-            case PURPLE -> SPRMain.ENCHANTED_PURPLE_POTATO.get();
-            case RED -> SPRMain.ENCHANTED_RED_POTATO.get();
-            case WHITE -> SPRMain.ENCHANTED_WHITE_POTATO.get();
+            case PURPLE -> SweetPotatoItems.ENCHANTED_PURPLE_POTATO.get();
+            case RED -> SweetPotatoItems.ENCHANTED_RED_POTATO.get();
+            case WHITE -> SweetPotatoItems.ENCHANTED_WHITE_POTATO.get();
         };
     }
 
