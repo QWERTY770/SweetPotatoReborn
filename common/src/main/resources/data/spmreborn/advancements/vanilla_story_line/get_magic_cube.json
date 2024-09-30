@@ -8,10 +8,10 @@
     "announce_to_chat": true,
     "hidden": false,
     "title": {
-      "translate": "advancement.nether.sweet_potato.get_magic_cube.title"
+      "translate": "advancement.nether.spmreborn.get_magic_cube.title"
     },
     "description": {
-      "translate": "advancement.nether.sweet_potato.get_magic_cube.description"
+      "translate": "advancement.nether.spmreborn.get_magic_cube.description"
     }
   },
   "parent": "minecraft:nether/obtain_crying_obsidian",
