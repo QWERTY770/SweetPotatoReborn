@@ -9,7 +9,7 @@ import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractLockableConta
 import io.github.qwerty770.mcmod.spmreborn.magic.WeightedStatusEffect;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.MagicCubeScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.sound.SweetPotatoSoundEvents;
-import io.github.qwerty770.mcmod.spmreborn.util.BooleanStateManager;
+import io.github.qwerty770.mcmod.spmreborn.util.world.BooleanStateManager;
 import io.github.qwerty770.mcmod.spmreborn.util.effects.StatusEffectInstances;
 import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntMagicCubeProperties;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

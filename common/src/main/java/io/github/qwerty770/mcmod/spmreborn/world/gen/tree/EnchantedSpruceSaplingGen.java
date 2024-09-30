@@ -8,11 +8,11 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 public class EnchantedSpruceSaplingGen extends SpruceTreeGrower {
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomSource, boolean bl) {
-        return TreeFeatures.SPRUCE;
+        return SweetPotatoTreeFeatures.SPRUCE;
     }
 
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource random) {
-        return random.nextBoolean() ? TreeFeatures.MEGA_SPRUCE : TreeFeatures.MEGA_PINE;
+        return random.nextBoolean() ? SweetPotatoTreeFeatures.MEGA_SPRUCE : SweetPotatoTreeFeatures.MEGA_PINE;
     }
 }

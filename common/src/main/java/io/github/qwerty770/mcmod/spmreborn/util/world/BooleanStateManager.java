@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.util;
+package io.github.qwerty770.mcmod.spmreborn.util.world;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.properties.Property;

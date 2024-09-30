@@ -34,15 +34,15 @@ public class SPRMain {
 	}
 
 	public static void register(){
-		SweetPotatoBlocks.LOG_WRAPPER.run();
-		SweetPotatoBlockEntityTypes.LOG_WRAPPER.run();
-		SweetPotatoItems.LOG_WRAPPER.run();
-		SweetPotatoRecipes.LOG_WRAPPER.run();
-		SweetPotatoLootFunctions.LOG_WRAPPER.run(); //
-		SweetPotatoStats.LOG_WRAPPER.run();
-		SweetPotatoSoundEvents.LOG_WRAPPER.run();
-		SweetPotatoMenuTypes.LOG_WRAPPER.run();
-		TreeFeatures.register();
+		SweetPotatoBlocks.LOG_WRAPPER.run(); blockRegistry.register();
+		SweetPotatoBlockEntityTypes.LOG_WRAPPER.run(); blockEntityRegistry.register();
+		SweetPotatoItems.LOG_WRAPPER.run(); itemRegistry.register();
+		SweetPotatoRecipes.LOG_WRAPPER.run(); recipeTypeRegistry.register(); recipeSerializerRegistry.register();
+		SweetPotatoLootFunctions.LOG_WRAPPER.run(); lootFunctionRegistry.register();
+		SweetPotatoStats.LOG_WRAPPER.run(); statRegistry.register();
+		SweetPotatoSoundEvents.LOG_WRAPPER.run(); soundRegistry.register();
+		SweetPotatoMenuTypes.LOG_WRAPPER.run(); menuRegistry.register();
+		SweetPotatoTreeFeatures.LOG_WRAPPER.run(); //featureRegistry.register();
 	}
 
 	public static void init() {

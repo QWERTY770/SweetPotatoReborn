@@ -4,7 +4,7 @@ import io.github.qwerty770.mcmod.spmreborn.blocks.GrinderBlock;
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractLockableContainerBlockEntity;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.GrinderScreenHandler;
-import io.github.qwerty770.mcmod.spmreborn.util.BooleanStateManager;
+import io.github.qwerty770.mcmod.spmreborn.util.world.BooleanStateManager;
 import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntGrinderProperties;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.GrindingUtils;
 import net.minecraft.core.BlockPos;

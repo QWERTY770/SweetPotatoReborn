@@ -1,10 +1,12 @@
 package io.github.qwerty770.mcmod.spmreborn.world.gen.tree;
 
 import com.google.common.collect.ImmutableList;
-import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.util.world.SimpleStateProviderTool;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -28,24 +30,19 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.*;
 import java.util.List;
 import java.util.OptionalInt;
 
-import static io.github.qwerty770.mcmod.spmreborn.world.gen.tree.TreeFeatures.Constants.*;
-
-/* (not javadoc)
-* Most of the code are from {@code ConfiguredFeatures}
-* and {@code TreeConfiguredFeatures}.<br />
-* Don't ask us for the algorithm CUZ WE DON'T KNOW EITHER.
-*/
+import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.featureRegistry;
+import static io.github.qwerty770.mcmod.spmreborn.world.gen.tree.SweetPotatoTreeFeatures.Constants.*;
 
 /**
  * @see net.minecraft.world.level.block.grower.OakTreeGrower
  * @see net.minecraft.data.worldgen.features.TreeFeatures#FANCY_OAK
  */
-public final class TreeFeatures {
-    public static final DeferredRegister<ConfiguredFeature<?, ?>> featureRegister = DeferredRegister.create(SPRMain.MODID, Registries.CONFIGURED_FEATURE);
+public final class SweetPotatoTreeFeatures {
+    public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("tree_features");
 
     private static <FC extends TreeConfiguration> ResourceKey<ConfiguredFeature<?, ?>> register(String id, FC featureConfig) {
         // Temporary solution
-        featureRegister.register(id, () -> new ConfiguredFeature<>(Feature.TREE, featureConfig));
+        featureRegistry.register(id, () -> new ConfiguredFeature<>(Feature.TREE, featureConfig));
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocationTool.create(SPRMain.MODID, id));
     }
 
@@ -68,7 +65,7 @@ public final class TreeFeatures {
                 ((new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(SPRUCE_LOG),
                         new StraightTrunkPlacer(5, 2, 1),
-                        BlockStateProvider.simple(ENCHANTED_SPRUCE_LEAVES),
+                        new SimpleStateProviderTool(ENCHANTED_SPRUCE_LEAVES),
                         new SpruceFoliagePlacer(UniformInt.of(2, 3), UniformInt.of(0, 2), UniformInt.of(1, 2)),
                         new TwoLayersFeatureSize(2, 0, 2)))
                         .ignoreVines().build()));
@@ -76,7 +73,7 @@ public final class TreeFeatures {
                 ((new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(SPRUCE_LOG),
                         new GiantTrunkPlacer(13, 2, 14),
-                        BlockStateProvider.simple(ENCHANTED_SPRUCE_LEAVES),
+                        new SimpleStateProviderTool(ENCHANTED_SPRUCE_LEAVES),
                         new MegaPineFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(13, 17)),
                         new TwoLayersFeatureSize(1, 1, 2)))
                         .decorators(ImmutableList.of(new AlterGroundDecorator(BlockStateProvider.simple(PODZOL))))
@@ -85,7 +82,7 @@ public final class TreeFeatures {
                 ((new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(SPRUCE_LOG),
                         new GiantTrunkPlacer(13, 2, 14),
-                        BlockStateProvider.simple(ENCHANTED_SPRUCE_LEAVES),
+                        new SimpleStateProviderTool(ENCHANTED_SPRUCE_LEAVES),
                         new MegaPineFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), UniformInt.of(3, 7)),
                         new TwoLayersFeatureSize(1, 1, 2)))
                         .decorators(ImmutableList.of(new AlterGroundDecorator(BlockStateProvider.simple(PODZOL))))
@@ -99,7 +96,7 @@ public final class TreeFeatures {
                 ((new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(JUNGLE_LOG),
                         new MegaJungleTrunkPlacer(10, 2, 19),
-                        BlockStateProvider.simple(ENCHANTED_JUNGLE_LEAVES),
+                        new SimpleStateProviderTool(ENCHANTED_JUNGLE_LEAVES),
                         new MegaJungleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2),
                         new TwoLayersFeatureSize(1, 1, 2)))
                         .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25f)))
@@ -108,14 +105,14 @@ public final class TreeFeatures {
                 ((new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(ACACIA_LOG),
                         new ForkingTrunkPlacer(5, 2, 2),
-                        BlockStateProvider.simple(ENCHANTED_ACACIA_LEAVES),
+                        new SimpleStateProviderTool(ENCHANTED_ACACIA_LEAVES),
                         new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2)))
                         .ignoreVines().build()));
         DARK_OAK = register("dark_oak",
                 ((new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(DARK_OAK_LOG),
                         new DarkOakTrunkPlacer(6, 2, 1),
-                        BlockStateProvider.simple(ENCHANTED_DARK_OAK_LEAVES),
+                        new SimpleStateProviderTool(ENCHANTED_DARK_OAK_LEAVES),
                         new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
                         new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())))
                         .ignoreVines().build()));
@@ -123,55 +120,55 @@ public final class TreeFeatures {
 
     static final class Constants {
         public static final BlockState OAK_LOG;
-        public static final BlockState ENCHANTED_OAK_LEAVES;
-        public static final BlockState ENCHANTED_OAK_SAPLING;
+        public static final RegistrySupplier<Block> ENCHANTED_OAK_LEAVES;
+        public static final RegistrySupplier<Block> ENCHANTED_OAK_SAPLING;
 
         public static final BlockState SPRUCE_LOG;
-        public static final BlockState ENCHANTED_SPRUCE_LEAVES;
-        public static final BlockState ENCHANTED_SPRUCE_SAPLING;
+        public static final RegistrySupplier<Block> ENCHANTED_SPRUCE_LEAVES;
+        public static final RegistrySupplier<Block> ENCHANTED_SPRUCE_SAPLING;
         public static final BlockState PODZOL;
 
         public static final BlockState BIRCH_LOG;
-        public static final BlockState ENCHANTED_BIRCH_LEAVES;
-        public static final BlockState ENCHANTED_BIRCH_SAPLING;
+        public static final RegistrySupplier<Block> ENCHANTED_BIRCH_LEAVES;
+        public static final RegistrySupplier<Block> ENCHANTED_BIRCH_SAPLING;
 
         public static final BlockState JUNGLE_LOG;
-        public static final BlockState ENCHANTED_JUNGLE_LEAVES;
-        public static final BlockState ENCHANTED_JUNGLE_SAPLING;
+        public static final RegistrySupplier<Block> ENCHANTED_JUNGLE_LEAVES;
+        public static final RegistrySupplier<Block> ENCHANTED_JUNGLE_SAPLING;
 
         public static final BlockState ACACIA_LOG;
-        public static final BlockState ENCHANTED_ACACIA_LEAVES;
-        public static final BlockState ENCHANTED_ACACIA_SAPLING;
+        public static final RegistrySupplier<Block> ENCHANTED_ACACIA_LEAVES;
+        public static final RegistrySupplier<Block> ENCHANTED_ACACIA_SAPLING;
 
         public static final BlockState DARK_OAK_LOG;
-        public static final BlockState ENCHANTED_DARK_OAK_LEAVES;
-        public static final BlockState ENCHANTED_DARK_OAK_SAPLING;
+        public static final RegistrySupplier<Block> ENCHANTED_DARK_OAK_LEAVES;
+        public static final RegistrySupplier<Block> ENCHANTED_DARK_OAK_SAPLING;
 
         static {
             OAK_LOG = Blocks.OAK_LOG.defaultBlockState();
-            ENCHANTED_OAK_LEAVES = SweetPotatoBlocks.ENCHANTED_OAK_LEAVES.get().defaultBlockState();
-            ENCHANTED_OAK_SAPLING = SweetPotatoBlocks.ENCHANTED_OAK_SAPLING.get().defaultBlockState();
+            ENCHANTED_OAK_LEAVES = SweetPotatoBlocks.ENCHANTED_OAK_LEAVES;
+            ENCHANTED_OAK_SAPLING = SweetPotatoBlocks.ENCHANTED_OAK_SAPLING;
 
             SPRUCE_LOG = Blocks.SPRUCE_LOG.defaultBlockState();
-            ENCHANTED_SPRUCE_LEAVES = SweetPotatoBlocks.ENCHANTED_SPRUCE_LEAVES.get().defaultBlockState();
-            ENCHANTED_SPRUCE_SAPLING = SweetPotatoBlocks.ENCHANTED_SPRUCE_SAPLING.get().defaultBlockState();
+            ENCHANTED_SPRUCE_LEAVES = SweetPotatoBlocks.ENCHANTED_SPRUCE_LEAVES;
+            ENCHANTED_SPRUCE_SAPLING = SweetPotatoBlocks.ENCHANTED_SPRUCE_SAPLING;
             PODZOL = Blocks.PODZOL.defaultBlockState();
 
             BIRCH_LOG = Blocks.BIRCH_LOG.defaultBlockState();
-            ENCHANTED_BIRCH_LEAVES = SweetPotatoBlocks.ENCHANTED_BIRCH_LEAVES.get().defaultBlockState();
-            ENCHANTED_BIRCH_SAPLING = SweetPotatoBlocks.ENCHANTED_BIRCH_SAPLING.get().defaultBlockState();
+            ENCHANTED_BIRCH_LEAVES = SweetPotatoBlocks.ENCHANTED_BIRCH_LEAVES;
+            ENCHANTED_BIRCH_SAPLING = SweetPotatoBlocks.ENCHANTED_BIRCH_SAPLING;
 
             JUNGLE_LOG = Blocks.JUNGLE_LOG.defaultBlockState();
-            ENCHANTED_JUNGLE_LEAVES = SweetPotatoBlocks.ENCHANTED_JUNGLE_LEAVES.get().defaultBlockState();
-            ENCHANTED_JUNGLE_SAPLING = SweetPotatoBlocks.ENCHANTED_JUNGLE_SAPLING.get().defaultBlockState();
+            ENCHANTED_JUNGLE_LEAVES = SweetPotatoBlocks.ENCHANTED_JUNGLE_LEAVES;
+            ENCHANTED_JUNGLE_SAPLING = SweetPotatoBlocks.ENCHANTED_JUNGLE_SAPLING;
 
             ACACIA_LOG = Blocks.ACACIA_LOG.defaultBlockState();
-            ENCHANTED_ACACIA_LEAVES = SweetPotatoBlocks.ENCHANTED_ACACIA_LEAVES.get().defaultBlockState();
-            ENCHANTED_ACACIA_SAPLING = SweetPotatoBlocks.ENCHANTED_ACACIA_SAPLING.get().defaultBlockState();
+            ENCHANTED_ACACIA_LEAVES = SweetPotatoBlocks.ENCHANTED_ACACIA_LEAVES;
+            ENCHANTED_ACACIA_SAPLING = SweetPotatoBlocks.ENCHANTED_ACACIA_SAPLING;
 
             DARK_OAK_LOG = Blocks.DARK_OAK_LOG.defaultBlockState();
-            ENCHANTED_DARK_OAK_LEAVES = SweetPotatoBlocks.ENCHANTED_DARK_OAK_LEAVES.get().defaultBlockState();
-            ENCHANTED_DARK_OAK_SAPLING = SweetPotatoBlocks.ENCHANTED_DARK_OAK_SAPLING.get().defaultBlockState();
+            ENCHANTED_DARK_OAK_LEAVES = SweetPotatoBlocks.ENCHANTED_DARK_OAK_LEAVES;
+            ENCHANTED_DARK_OAK_SAPLING = SweetPotatoBlocks.ENCHANTED_DARK_OAK_SAPLING;
         }
 
         public static final BeehiveDecorator MORE_BEEHIVES_TREES = new BeehiveDecorator(0.05F);
@@ -179,19 +176,19 @@ public final class TreeFeatures {
 
     private static TreeConfiguration.TreeConfigurationBuilder largeOak() {
         return (new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(Blocks.OAK_LOG),
+                BlockStateProvider.simple(OAK_LOG),
                 new FancyTrunkPlacer(3, 11, 0),
-                BlockStateProvider.simple(ENCHANTED_OAK_LEAVES),
+                new SimpleStateProviderTool(ENCHANTED_OAK_LEAVES),
                 new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
                 new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))))
                 .ignoreVines();
     }
 
-    private static TreeConfiguration.TreeConfigurationBuilder tree(Block trunkBlock, BlockState foliageBlock, int baseHeight, int firstRandomHeight) {
+    private static TreeConfiguration.TreeConfigurationBuilder tree(Block trunkBlock, RegistrySupplier<Block> foliageBlock, int baseHeight, int firstRandomHeight) {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(trunkBlock),
                 new StraightTrunkPlacer(baseHeight, firstRandomHeight, 0),
-                BlockStateProvider.simple(foliageBlock),
+                new SimpleStateProviderTool(foliageBlock),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1));
     }
@@ -208,9 +205,5 @@ public final class TreeFeatures {
 
     private static TreeConfiguration.TreeConfigurationBuilder jungle() {
         return tree(Blocks.JUNGLE_LOG, ENCHANTED_JUNGLE_LEAVES, 4, 8);
-    }
-
-    public static void register() {
-        featureRegister.register();
     }
 }
