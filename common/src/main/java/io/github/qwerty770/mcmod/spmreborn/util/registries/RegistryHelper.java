@@ -49,7 +49,6 @@ public abstract class RegistryHelper {
     // 2023/12/16: Rewrite the whole class (mark PlatformRegister, RegistryContainer and RegistryImpl as deprecated)
 
     private static final List<DeferredRegister<?>> modRegistries = new ArrayList<>();
-    public static final DeferredRegister<CreativeModeTab> creativeTabRegistry = ofModRegistry(Registries.CREATIVE_MODE_TAB);
     public static final DeferredRegister<Block> blockRegistry = ofModRegistry(Registries.BLOCK);
     public static final DeferredRegister<Item> itemRegistry = ofModRegistry(Registries.ITEM);
     public static final DeferredRegister<BlockEntityType<?>> blockEntityRegistry = ofModRegistry(Registries.BLOCK_ENTITY_TYPE);
@@ -60,10 +59,10 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
     public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
-    // public static final DeferredRegister<ConfiguredFeature<?, ?>> featureRegistry = ofModRegistry(ResourceKey.createRegistryKey(ResourceLocationTool.create("worldgen/configured_feature")));
     public static final DeferredRegister<TreeDecoratorType<?>> treeDecoratorTypeRegistry = ofModRegistry(Registries.TREE_DECORATOR_TYPE);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
     public static final DeferredRegister<LootItemFunctionType> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
+    public static final DeferredRegister<CreativeModeTab> creativeTabRegistry = ofModRegistry(Registries.CREATIVE_MODE_TAB);
 
     public static ResourceLocation id(String id) {
         return ResourceLocationTool.create(SPRMain.MODID, id);
@@ -157,7 +156,6 @@ public abstract class RegistryHelper {
         return reg;
     }
 
-    @Deprecated
     public static void registerAll(){
         for (var reg : modRegistries) {
             reg.register();

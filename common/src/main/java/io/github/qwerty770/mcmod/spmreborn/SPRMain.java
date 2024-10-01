@@ -14,6 +14,7 @@ import io.github.qwerty770.mcmod.spmreborn.sound.SweetPotatoSoundEvents;
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.ComposterHelper;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
 import io.github.qwerty770.mcmod.spmreborn.world.gen.tree.*;
 import net.minecraft.server.packs.PackType;
@@ -36,19 +37,19 @@ public class SPRMain {
 	}
 
 	public static void register(){
-		SweetPotatoBlocks.LOG_WRAPPER.run(); blockRegistry.register();
-		SweetPotatoBlockEntityTypes.LOG_WRAPPER.run(); blockEntityRegistry.register();
-		SweetPotatoItems.LOG_WRAPPER.run(); itemRegistry.register(); creativeTabRegistry.register();
-		SweetPotatoRecipes.LOG_WRAPPER.run(); recipeTypeRegistry.register(); recipeSerializerRegistry.register();
-		SweetPotatoLootFunctions.LOG_WRAPPER.run(); lootFunctionRegistry.register();
-		SweetPotatoStats.LOG_WRAPPER.run(); statRegistry.register();
-		SweetPotatoSoundEvents.LOG_WRAPPER.run(); soundRegistry.register();
-		SweetPotatoMenuTypes.LOG_WRAPPER.run(); menuRegistry.register();
+		SweetPotatoBlocks.LOG_WRAPPER.run();
+		SweetPotatoBlockEntityTypes.LOG_WRAPPER.run();
+		SweetPotatoItems.LOG_WRAPPER.run();
+		SweetPotatoRecipes.LOG_WRAPPER.run();
+		SweetPotatoLootFunctions.LOG_WRAPPER.run();
+		SweetPotatoStats.LOG_WRAPPER.run();
+		SweetPotatoSoundEvents.LOG_WRAPPER.run();
+		SweetPotatoMenuTypes.LOG_WRAPPER.run();
 		SweetPotatoTreeFeatures.LOG_WRAPPER.run();
+		RegistryHelper.registerAll();
 	}
 
 	public static void init() {
-		// SPRMain.register();
 		// FabricLoader.getInstance().getEntrypoints(MODID, SPRLinkage.class).forEach(SPRLinkage::init);
 		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
 		ComposterHelper.register();
