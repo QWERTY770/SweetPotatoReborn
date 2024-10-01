@@ -13,7 +13,7 @@ authors = "QWERTY770"
 description = '''
 Try new kinds of food, crops & magic in Sweet Potato Mod!
 '''
-#logoFile = "icon.png"
+logoFile = "icon.png"
 
 [[dependencies.spmreborn]]
 modId = "forge"

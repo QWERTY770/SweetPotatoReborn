@@ -63,7 +63,10 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
 
     @Override
     protected @NotNull ItemCombinerMenuSlotDefinition createInputSlotDefinitions() {
-        return ItemCombinerMenuSlotDefinition.create().build();
+        return ItemCombinerMenuSlotDefinition.create()
+                .withSlot(0, 27, 47, (itemStack) -> true)
+                .withSlot(1, 76, 47, (itemStack) -> true)
+                .withResultSlot(2, 134, 47).build();
     }
 
     @Override
@@ -92,8 +95,8 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
         this.inputSlots.setItem(i, itemStack);
     }
 
-    // TODO
-    protected boolean shouldQuickMoveToAdditionalSlot(ItemStack itemStack) {
+    protected boolean canMoveIntoInputSlots(ItemStack itemStack) {
+        // ItemCombinerMenu.shouldQuickMoveToAdditionalSlot(ItemStack itemStack) in minecraft 1.19-
         return this.list.stream().anyMatch(seedUpdatingRecipe ->
                 seedUpdatingRecipe.isAdditionIngredient(itemStack));
     }

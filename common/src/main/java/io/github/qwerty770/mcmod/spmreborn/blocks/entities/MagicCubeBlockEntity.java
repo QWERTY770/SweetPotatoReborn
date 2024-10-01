@@ -264,7 +264,6 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     private List<MobEffectInstance> calcEnchantments() {
-        //TODO
         List<MobEffectInstance> enchantmentList = new ObjectArrayList<>();
         ShufflingList<MobEffectInstance> weightedList = new ShufflingList<>();
         WeightedStatusEffect.dump2weightedList(weightedList, withViceFuel());
