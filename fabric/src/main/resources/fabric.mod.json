@@ -25,7 +25,6 @@
       "io.github.qwerty770.fabricmod.spmreborn.SPRClientFabric"
     ],
     "server": [
-      "io.github.qwerty770.mcmod.spmreborn.linkage.SPRLinkageServer::load"
     ]
   },
   "mixins": [

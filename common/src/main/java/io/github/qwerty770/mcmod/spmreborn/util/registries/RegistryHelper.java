@@ -31,7 +31,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.storage.loot.Serializer;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
@@ -39,6 +38,7 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -60,7 +60,7 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
     public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
-    public static final DeferredRegister<ConfiguredFeature<?, ?>> featureRegistry = ofModRegistry(Registries.CONFIGURED_FEATURE);
+    // public static final DeferredRegister<ConfiguredFeature<?, ?>> featureRegistry = ofModRegistry(ResourceKey.createRegistryKey(ResourceLocationTool.create("worldgen/configured_feature")));
     public static final DeferredRegister<TreeDecoratorType<?>> treeDecoratorTypeRegistry = ofModRegistry(Registries.TREE_DECORATOR_TYPE);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
     public static final DeferredRegister<LootItemFunctionType> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
@@ -94,13 +94,14 @@ public abstract class RegistryHelper {
     }
 
     // Update to Minecraft 1.20 -- 2023/12/16
-    public static <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Block... blocks) {
+    @SafeVarargs
+    public static <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, RegistrySupplier<Block>... blocks) {
         Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, id);
         assert type != null;
-        return blockEntityRegistry.register(id, () -> BlockEntityType.Builder.of(supplier, blocks).build(type));
+        return blockEntityRegistry.register(id, () -> BlockEntityType.Builder.of(supplier,
+                Arrays.stream(blocks).map(RegistrySupplier::get).toArray(Block[]::new)).build(type));
     }
 
-    // @Environment(EnvType.CLIENT)
     public static RegistrySupplier<SoundEvent> sound(String id) {
         return soundRegistry.register(id, () -> SoundEvent.createVariableRangeEvent(id(id)));
     }

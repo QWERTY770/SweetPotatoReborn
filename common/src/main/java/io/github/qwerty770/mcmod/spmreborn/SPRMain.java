@@ -7,12 +7,12 @@ import io.github.qwerty770.mcmod.spmreborn.items.*;
 import io.github.qwerty770.mcmod.spmreborn.loot.SPRLootTables;
 import io.github.qwerty770.mcmod.spmreborn.loot.SweetPotatoLootFunctions;
 import io.github.qwerty770.mcmod.spmreborn.magic.MagicalEnchantmentLoader;
+import io.github.qwerty770.mcmod.spmreborn.mixin.acc.ParrotEntityAccessor;
 import io.github.qwerty770.mcmod.spmreborn.recipe.SweetPotatoRecipes;
 import io.github.qwerty770.mcmod.spmreborn.client.SweetPotatoMenuTypes;
 import io.github.qwerty770.mcmod.spmreborn.sound.SweetPotatoSoundEvents;
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.AnimalIngredients;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.ComposterHelper;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
 import io.github.qwerty770.mcmod.spmreborn.world.gen.tree.*;
@@ -20,6 +20,8 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Set;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.*;
 
@@ -36,23 +38,22 @@ public class SPRMain {
 	public static void register(){
 		SweetPotatoBlocks.LOG_WRAPPER.run(); blockRegistry.register();
 		SweetPotatoBlockEntityTypes.LOG_WRAPPER.run(); blockEntityRegistry.register();
-		SweetPotatoItems.LOG_WRAPPER.run(); itemRegistry.register();
+		SweetPotatoItems.LOG_WRAPPER.run(); itemRegistry.register(); creativeTabRegistry.register();
 		SweetPotatoRecipes.LOG_WRAPPER.run(); recipeTypeRegistry.register(); recipeSerializerRegistry.register();
 		SweetPotatoLootFunctions.LOG_WRAPPER.run(); lootFunctionRegistry.register();
 		SweetPotatoStats.LOG_WRAPPER.run(); statRegistry.register();
 		SweetPotatoSoundEvents.LOG_WRAPPER.run(); soundRegistry.register();
 		SweetPotatoMenuTypes.LOG_WRAPPER.run(); menuRegistry.register();
-		SweetPotatoTreeFeatures.LOG_WRAPPER.run(); //featureRegistry.register();
+		SweetPotatoTreeFeatures.LOG_WRAPPER.run();
 	}
 
 	public static void init() {
-		SPRMain.register();
-		// TODO: Is it necessary?
+		// SPRMain.register();
 		// FabricLoader.getInstance().getEntrypoints(MODID, SPRLinkage.class).forEach(SPRLinkage::init);
 		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
 		ComposterHelper.register();
 		SPRLootTables.init();
-		AnimalIngredients.configureParrot();
+		SPRMain.configureParrot();
 		LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
 		LOGGER.info("This is for Minecraft 1.20 and above!");
 	}
@@ -73,5 +74,12 @@ public class SPRMain {
 		// About pig food, parrot food and chicken food
 		PIG_BREEDING_INGREDIENTS = itemTag("pig_breeding_ingredients");
 		CHICKEN_BREEDING_INGREDIENTS = itemTag("chicken_breeding_ingredients");
+	}
+
+	@SuppressWarnings("UnreachableCode")
+	public static void configureParrot() {
+		Set<Item> parrotTamingIngredients = ParrotEntityAccessor.getTamingIngredients();
+		parrotTamingIngredients.add(SweetPotatoItems.ENCHANTED_BEETROOT_SEEDS.get());
+		parrotTamingIngredients.add(SweetPotatoItems.ENCHANTED_WHEAT_SEEDS.get());
 	}
 }

@@ -8,6 +8,8 @@ import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWr
 import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
 import io.github.qwerty770.mcmod.spmreborn.util.world.SimpleStateProviderTool;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -27,10 +29,11 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecora
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.OptionalInt;
 
-import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.featureRegistry;
 import static io.github.qwerty770.mcmod.spmreborn.world.gen.tree.SweetPotatoTreeFeatures.Constants.*;
 
 /**
@@ -39,13 +42,14 @@ import static io.github.qwerty770.mcmod.spmreborn.world.gen.tree.SweetPotatoTree
  */
 public final class SweetPotatoTreeFeatures {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("tree_features");
-
-    private static <FC extends TreeConfiguration> ResourceKey<ConfiguredFeature<?, ?>> register(String id, FC featureConfig) {
-        // Temporary solution
-        featureRegistry.register(id, () -> new ConfiguredFeature<>(Feature.TREE, featureConfig));
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocationTool.create(SPRMain.MODID, id));
+    public static Map<ResourceKey<ConfiguredFeature<?, ?>>, TreeConfiguration> featureMap = new HashMap<>();
+    
+    public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext){
+        for (ResourceKey<ConfiguredFeature<?, ?>> resourceKey : featureMap.keySet()){
+            FeatureUtils.register(bootstapContext, resourceKey, Feature.TREE, featureMap.get(resourceKey));
+        }
     }
-
+    
     // Update to Minecraft 1.20 -- 2023/12/16
     public static final ResourceKey<ConfiguredFeature<?, ?>>
             FANCY_OAK, FANCY_OAK_BEES_005, OAK, OAK_BEES_005,
@@ -116,6 +120,12 @@ public final class SweetPotatoTreeFeatures {
                         new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
                         new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())))
                         .ignoreVines().build()));
+    }
+
+    private static <FC extends TreeConfiguration> ResourceKey<ConfiguredFeature<?, ?>> register(String id, FC featureConfig) {
+        ResourceKey<ConfiguredFeature<?, ?>> resourceKey = ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocationTool.create(SPRMain.MODID, id));
+        featureMap.put(resourceKey, featureConfig);
+        return resourceKey;
     }
 
     static final class Constants {

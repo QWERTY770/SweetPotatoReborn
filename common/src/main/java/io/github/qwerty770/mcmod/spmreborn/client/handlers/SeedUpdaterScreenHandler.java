@@ -61,10 +61,9 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
         }
     }
 
-    @SuppressWarnings("NullableProblems")
     @Override
-    protected ItemCombinerMenuSlotDefinition createInputSlotDefinitions() {
-        return null;
+    protected @NotNull ItemCombinerMenuSlotDefinition createInputSlotDefinitions() {
+        return ItemCombinerMenuSlotDefinition.create().build();
     }
 
     @Override

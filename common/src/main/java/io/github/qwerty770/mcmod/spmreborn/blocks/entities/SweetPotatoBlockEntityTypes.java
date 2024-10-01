@@ -13,7 +13,7 @@ public class SweetPotatoBlockEntityTypes {
     public static final RegistrySupplier<BlockEntityType<GrinderBlockEntity>> GRINDER_BLOCK_ENTITY_TYPE;
     public static final RegistrySupplier<BlockEntityType<MagicCubeBlockEntity>> MAGIC_CUBE_BLOCK_ENTITY_TYPE;
     static {
-        GRINDER_BLOCK_ENTITY_TYPE = blockEntity("grinder", GrinderBlockEntity::new, SweetPotatoBlocks.GRINDER.getOrNull());
-        MAGIC_CUBE_BLOCK_ENTITY_TYPE = blockEntity("magic_cube", MagicCubeBlockEntity::new, SweetPotatoBlocks.MAGIC_CUBE.getOrNull());
+        GRINDER_BLOCK_ENTITY_TYPE = blockEntity("grinder", GrinderBlockEntity::new, SweetPotatoBlocks.GRINDER);
+        MAGIC_CUBE_BLOCK_ENTITY_TYPE = blockEntity("magic_cube", MagicCubeBlockEntity::new, SweetPotatoBlocks.MAGIC_CUBE);
     }
 }

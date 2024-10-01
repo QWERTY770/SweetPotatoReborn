@@ -36,9 +36,7 @@ public class SPRClient {
         ColorHandlerRegistry.registerItemColors((stack, tintIndex) -> FoliageColor.getEvergreenColor(), SweetPotatoItems.ENCHANTED_SPRUCE_LEAVES_ITEM.get());
 
         /* Linkage */
-        // TODO: Is it necessary?
         // FabricLoader.getInstance().getEntrypoints("spmreborn.client", SPRLinkageClient.class).forEach(SPRLinkageClient::initClient);
-
         /* Rendering */
         // Update to Minecraft 1.20 -- 2023/12/3 and 2023/12/16
         RenderTypeRegistry.register(RenderType.cutout(),
