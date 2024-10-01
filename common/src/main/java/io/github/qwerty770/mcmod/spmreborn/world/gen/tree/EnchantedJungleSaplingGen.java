@@ -8,11 +8,11 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 public class EnchantedJungleSaplingGen extends JungleTreeGrower {
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomSource, boolean bl) {
-        return TreeFeatures.JUNGLE_TREE_NO_VINE;
+        return SweetPotatoTreeFeatures.JUNGLE_TREE_NO_VINE;
     }
 
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource random) {
-        return TreeFeatures.MEGA_JUNGLE_TREE;
+        return SweetPotatoTreeFeatures.MEGA_JUNGLE_TREE;
     }
 }

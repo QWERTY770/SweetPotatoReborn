@@ -6,14 +6,14 @@ license = "Apache-2.0"
 
 [[mods]]
 modId = "spmreborn"
-version = "1.0.0"
+version = "${version}"
 displayName = "Sweet Potato Reborn"
 displayURL="https://github.com/QWERTY770/SweetPotatoReborn"
 authors = "QWERTY770"
 description = '''
 Try new kinds of food, crops & magic in Sweet Potato Mod!
 '''
-logoFile = "icon.png"
+#logoFile = "icon.png"
 
 [[dependencies.spmreborn]]
 modId = "forge"

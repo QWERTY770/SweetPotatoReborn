@@ -9,9 +9,9 @@ public class EnchantedOakSaplingGen extends OakTreeGrower {
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean canSpawnBees) {
         if (random.nextInt(10) == 0) {
-            return canSpawnBees ? TreeFeatures.FANCY_OAK_BEES_005 : TreeFeatures.FANCY_OAK;
+            return canSpawnBees ? SweetPotatoTreeFeatures.FANCY_OAK_BEES_005 : SweetPotatoTreeFeatures.FANCY_OAK;
         } else {
-            return canSpawnBees ? TreeFeatures.OAK_BEES_005 : TreeFeatures.OAK;
+            return canSpawnBees ? SweetPotatoTreeFeatures.OAK_BEES_005 : SweetPotatoTreeFeatures.OAK;
         }
     }
 }

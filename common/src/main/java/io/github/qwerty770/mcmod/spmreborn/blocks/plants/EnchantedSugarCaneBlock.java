@@ -59,8 +59,6 @@ public class EnchantedSugarCaneBlock extends Block {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (world.isEmptyBlock(pos.above())) {
             int i = 1;
-            //for(i = 1; world.getBlockState(pos.down(i)).isOf(this); ++i) {
-            //}
             while (world.getBlockState(pos.below(i)).is(this)) i++;
 
             if (i < 3) {
@@ -76,7 +74,7 @@ public class EnchantedSugarCaneBlock extends Block {
 
     }
 
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
         if (!state.canSurvive(world, pos)) {
             world.scheduleTick(pos, this, 1);
         }

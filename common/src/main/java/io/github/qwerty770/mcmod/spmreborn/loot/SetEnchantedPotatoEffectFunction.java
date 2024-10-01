@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.items.EnchantedSweetPotatoItem;
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoProperties;
 import io.github.qwerty770.mcmod.spmreborn.util.effects.StatusEffectInstances;
@@ -58,7 +57,7 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
 
     @Override
     public @NotNull LootItemFunctionType getType() {
-        return SPRMain.SET_ENCHANTED_POTATO_EFFECT;
+        return SweetPotatoLootFunctions.SET_ENCHANTED_POTATO_EFFECT.get();
     }
 
     public static class Serializer

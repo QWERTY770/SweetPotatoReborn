@@ -7,9 +7,8 @@ import io.github.qwerty770.mcmod.spmreborn.world.levelmeta.SPRLevelProperties;
 import io.github.qwerty770.mcmod.spmreborn.world.levelmeta.SPRLevelPropertiesHelper;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.LevelSettings;
-import net.minecraft.world.level.levelgen.WorldGenSettings;
+import net.minecraft.world.level.levelgen.WorldOptions;
 import net.minecraft.world.level.storage.LevelVersion;
 import net.minecraft.world.level.storage.PrimaryLevelData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,7 +34,7 @@ public class LevelPropertiesMixin implements SPRLevelProperties {
     }
 
     @Inject(at = @At("RETURN"), method = "parse")
-    private static void onReadProperties(Dynamic<Tag> dynamic, DataFixer dataFixer, int dataVersion, CompoundTag playerData, LevelSettings levelInfo, LevelVersion saveVersionInfo, WorldGenSettings generatorOptions, Lifecycle lifecycle, CallbackInfoReturnable<PrimaryLevelData> cir) {
+    private static void onReadProperties(Dynamic<?> dynamic, DataFixer dataFixer, int i, CompoundTag compoundTag, LevelSettings levelSettings, LevelVersion levelVersion, PrimaryLevelData.SpecialWorldProperty specialWorldProperty, WorldOptions worldOptions, Lifecycle lifecycle, CallbackInfoReturnable<PrimaryLevelData> cir) {
         PrimaryLevelData levelProperties = cir.getReturnValue();
         SPRLevelPropertiesHelper.setCurrentSPRDataVersion((SPRLevelProperties) levelProperties);
     }

@@ -7,6 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
  * Should have constructors with {@link FriendlyByteBuf} and other essential
  * parameters.
  */
+// TODO: Is it necessary?
 public interface PlayPacket {
     void toPacket(FriendlyByteBuf buf);
 

@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.items;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import io.github.qwerty770.mcmod.spmreborn.util.inventory.PeelInserter;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoStatus;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
@@ -28,7 +28,7 @@ public class RawSweetPotatoBlockItem extends ItemNameBlockItem implements SweetP
     public @NotNull ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
         super.finishUsingItem(stack, world, user);
         if (user instanceof Player playerEntity) {
-            playerEntity.awardStat(SPRMain.SWEET_POTATO_EATEN);
+            playerEntity.awardStat(SweetPotatoStats.SWEET_POTATO_EATEN);
             if (!((Player) user).getAbilities().instabuild)
                 PeelInserter.run(playerEntity);
         }

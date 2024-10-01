@@ -1,8 +1,10 @@
 package io.github.qwerty770.mcmod.spmreborn.items;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.ApiStatus;
@@ -18,8 +20,9 @@ public class EnchantedBlockItem extends BlockItem {
         return true;
     }
 
+    // Update to Minecraft 1.20 -- 2023/12/16  RegistrySupplier
     @ApiStatus.Internal
-    public static EnchantedBlockItem of(String id, Block original, Properties settings) {
-        return (EnchantedBlockItem) RegistryHelper.item(id, new EnchantedBlockItem(original, settings));
+    public static RegistrySupplier<Item> of(String id, RegistrySupplier<Block> original, Properties settings) {
+        return RegistryHelper.item(id, () -> new EnchantedBlockItem(original.get(), settings));
     }
 }

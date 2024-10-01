@@ -11,23 +11,20 @@ public class MiscLootTables {
         LootPool.Builder pool = LootPool.lootPool();
         pool.add(LootTableReference.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(4));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 1,
-        //         LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(4));
+        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 1, LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(4));
     }
 
     public static LootPool.Builder shipwreckSupply() {
         LootPool.Builder pool = LootPool.lootPool();
         pool.add(LootTableReference.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(7));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0,
-        //         LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(7));
+        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0, LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(7));
     }
 
     public static LootPool.Builder woodlandMansion() {
         LootPool.Builder pool = LootPool.lootPool();
         pool.add(LootTableReference.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(15));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 1,
-        //         LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(15));
+        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 1, LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(15));
     }
 }

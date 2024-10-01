@@ -13,6 +13,6 @@ public class EnchantedDarkOakSaplingGen extends DarkOakTreeGrower {
 
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource random) {
-        return TreeFeatures.DARK_OAK;
+        return SweetPotatoTreeFeatures.DARK_OAK;
     }
 }

@@ -2,6 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn.loot;
 
 import dev.architectury.event.events.common.LootEvent;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -18,9 +19,9 @@ public class SPRLootTables {
                 MORE_BAKED_SWEET_POTATOES;
 
     static {
-        RAW_SWEET_POTATOES = new ResourceLocation(SPRMain.MODID, "misc/raw_sweet_potatoes");
-        MORE_RAW_SWEET_POTATOES = new ResourceLocation(SPRMain.MODID, "misc/more_raw_sweet_potatoes");
-        MORE_BAKED_SWEET_POTATOES = new ResourceLocation(SPRMain.MODID, "misc/more_baked_sweet_potatoes");
+        RAW_SWEET_POTATOES = ResourceLocationTool.create(SPRMain.MODID, "misc/raw_sweet_potatoes");
+        MORE_RAW_SWEET_POTATOES = ResourceLocationTool.create(SPRMain.MODID, "misc/more_raw_sweet_potatoes");
+        MORE_BAKED_SWEET_POTATOES = ResourceLocationTool.create(SPRMain.MODID, "misc/more_baked_sweet_potatoes");
     }
 
     private static final List<ResourceLocation> zombies = List.of(EntityType.ZOMBIE.getDefaultLootTable(),

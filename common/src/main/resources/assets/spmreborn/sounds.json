@@ -7,7 +7,7 @@
         "pitch": 1
       }
     ],
-    "subtitle": "subtitles.block.sweet_potato.agroforestry_table.finish"
+    "subtitle": "subtitles.block.spmreborn.agroforestry_table.finish"
   },
   "block.grinder.grind": {
     "sounds": [{
@@ -15,7 +15,7 @@
       "volume": 1,
       "pitch": 1
     }],
-    "subtitle": "subtitles.block.sweet_potato.grinder.grind"
+    "subtitle": "subtitles.block.spmreborn.grinder.grind"
   },
   "block.magic_cube.activate": {
     "sounds": [{
@@ -23,7 +23,7 @@
       "volume": 1,
       "pitch": 1
     }],
-    "subtitle": "subtitles.block.sweet_potato.magic_cube.activate"
+    "subtitle": "subtitles.block.spmreborn.magic_cube.activate"
   },
   "block.magic_cube.deactivate": {
     "sounds": [{
@@ -31,7 +31,7 @@
       "volume": 1,
       "pitch": 1
     }],
-    "subtitle": "subtitles.block.sweet_potato.magic_cube.deactivate"
+    "subtitle": "subtitles.block.spmreborn.magic_cube.deactivate"
   },
   "block.magic_cube.ambient": {
     "sounds": [{
@@ -39,6 +39,6 @@
       "volume": 1,
       "pitch": 1
     }],
-    "subtitle": "subtitles.block.sweet_potato.magic_cube.ambient"
+    "subtitle": "subtitles.block.spmreborn.magic_cube.ambient"
   }
 }

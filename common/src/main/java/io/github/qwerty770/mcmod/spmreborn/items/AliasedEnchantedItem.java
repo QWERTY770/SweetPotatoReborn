@@ -1,9 +1,10 @@
 package io.github.qwerty770.mcmod.spmreborn.items;
 
-import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -22,18 +23,14 @@ public class AliasedEnchantedItem extends ItemNameBlockItem {
         return true;
     }
 
+    // Update to Minecraft 1.20 -- 2023/12/16  RegistrySupplier
     @ApiStatus.Internal
-    public static AliasedEnchantedItem of(String id, Block original) {
-        return of(id, original, SPRMain.defaultProp);
+    public static RegistrySupplier<Item> of(String id, RegistrySupplier<Block> original, Properties properties) {
+        return RegistryHelper.item(id, () -> new AliasedEnchantedItem(original.get(), properties));
     }
 
     @ApiStatus.Internal
-    public static AliasedEnchantedItem of(String id, Block original, Properties properties) {
-        return (AliasedEnchantedItem) RegistryHelper.item(id, new AliasedEnchantedItem(original, properties));
-    }
-
-    @ApiStatus.Internal
-    public static AliasedEnchantedItem ofMiscFood(String id, Block original, FoodProperties foodComponent, Properties properties) {
-        return (AliasedEnchantedItem) RegistryHelper.item(id, new AliasedEnchantedItem(original, properties.food(foodComponent)));
+    public static RegistrySupplier<Item> ofFood(String id, RegistrySupplier<Block> original, FoodProperties foodComponent, Properties properties) {
+        return RegistryHelper.item(id, () -> new AliasedEnchantedItem(original.get(), properties.food(foodComponent)));
     }
 }

@@ -8,6 +8,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 public class EnchantedAcaciaSaplingGen extends AcaciaTreeGrower {
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomSource, boolean bl) {
-        return TreeFeatures.ACACIA;
+        return SweetPotatoTreeFeatures.ACACIA;
     }
 }
