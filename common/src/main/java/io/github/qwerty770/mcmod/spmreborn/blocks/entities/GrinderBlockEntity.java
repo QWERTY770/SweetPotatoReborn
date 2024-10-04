@@ -235,7 +235,6 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
         return false;
     }*/
 
-    //@HardCoded
     protected boolean canAcceptRecipeOutput() {
         return canAcceptRecipeOutput(SweetPotatoItems.POTATO_POWDER.get());
     }
@@ -253,7 +252,6 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
      *
      * @since beta-1.0.0
      */
-    //@HardCoded
     protected boolean canAcceptRecipeOutput(ItemLike item) {
         //ItemStack shallBeOutput = new ItemStack(SPMMain.POTATO_POWDER);
         ItemStack outInv = this.inventory.get(1);

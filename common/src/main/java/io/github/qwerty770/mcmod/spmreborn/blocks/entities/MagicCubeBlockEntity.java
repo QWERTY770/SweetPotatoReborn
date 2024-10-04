@@ -1,6 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks.entities;
 
 import com.mojang.logging.LogUtils;
+import dev.architectury.registry.menu.ExtendedMenuProvider;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.MagicCubeBlock;
 import io.github.qwerty770.mcmod.spmreborn.items.RawSweetPotatoBlockItem;
@@ -19,7 +20,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.WorldlyContainer;
@@ -45,11 +45,9 @@ import java.util.Optional;
 
 import static net.minecraft.world.level.block.Blocks.SOUL_FIRE;
 
-// TODO Re-implementation of ExtendedScreenHandlerFactory
-public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity implements WorldlyContainer {
+public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity implements WorldlyContainer, ExtendedMenuProvider {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    //protected StateHelperV1 stateHelper;
     private static final int[] TOP_SLOTS = new int[] { 0, 1, 2 };
     private static final int[] BOTTOM_SLOTS = new int[] { 3, 4, 5 };
     private static final int[] SIDE_SLOTS = new int[] { 6, 7 };
@@ -324,8 +322,8 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
         return slot > 2 && slot < 6 && dir == Direction.DOWN;
     }
 
-    // @Override
-    public void writeScreenOpeningData(ServerPlayer serverPlayerEntity, FriendlyByteBuf packetByteBuf) {
+    @Override
+    public void saveExtraData(FriendlyByteBuf packetByteBuf) {
         packetByteBuf.writeBlockPos(this.worldPosition);
     }
 
