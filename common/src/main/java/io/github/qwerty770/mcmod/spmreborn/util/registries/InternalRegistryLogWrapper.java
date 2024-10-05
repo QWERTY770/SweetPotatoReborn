@@ -1,6 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.util.registries;
 
 import com.mojang.logging.LogUtils;
+import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
@@ -20,6 +21,6 @@ public class InternalRegistryLogWrapper implements Runnable {
     }
 
     public static InternalRegistryLogWrapper of(String s) {
-        return new InternalRegistryLogWrapper(ResourceLocationTool.create("spmreborn", s));
+        return new InternalRegistryLogWrapper(ResourceLocationTool.create(SPRMain.MODID, s));
     }
 }

@@ -1,6 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.util.registries;
 
 import com.mojang.datafixers.types.Type;
+import com.mojang.serialization.Codec;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -17,6 +18,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.flag.FeatureFlags;
@@ -31,6 +33,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.storage.loot.Serializer;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
@@ -40,25 +44,26 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public abstract class RegistryHelper {
     // Update to Minecraft 1.20 -- 2023/10/30  net.minecraft.core.Registry -> net.minecraft.core.registries.BuiltInRegistries.XXX
-    // Update to Minecraft 1.20 -- 2023/12/16  Use DeferredRegister for cross-platform support
+    // 2023/12/16: Use DeferredRegister for cross-platform support
     // 2023/12/16: Rewrite the whole class (mark PlatformRegister, RegistryContainer and RegistryImpl as deprecated)
 
     private static final List<DeferredRegister<?>> modRegistries = new ArrayList<>();
     public static final DeferredRegister<Block> blockRegistry = ofModRegistry(Registries.BLOCK);
     public static final DeferredRegister<Item> itemRegistry = ofModRegistry(Registries.ITEM);
     public static final DeferredRegister<BlockEntityType<?>> blockEntityRegistry = ofModRegistry(Registries.BLOCK_ENTITY_TYPE);
+    public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
     public static final DeferredRegister<RecipeSerializer<?>> recipeSerializerRegistry = ofModRegistry(Registries.RECIPE_SERIALIZER);
     public static final DeferredRegister<MenuType<?>> menuRegistry = ofModRegistry(Registries.MENU);
     public static final DeferredRegister<SoundEvent> soundRegistry = ofModRegistry(Registries.SOUND_EVENT);
     public static final DeferredRegister<ParticleType<?>> particleTypeRegistry = ofModRegistry(Registries.PARTICLE_TYPE);
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
-    public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
     public static final DeferredRegister<TreeDecoratorType<?>> treeDecoratorTypeRegistry = ofModRegistry(Registries.TREE_DECORATOR_TYPE);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
     public static final DeferredRegister<LootItemFunctionType> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
@@ -66,6 +71,14 @@ public abstract class RegistryHelper {
 
     public static ResourceLocation id(String id) {
         return ResourceLocationTool.create(SPRMain.MODID, id);
+    }
+
+    public static RegistrySupplier<Block> block(String id, Block block2) {
+        return blockRegistry.register(id, () -> block2);
+    }
+
+    public static RegistrySupplier<Block> block(String id, Supplier<Block> supplier) {
+        return blockRegistry.register(id, supplier);
     }
 
     public static RegistrySupplier<Item> item(String id, Item item2) {
@@ -77,32 +90,20 @@ public abstract class RegistryHelper {
     }
 
     public static RegistrySupplier<Item> defaultItem(String id, @NotNull Item.Properties settings) {
-        return item(id, () -> new Item(settings));
+        return itemRegistry.register(id, () -> new Item(settings));
     }
 
-    public static RegistrySupplier<Block> block(String id, Block block2) {
-        return blockRegistry.register(id, () -> block2);
-    }
-
-    public static RegistrySupplier<Block> block(String id, Supplier<Block> supplier) {
-        return blockRegistry.register(id, supplier);
-    }
-
-    public static RegistrySupplier<BlockItem> blockItem(String id, RegistrySupplier<Block> block2, @NotNull Item.Properties settings) {
+    public static RegistrySupplier<BlockItem> blockItem(String id, Supplier<Block> block2, @NotNull Item.Properties settings) {
         return itemRegistry.register(id, () -> new BlockItem(block2.get(), settings));
     }
 
     // Update to Minecraft 1.20 -- 2023/12/16
     @SafeVarargs
-    public static <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, RegistrySupplier<Block>... blocks) {
+    public static <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Supplier<Block>... blocks) {
         Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, id);
         assert type != null;
         return blockEntityRegistry.register(id, () -> BlockEntityType.Builder.of(supplier,
-                Arrays.stream(blocks).map(RegistrySupplier::get).toArray(Block[]::new)).build(type));
-    }
-
-    public static RegistrySupplier<SoundEvent> sound(String id) {
-        return soundRegistry.register(id, () -> SoundEvent.createVariableRangeEvent(id(id)));
+                Arrays.stream(blocks).map(Supplier::get).toArray(Block[]::new)).build(type));
     }
 
     public static <T extends Recipe<Container>> RegistrySupplier<RecipeType<T>> recipeType(String id) {
@@ -128,6 +129,18 @@ public abstract class RegistryHelper {
         return menuRegistry.register(id, () -> MenuRegistry.ofExtended(factory));
     }
 
+    public static Supplier<SoundEvent> sound(String id) {
+        return () -> SoundEvent.createVariableRangeEvent(id(id));
+    }
+
+    public <P extends ParticleType<?>> RegistrySupplier<P> particleType(String id, Supplier<P> particleTypeSup) {
+        return particleTypeRegistry.register(id, particleTypeSup);
+    }
+
+    public <E extends Entity> RegistrySupplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder) {
+        return entityTypeRegistry.register(id, () -> builder.get().build(id(id).toString()));
+    }
+
     public static TagContainer<Item> itemTag(String id) {
         return TagContainer.register(id(id), BuiltInRegistries.ITEM);
     }
@@ -141,6 +154,14 @@ public abstract class RegistryHelper {
     }
 
     public static ResourceLocation stat(String id) { return stat(id, StatFormatter.DEFAULT); }
+
+    public <P extends TreeDecorator> RegistrySupplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<Codec<P>> codecGetter) {
+        return treeDecoratorTypeRegistry.register(id, () -> new TreeDecoratorType<>(codecGetter.get()));
+    }
+
+    public RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
+        return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
+    }
 
     public static RegistrySupplier<LootItemFunctionType> lootFunction(String id, Serializer<? extends LootItemFunction> serializer) {
         return lootFunctionRegistry.register(id, () -> new LootItemFunctionType(serializer));

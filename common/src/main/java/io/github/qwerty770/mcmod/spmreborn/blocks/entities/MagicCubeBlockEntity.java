@@ -10,6 +10,7 @@ import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractLockableConta
 import io.github.qwerty770.mcmod.spmreborn.magic.WeightedStatusEffect;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.MagicCubeScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.sound.SweetPotatoSoundEvents;
+import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
 import io.github.qwerty770.mcmod.spmreborn.util.world.BooleanStateManager;
 import io.github.qwerty770.mcmod.spmreborn.util.effects.StatusEffectInstances;
 import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntMagicCubeProperties;
@@ -30,7 +31,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -229,12 +229,9 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             this.setItem(outputIndex, this.enchant(inputCopy));
         } else if (random.nextDouble() <= (withViceFuel() ? 0.5D : 0.4D)) {
             // GENE-WORK
-            List<ItemLike> itemSet = new ObjectArrayList<>(2);
             if (item instanceof RawSweetPotatoBlockItem sweetPotato && SPRMain.RAW_SWEET_POTATOES.contains(item)) {
-                sweetPotato.asType().getOtherTwo().forEach(sweetPotatoType -> itemSet.add(sweetPotatoType.getRaw()));
-                this.setItem(outputIndex, new ItemStack(
-                        random.nextBoolean() ? itemSet.get(0) : itemSet.get(1)
-                , count));
+                this.setItem(outputIndex, new ItemStack(sweetPotato.asType().getOtherTwo()
+                                .map(SweetPotatoType::getRaw).toList().get(random.nextInt(2)), count));
             }
         } else if (random.nextDouble() > (0.3D - 0.02D * fireCountCache)) {
             this.setItem(outputIndex, inputCopy);
@@ -252,7 +249,6 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
         List<MobEffectInstance> enchantments = calcEnchantments();
         enchantments.forEach(statusEffectInstance -> listTag.add(StatusEffectInstances.writeNbt(statusEffectInstance)));
         int length = enchantments.size();
-        //short randomIndex = (short) (this.world.random.nextDouble() * length);
         short randomIndex = (short) (length == 0 ? -1 : random.nextInt(length));
         tag.put("statusEffects", listTag);
         tag.putShort("displayIndex", randomIndex);
@@ -269,7 +265,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
             LOGGER.warn("No effects can be applied: empty weighted list");
             return Collections.emptyList();
         }
-        for (byte times = 0; times < 5; ++times) {
+        for (int times = 0; times < 5; ++times) {
             Optional<MobEffectInstance> optional = weightedList.shuffle().stream().findAny();
             enchantmentList.add(optional.orElseThrow());
             if (random.nextBoolean()) break;
@@ -300,7 +296,6 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
         super.saveAdditional(tag);
         tag.putShort("EnergyTime", this.mainFuelTime);
         tag.putShort("SublimateTime", this.viceFuelTime);
-        //return tag;
     }
 
     @Override
@@ -324,6 +319,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
 
     @Override
     public void saveExtraData(FriendlyByteBuf packetByteBuf) {
+        // Multi-platform support
         packetByteBuf.writeBlockPos(this.worldPosition);
     }
 
