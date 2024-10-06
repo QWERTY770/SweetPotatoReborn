@@ -3,7 +3,7 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.GrinderScreenHandler;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
@@ -34,7 +34,7 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderScreenHandler>
 
     // Update to Minecraft 1.20 -- 2023/06/29
     @Override
-    public void renderBg(GuiGraphics guiGraphics, float delta, int mouseX, int mouseY) {
+    public void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
@@ -47,9 +47,9 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderScreenHandler>
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        this.renderBackground(guiGraphics);
-        super.render(guiGraphics, mouseX, mouseY, delta);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 }

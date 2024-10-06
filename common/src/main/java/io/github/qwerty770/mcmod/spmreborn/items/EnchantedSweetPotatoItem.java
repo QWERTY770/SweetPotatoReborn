@@ -33,11 +33,6 @@ import java.util.stream.Stream;
 public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPotatoProperties {
     // Update to Minecraft 1.20 -- 2023/10/30
     // Removed all usages of net.fabricmc.fabric.api.util.NbtType
-    @Override
-    public boolean isEdible() {
-        return true;
-    }
-
     private final SweetPotatoType sweetPotatoType;
 
     public EnchantedSweetPotatoItem(Properties settings, SweetPotatoType type) {
@@ -56,10 +51,10 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
         if (!world.isClientSide) {
             Optional<List<MobEffectInstance>> statusEffectInstances = calcEffect(stack);
             statusEffectInstances.ifPresent(set -> set.forEach(statusEffectInstance -> {
-                if (!statusEffectInstance.getEffect().isInstantenous()) {
+                if (!statusEffectInstance.getEffect().value().isInstantenous()) {
                     user.addEffect(new MobEffectInstance(statusEffectInstance));
                 } else {
-                    statusEffectInstance.getEffect().applyInstantenousEffect(user, user, user, statusEffectInstance.getAmplifier(), 1.0D);
+                    statusEffectInstance.getEffect().value().applyInstantenousEffect(user, user, user, statusEffectInstance.getAmplifier(), 1.0D);
                 }
             }));
         }

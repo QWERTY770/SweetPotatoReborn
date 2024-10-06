@@ -1,14 +1,15 @@
-package io.github.qwerty770.mcmod.spmreborn.world.gen.tree;
+package io.github.qwerty770.mcmod.spmreborn.world.tree;
 
+import java.util.*;
 import com.google.common.collect.ImmutableList;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
-import io.github.qwerty770.mcmod.spmreborn.util.world.SimpleStateProviderTool;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.api.SimpleStateProviderTool;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -29,29 +30,23 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecora
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.OptionalInt;
-
-import static io.github.qwerty770.mcmod.spmreborn.world.gen.tree.SweetPotatoTreeFeatures.Constants.*;
+import static io.github.qwerty770.mcmod.spmreborn.world.tree.SweetPotatoTreeFeatures.Constants.*;
 
 /**
- * @see net.minecraft.world.level.block.grower.OakTreeGrower
+ * @see net.minecraft.world.level.block.grower.TreeGrower
  * @see net.minecraft.data.worldgen.features.TreeFeatures#FANCY_OAK
  */
 public final class SweetPotatoTreeFeatures {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("tree_features");
     public static Map<ResourceKey<ConfiguredFeature<?, ?>>, TreeConfiguration> featureMap = new HashMap<>();
     
-    public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> bootstapContext){
+    public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> bootstapContext){
         for (ResourceKey<ConfiguredFeature<?, ?>> resourceKey : featureMap.keySet()){
             FeatureUtils.register(bootstapContext, resourceKey, Feature.TREE, featureMap.get(resourceKey));
         }
     }
-    
-    // Update to Minecraft 1.20 -- 2023/12/16
-    public static final ResourceKey<ConfiguredFeature<?, ?>>
+
+    public static final Optional<ResourceKey<ConfiguredFeature<?, ?>>>
             FANCY_OAK, FANCY_OAK_BEES_005, OAK, OAK_BEES_005,
             SPRUCE, MEGA_SPRUCE, MEGA_PINE,
             BIRCH, BIRCH_BEES_005,
@@ -122,10 +117,10 @@ public final class SweetPotatoTreeFeatures {
                         .ignoreVines().build()));
     }
 
-    private static <FC extends TreeConfiguration> ResourceKey<ConfiguredFeature<?, ?>> register(String id, FC featureConfig) {
+    private static <FC extends TreeConfiguration> Optional<ResourceKey<ConfiguredFeature<?, ?>>> register(String id, FC featureConfig) {
         ResourceKey<ConfiguredFeature<?, ?>> resourceKey = ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocationTool.create(SPRMain.MODID, id));
         featureMap.put(resourceKey, featureConfig);
-        return resourceKey;
+        return Optional.of(resourceKey);
     }
 
     static final class Constants {

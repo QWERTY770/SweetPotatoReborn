@@ -6,7 +6,6 @@ import net.minecraft.world.item.ItemStack;
 
 @StableApi
 public class EnchantedItem extends Item {
-
     public EnchantedItem(Properties settings) {
         super(settings);
     }

@@ -11,11 +11,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class BakedSweetPotatoItem extends Item implements SweetPotatoProperties {
     private final SweetPotatoType sweetPotatoType;
 
     public BakedSweetPotatoItem(Properties settings, SweetPotatoType type) {
-        super(settings.food(type.getComponent(SweetPotatoStatus.BAKED).asFoodComponent()));
+        super(settings.food(Objects.requireNonNull(type.getComponent(SweetPotatoStatus.BAKED)).asFoodComponent()));
         this.sweetPotatoType = type;
     }
 

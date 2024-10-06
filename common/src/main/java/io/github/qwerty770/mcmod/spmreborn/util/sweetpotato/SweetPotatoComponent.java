@@ -35,8 +35,8 @@ public class SweetPotatoComponent {
     public FoodProperties asFoodComponent() {
         FoodProperties.Builder builder = new FoodProperties.Builder()
                 .nutrition(this.hunger)
-                .saturationMod(this.saturationModifier);
-        return this.alwaysEdible ? (builder.alwaysEat().build()) : (builder.build());
+                .saturationModifier(this.saturationModifier);
+        return this.alwaysEdible ? (builder.alwaysEdible().build()) : (builder.build());
     }
 
     public void registerCompostableItem(SweetPotatoType type, SweetPotatoStatus status) {

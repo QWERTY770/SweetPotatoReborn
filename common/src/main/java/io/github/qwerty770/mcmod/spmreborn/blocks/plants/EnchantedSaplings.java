@@ -6,7 +6,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SaplingBlock;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class EnchantedSaplings extends SaplingBlock {
 
-    public EnchantedSaplings(AbstractTreeGrower generator, Properties settings) {
+    public EnchantedSaplings(TreeGrower generator, Properties settings) {
         super(generator, settings);
         this.registerDefaultState(this.getStateDefinition().any().setValue(STAGE, 0));
     }

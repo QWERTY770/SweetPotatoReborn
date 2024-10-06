@@ -1,11 +1,13 @@
 package io.github.qwerty770.mcmod.spmreborn.util.registries;
 
 import com.mojang.datafixers.types.Type;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
@@ -17,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.util.datafix.fixes.References;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -36,7 +38,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-import net.minecraft.world.level.storage.loot.Serializer;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import org.jetbrains.annotations.NotNull;
@@ -48,6 +49,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
+@StableApi
 public abstract class RegistryHelper {
     // Update to Minecraft 1.20 -- 2023/10/30  net.minecraft.core.Registry -> net.minecraft.core.registries.BuiltInRegistries.XXX
     // 2023/12/16: Use DeferredRegister for cross-platform support
@@ -66,7 +68,7 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
     public static final DeferredRegister<TreeDecoratorType<?>> treeDecoratorTypeRegistry = ofModRegistry(Registries.TREE_DECORATOR_TYPE);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
-    public static final DeferredRegister<LootItemFunctionType> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
+    public static final DeferredRegister<LootItemFunctionType<?>> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
     public static final DeferredRegister<CreativeModeTab> creativeTabRegistry = ofModRegistry(Registries.CREATIVE_MODE_TAB);
 
     public static ResourceLocation id(String id) {
@@ -106,7 +108,7 @@ public abstract class RegistryHelper {
                 Arrays.stream(blocks).map(Supplier::get).toArray(Block[]::new)).build(type));
     }
 
-    public static <T extends Recipe<Container>> RegistrySupplier<RecipeType<T>> recipeType(String id) {
+    public static <T extends Recipe<RecipeInput>> RegistrySupplier<RecipeType<T>> recipeType(String id) {
         ResourceLocation id2 = id(id);
         return recipeTypeRegistry.register(id, () -> new RecipeType<>() {
             @Override
@@ -155,7 +157,7 @@ public abstract class RegistryHelper {
 
     public static ResourceLocation stat(String id) { return stat(id, StatFormatter.DEFAULT); }
 
-    public <P extends TreeDecorator> RegistrySupplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<Codec<P>> codecGetter) {
+    public <P extends TreeDecorator> RegistrySupplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<MapCodec<P>> codecGetter) {
         return treeDecoratorTypeRegistry.register(id, () -> new TreeDecoratorType<>(codecGetter.get()));
     }
 
@@ -163,8 +165,8 @@ public abstract class RegistryHelper {
         return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
     }
 
-    public static RegistrySupplier<LootItemFunctionType> lootFunction(String id, Serializer<? extends LootItemFunction> serializer) {
-        return lootFunctionRegistry.register(id, () -> new LootItemFunctionType(serializer));
+    public static RegistrySupplier<LootItemFunctionType<?>> lootFunction(String id, MapCodec<? extends LootItemFunction> serializer) {
+        return lootFunctionRegistry.register(id, () -> new LootItemFunctionType<>(serializer));
     }
 
     public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab){

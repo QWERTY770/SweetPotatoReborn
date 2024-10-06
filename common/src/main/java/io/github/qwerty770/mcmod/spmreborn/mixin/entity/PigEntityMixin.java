@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.mixin.entity;
 
-import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.animal.Pig;

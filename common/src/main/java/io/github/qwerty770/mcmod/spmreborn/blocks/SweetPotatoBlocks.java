@@ -2,14 +2,14 @@ package io.github.qwerty770.mcmod.spmreborn.blocks;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.blocks.plants.*;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
-import io.github.qwerty770.mcmod.spmreborn.world.gen.tree.*;
 import net.minecraft.world.level.block.Block;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.BlockUtils.*;
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.BlockUtils.createLeaves;
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.block;
+import static io.github.qwerty770.mcmod.spmreborn.world.tree.SweetPotatoTreeGrowers.*;
 
 public class SweetPotatoBlocks {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("blocks");
@@ -72,12 +72,12 @@ public class SweetPotatoBlocks {
         ENCHANTED_CARROTS_CROP = block("enchanted_carrots", new EnchantedCarrotsBlock(crop));
         ENCHANTED_SUGAR_CANE = block("enchanted_sugar_cane", new EnchantedSugarCaneBlock(grass));
         // Saplings
-        ENCHANTED_OAK_SAPLING = createEnchantedSapling("enchanted_oak_sapling", EnchantedOakSaplingGen::new);
-        ENCHANTED_SPRUCE_SAPLING = createEnchantedSapling("enchanted_spruce_sapling", EnchantedSpruceSaplingGen::new);
-        ENCHANTED_BIRCH_SAPLING = createEnchantedSapling("enchanted_birch_sapling", EnchantedBirchSaplingGen::new);
-        ENCHANTED_JUNGLE_SAPLING = createEnchantedSapling("enchanted_jungle_sapling", EnchantedJungleSaplingGen::new);
-        ENCHANTED_ACACIA_SAPLING = createEnchantedSapling("enchanted_acacia_sapling", EnchantedAcaciaSaplingGen::new);
-        ENCHANTED_DARK_OAK_SAPLING = createEnchantedSapling("enchanted_dark_oak_sapling", EnchantedDarkOakSaplingGen::new);
+        ENCHANTED_OAK_SAPLING = createEnchantedSapling("enchanted_oak_sapling", ENCHANTED_OAK_GROWER);
+        ENCHANTED_SPRUCE_SAPLING = createEnchantedSapling("enchanted_spruce_sapling", ENCHANTED_SPRUCE_GROWER);
+        ENCHANTED_BIRCH_SAPLING = createEnchantedSapling("enchanted_birch_sapling", ENCHANTED_BIRCH_GROWER);
+        ENCHANTED_JUNGLE_SAPLING = createEnchantedSapling("enchanted_jungle_sapling", ENCHANTED_JUNGLE_GROWER);
+        ENCHANTED_ACACIA_SAPLING = createEnchantedSapling("enchanted_acacia_sapling", ENCHANTED_ACACIA_GROWER);
+        ENCHANTED_DARK_OAK_SAPLING = createEnchantedSapling("enchanted_dark_oak_sapling", ENCHANTED_DARK_OAK_GROWER);
         // Potted
         POTTED_ENCHANTED_OAK_SAPLING = createPotted("potted_enchanted_oak_sapling", ENCHANTED_OAK_SAPLING);
         POTTED_ENCHANTED_SPRUCE_SAPLING = createPotted("potted_enchanted_spruce_sapling", ENCHANTED_SPRUCE_SAPLING);

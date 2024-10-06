@@ -1,7 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.magic;
 
 import com.google.gson.*;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -39,7 +39,7 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener i
                 JsonObject eachObj = GsonHelper.convertToJsonObject(je, "Element #" + i);
                 ResourceLocation id = ResourceLocationTool.create(GsonHelper.getAsString(eachObj, "id"));
                 if (!BuiltInRegistries.MOB_EFFECT.keySet().contains(id)) {
-                    LOGGER.error("Invalid status effect id: " + id);
+                    LOGGER.error("Invalid status effect id: {}", id);
                     continue;
                 }
                 MobEffect effect = BuiltInRegistries.MOB_EFFECT.getOptional(id)

@@ -17,7 +17,7 @@ public interface PeelInserter {
         int i;
         for (i = 0; i < inventory.items.size(); ++i) {
             eachStack = inventory.items.get(i);
-            if (eachStack.getItem().equals(SweetPotatoItems.PEEL.get()) && eachStack.getCount() < SweetPotatoItems.PEEL.get().getMaxStackSize()) {
+            if (eachStack.getItem().equals(SweetPotatoItems.PEEL.get()) && eachStack.getCount() < SweetPotatoItems.PEEL.get().getDefaultMaxStackSize()) {
                 eachStack.grow(1);
                 return PeelActionResult.INSERT;
             }

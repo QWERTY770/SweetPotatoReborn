@@ -1,7 +1,8 @@
 package io.github.qwerty770.mcmod.spmreborn.util.effects;
 
 import com.google.gson.JsonObject;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -27,7 +28,7 @@ public class StatusEffectInstances {
         MobEffect effect = fromId(raw);
         if (effect == null) return null;
         int duration = tag.getInt("duration"), amplifier = tag.getInt("amplifier"); // defaulted as 0
-        return new MobEffectInstance(effect, duration, amplifier);
+        return new MobEffectInstance(Holder.direct(effect), duration, amplifier);
     }
 
     private static MobEffect fromId(String raw) {
@@ -44,7 +45,7 @@ public class StatusEffectInstances {
     @Nullable
     public static MobEffectInstance readJson(JsonObject json) {
         if (!GsonHelper.isStringValue(json, "id")) {
-            LOGGER.warn("Expected id as string, found" + json.get("id"));
+            LOGGER.warn("Expected id as string, found {}", json.get("id"));
             return null;
         }
         String raw = GsonHelper.getAsString(json, "id");
@@ -52,7 +53,7 @@ public class StatusEffectInstances {
         if (effect == null) return null;
         int duration = GsonHelper.getAsInt(json, "duration", 0 /*sic*/);
         int amplifier = GsonHelper.getAsInt(json, "amplifier", 0);
-        return new MobEffectInstance(effect, duration, amplifier);
+        return new MobEffectInstance(Holder.direct(effect), duration, amplifier);
     }
 
     /**
@@ -60,7 +61,7 @@ public class StatusEffectInstances {
      */
     public static CompoundTag writeNbt(MobEffectInstance effect) {
         CompoundTag tag = new CompoundTag();
-        MobEffect statusEffect = effect.getEffect();
+        MobEffect statusEffect = effect.getEffect().value();
         ResourceLocation id = BuiltInRegistries.MOB_EFFECT.getKey(statusEffect);
         if (id == null) {
             LOGGER.error("Cannot write status effect: {}", statusEffect.getDisplayName());
@@ -74,7 +75,7 @@ public class StatusEffectInstances {
     }
 
     public static void writeJson(JsonObject json, MobEffectInstance effect) {
-        MobEffect statusEffect = effect.getEffect();
+        MobEffect statusEffect = effect.getEffect().value();
         ResourceLocation id = BuiltInRegistries.MOB_EFFECT.getKey(statusEffect);
         if (id == null) throw new IllegalArgumentException("unknown effect");
         json.addProperty("id", id.toString());

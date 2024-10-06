@@ -1,12 +1,12 @@
 package io.github.qwerty770.forgemod.spmreborn;
 
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.registries.RegisterEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
-@Mod.EventBusSubscriber(modid = "spmreborn", bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = "spmreborn", bus = EventBusSubscriber.Bus.MOD)
 public final class ModEventSubscribers {
     @SubscribeEvent
     public static void init(FMLCommonSetupEvent event) {

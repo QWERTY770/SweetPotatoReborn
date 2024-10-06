@@ -17,6 +17,7 @@ import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntMagicCubeProperties;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -285,15 +286,15 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.mainFuelTime = tag.getShort("EnergyTime");
         this.viceFuelTime = tag.getShort("SublimateTime");
     }
 
     @Override
-    public void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
         tag.putShort("EnergyTime", this.mainFuelTime);
         tag.putShort("SublimateTime", this.viceFuelTime);
     }

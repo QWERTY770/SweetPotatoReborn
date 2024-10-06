@@ -6,6 +6,7 @@
 package io.github.qwerty770.mcmod.spmreborn.lib.blockentity;
 
 import io.github.qwerty770.mcmod.spmreborn.util.tick.ITickable;
+import net.minecraft.core.HolderLookup;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Iterator;
@@ -31,15 +32,17 @@ public abstract class AbstractLockableContainerBlockEntity extends BaseContainer
         this.size = size;
     }
 
-    public void saveAdditional(CompoundTag tag) {  // toTag
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, this.inventory);
+    @Override
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {  // toTag
+        super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, this.inventory, registries);
     }
 
-    public void load(CompoundTag tag) {  // fromTag
-        super.load(tag);
+    @Override
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {  // fromTag
+        super.loadAdditional(tag, registries);
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, this.inventory);
+        ContainerHelper.loadAllItems(tag, this.inventory, registries);
     }
 
     public int getContainerSize() {
@@ -85,6 +88,16 @@ public abstract class AbstractLockableContainerBlockEntity extends BaseContainer
     @Override
     public @NotNull ItemStack getItem(int slot) {
         return this.inventory.get(slot);
+    }
+
+    @Override
+    public @NotNull NonNullList<ItemStack> getItems(){
+        return this.inventory;
+    }
+
+    @Override
+    public void setItems(NonNullList<ItemStack> items){
+        this.inventory = items;
     }
 
     @Override

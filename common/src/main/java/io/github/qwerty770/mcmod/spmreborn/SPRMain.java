@@ -16,7 +16,7 @@ import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.ComposterHelper;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
-import io.github.qwerty770.mcmod.spmreborn.world.gen.tree.*;
+import io.github.qwerty770.mcmod.spmreborn.world.tree.SweetPotatoTreeFeatures;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.*;
 import org.slf4j.Logger;

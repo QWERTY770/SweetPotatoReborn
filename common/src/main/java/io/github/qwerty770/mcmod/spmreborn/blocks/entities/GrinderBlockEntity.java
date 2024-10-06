@@ -9,6 +9,7 @@ import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntGrinderProperties;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.GrindingUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.WorldlyContainer;
@@ -33,7 +34,6 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
     private static final byte MAX_COOLDOWN = 5;
 
     public final IntGrinderProperties properties;
-    // protected DefaultedList<ItemStack> inventory;
 
     protected final BooleanStateManager stateHelper;
 
@@ -101,8 +101,8 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.grindTime = tag.getShort("GrindTime");
         this.grindTimeTotal = tag.getShort("GrindTimeTotal");
         //this.propertyDelegate.set(2 /*IngredientData*/, tag.getInt("IngredientData"));
@@ -112,8 +112,8 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
     }
 
     @Override
-    public void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
         tag.putShort("GrindTime", (short) grindTime);
         tag.putShort("GrindTimeTotal", (short) grindTimeTotal);
         //Inventories.writeNbt(tag, this.inventory);
@@ -214,27 +214,6 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
             invOutput.grow(1);
     }
 
-    // TODO: Deal with this
-    /*@Deprecated
-    protected boolean canAcceptRecipeOutput(@Nullable Recipe<?> recipe) {
-        if (!this.inventory.get(0).isEmpty() && recipe != null) {
-            ItemStack output = recipe.getResultItem(RegistryAccess.EMPTY);
-            if (output.isEmpty())
-                return false;
-            else {
-                ItemStack outInv = this.inventory.get(1);
-                if (outInv.isEmpty())
-                    return true;
-                if (notSameItem(outInv, output))
-                    return false;
-                if (outInv.getCount() < this.getMaxStackSize() && outInv.getCount() < outInv.getMaxStackSize())
-                    return true;
-                return outInv.getCount() < output.getMaxStackSize();
-            }
-        }
-        return false;
-    }*/
-
     protected boolean canAcceptRecipeOutput() {
         return canAcceptRecipeOutput(SweetPotatoItems.POTATO_POWDER.get());
     }
@@ -261,7 +240,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
             return false;
         if (outInv.getCount() < this.getMaxStackSize() && outInv.getCount() < outInv.getMaxStackSize())
             return true;
-        return outInv.getCount() < item.asItem().getMaxStackSize();
+        return outInv.getCount() < item.asItem().getDefaultMaxStackSize();
     }
 
     private boolean isGrinding() {
