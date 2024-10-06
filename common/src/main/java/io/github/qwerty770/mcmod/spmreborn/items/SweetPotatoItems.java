@@ -2,7 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn.items;
 
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.Foods;

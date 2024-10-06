@@ -6,6 +6,8 @@ import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
@@ -48,6 +50,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
+@StableApi
 public abstract class RegistryHelper {
     // Update to Minecraft 1.20 -- 2023/10/30  net.minecraft.core.Registry -> net.minecraft.core.registries.BuiltInRegistries.XXX
     // 2023/12/16: Use DeferredRegister for cross-platform support

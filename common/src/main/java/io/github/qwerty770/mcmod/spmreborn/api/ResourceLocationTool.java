@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.util.registries;
+package io.github.qwerty770.mcmod.spmreborn.api;
 
 import net.minecraft.resources.ResourceLocation;
 

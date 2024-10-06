@@ -1,7 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.loot;
 
 import dev.architectury.registry.registries.RegistrySupplier;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.lootFunction;

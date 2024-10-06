@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.stats;
 
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import net.minecraft.resources.ResourceLocation;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.stat;

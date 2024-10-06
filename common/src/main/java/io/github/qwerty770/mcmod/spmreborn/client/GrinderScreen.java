@@ -3,7 +3,7 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.GrinderScreenHandler;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;

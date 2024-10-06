@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.util.world;
+package io.github.qwerty770.mcmod.spmreborn.api;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.BlockPos;

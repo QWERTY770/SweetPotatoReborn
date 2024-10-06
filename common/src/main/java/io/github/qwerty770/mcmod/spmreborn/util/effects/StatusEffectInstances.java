@@ -1,7 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.util.effects;
 
 import com.google.gson.JsonObject;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -44,7 +44,7 @@ public class StatusEffectInstances {
     @Nullable
     public static MobEffectInstance readJson(JsonObject json) {
         if (!GsonHelper.isStringValue(json, "id")) {
-            LOGGER.warn("Expected id as string, found" + json.get("id"));
+            LOGGER.warn("Expected id as string, found {}", json.get("id"));
             return null;
         }
         String raw = GsonHelper.getAsString(json, "id");

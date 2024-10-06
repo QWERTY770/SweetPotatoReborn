@@ -2,13 +2,12 @@ package io.github.qwerty770.mcmod.spmreborn.blocks;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.blocks.plants.*;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
 import io.github.qwerty770.mcmod.spmreborn.world.gen.tree.*;
 import net.minecraft.world.level.block.Block;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.BlockUtils.*;
-import static io.github.qwerty770.mcmod.spmreborn.util.registries.BlockUtils.createLeaves;
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.block;
 
 public class SweetPotatoBlocks {

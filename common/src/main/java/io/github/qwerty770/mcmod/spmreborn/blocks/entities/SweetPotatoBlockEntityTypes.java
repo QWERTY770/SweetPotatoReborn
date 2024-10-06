@@ -2,7 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn.blocks.entities;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.blockEntity;

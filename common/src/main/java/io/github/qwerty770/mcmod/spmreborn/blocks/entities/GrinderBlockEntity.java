@@ -214,27 +214,6 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
             invOutput.grow(1);
     }
 
-    // TODO: Deal with this
-    /*@Deprecated
-    protected boolean canAcceptRecipeOutput(@Nullable Recipe<?> recipe) {
-        if (!this.inventory.get(0).isEmpty() && recipe != null) {
-            ItemStack output = recipe.getResultItem(RegistryAccess.EMPTY);
-            if (output.isEmpty())
-                return false;
-            else {
-                ItemStack outInv = this.inventory.get(1);
-                if (outInv.isEmpty())
-                    return true;
-                if (notSameItem(outInv, output))
-                    return false;
-                if (outInv.getCount() < this.getMaxStackSize() && outInv.getCount() < outInv.getMaxStackSize())
-                    return true;
-                return outInv.getCount() < output.getMaxStackSize();
-            }
-        }
-        return false;
-    }*/
-
     protected boolean canAcceptRecipeOutput() {
         return canAcceptRecipeOutput(SweetPotatoItems.POTATO_POWDER.get());
     }

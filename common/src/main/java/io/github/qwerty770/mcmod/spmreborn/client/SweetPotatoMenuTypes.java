@@ -4,7 +4,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.GrinderScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.MagicCubeScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.SeedUpdaterScreenHandler;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import net.minecraft.world.inventory.MenuType;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.extendedMenuType;

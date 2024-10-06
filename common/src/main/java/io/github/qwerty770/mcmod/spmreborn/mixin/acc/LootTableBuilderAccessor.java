@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.List;
 
+@Deprecated
 @Mixin(LootTable.Builder.class)
 public interface LootTableBuilderAccessor {
     @Accessor

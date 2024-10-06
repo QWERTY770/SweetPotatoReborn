@@ -2,6 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn.util.registries;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.blocks.plants.EnchantedSaplings;
+import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
@@ -20,6 +21,7 @@ import java.util.function.Supplier;
 
 // Added on 2023/11/26 after deleting io.github.qwerty770.mcmod.spmreborn.util.objsettings.BlockSettings
 // Update to Minecraft 1.20 -- 2023/12/16
+@StableApi
 public class BlockUtils {
     public static final BlockBehaviour.Properties crop = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
     public static final BlockBehaviour.Properties grass = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY);

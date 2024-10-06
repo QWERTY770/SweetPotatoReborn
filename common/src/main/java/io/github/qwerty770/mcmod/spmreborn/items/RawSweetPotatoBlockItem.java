@@ -12,6 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class RawSweetPotatoBlockItem extends ItemNameBlockItem implements SweetPotatoProperties {
     @Override
     public boolean isEdible() {
@@ -21,7 +23,7 @@ public class RawSweetPotatoBlockItem extends ItemNameBlockItem implements SweetP
     private final SweetPotatoType sweetPotatoType;
 
     public RawSweetPotatoBlockItem(Block block, Properties settings, SweetPotatoType type) {
-        super(block, settings.food(type.getComponent(SweetPotatoStatus.RAW).asFoodComponent()));
+        super(block, settings.food(Objects.requireNonNull(type.getComponent(SweetPotatoStatus.RAW)).asFoodComponent()));
         this.sweetPotatoType = type;
     }
 

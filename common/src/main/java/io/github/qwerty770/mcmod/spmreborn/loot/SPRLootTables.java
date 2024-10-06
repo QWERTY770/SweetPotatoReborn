@@ -2,7 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn.loot;
 
 import dev.architectury.event.events.common.LootEvent;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.ResourceLocationTool;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;

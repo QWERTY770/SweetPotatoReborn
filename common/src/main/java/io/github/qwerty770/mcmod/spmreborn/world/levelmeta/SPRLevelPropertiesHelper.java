@@ -5,7 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.storage.WorldData;
 
 public class SPRLevelPropertiesHelper {
-    public static final int DATA_VERSION = 20;  // 1.0.0 for 1.20.1, originally 15
+    public static final int DATA_VERSION = 15;  // 15 for 1.20.1
 
     public static int getLevelSPRDataVersion(MinecraftServer server) {
         return getLevelSPRDataVersion(server.getWorldData());

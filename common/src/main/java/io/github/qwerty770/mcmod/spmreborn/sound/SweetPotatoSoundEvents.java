@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.sound;
 
-import io.github.qwerty770.mcmod.spmreborn.util.registries.InternalRegistryLogWrapper;
+import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import net.minecraft.sounds.SoundEvent;
 
 import java.util.function.Supplier;
