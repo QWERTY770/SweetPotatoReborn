@@ -7,10 +7,6 @@
     "AdvancementTaskMixin",
     "FeatureUtilsMixin",
     "acc.AdvancementTaskAccessor",
-    "acc.LootTableBuilderAccessor",
-    "acc.ParrotEntityAccessor",
-    "entity.ChickenEntityMixin",
-    "entity.PigEntityMixin",
     "modinfo.LevelPropertiesMixin",
     "modinfo.ServerPropertiesMixin"
   ],

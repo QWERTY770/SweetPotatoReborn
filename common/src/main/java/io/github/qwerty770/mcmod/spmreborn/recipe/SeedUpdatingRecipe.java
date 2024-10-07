@@ -1,16 +1,14 @@
 package io.github.qwerty770.mcmod.spmreborn.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -19,43 +17,35 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
-                                 Ingredient addition,
-                                 ItemStack result) implements Recipe<Container> {
+public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStack result) implements Recipe<SeedUpdatingRecipeInput> {
 
     @Override
-    public boolean matches(@NotNull Container inv, Level world) {
-        return this.base.test(inv.getItem(0)) && this.addition.test(inv.getItem(1));
+    public boolean matches(SeedUpdatingRecipeInput input, Level level) {
+        return this.base.test(input.base()) && this.addition.test(input.addition());
     }
 
     @Override
-    public @NotNull ItemStack assemble(Container inv, RegistryAccess registryAccess) {
-        ItemStack itemStack = this.result.copy();
-        CompoundTag compoundTag = inv.getItem(0).getTag();
-        if (compoundTag != null) {
-            itemStack.setTag(compoundTag.copy());
-        }
-        return itemStack;
+    public @NotNull ItemStack assemble(SeedUpdatingRecipeInput input, HolderLookup.Provider registries) {
+        ItemStack itemstack = input.base().transmuteCopy(this.result.getItem(), this.result.getCount());
+        itemstack.applyComponents(this.result.getComponentsPatch());
+        return itemstack;
     }
 
-    @Environment(EnvType.CLIENT) @Override
+    @Environment(EnvType.CLIENT)
+    @Override
     public boolean canCraftInDimensions(int width, int height) {
         return width * height >= 2;
     }
 
     @Override
-    public @NotNull ItemStack getResultItem(RegistryAccess registryAccess) {
+    public @NotNull ItemStack getResultItem(HolderLookup.Provider registries) {
         return this.result;
     }
 
     @Environment(EnvType.CLIENT)
+    @Override
     public @NotNull ItemStack getToastSymbol() {
         return new ItemStack(SweetPotatoBlocks.SEED_UPDATER.get());
-    }
-
-    @Override
-    public @NotNull ResourceLocation getId() {
-        return this.id;
     }
 
     @Override
@@ -66,6 +56,10 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
     @Override
     public @NotNull RecipeType<?> getType() {
         return SweetPotatoRecipes.SEED_UPDATING_RECIPE_TYPE.get();
+    }
+
+    public boolean isBaseIngredient(ItemStack itemStack) {
+        return this.base.test(itemStack);
     }
 
     public boolean isAdditionIngredient(ItemStack itemStack) {
@@ -79,27 +73,34 @@ public record SeedUpdatingRecipe(ResourceLocation id, Ingredient base,
     }
 
     public static class Serializer implements RecipeSerializer<SeedUpdatingRecipe> {
-        @Override
-        public @NotNull SeedUpdatingRecipe fromJson(ResourceLocation identifier, JsonObject jsonObject) {
-            Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "base"));
-            Ingredient ingredient2 = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "addition"));
-            ItemStack itemStack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result"));
-            return new SeedUpdatingRecipe(identifier, ingredient, ingredient2, itemStack);
+        private static final MapCodec<SeedUpdatingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+                instance.group(Ingredient.CODEC.fieldOf("base").forGetter((arg) -> arg.base),
+                        Ingredient.CODEC.fieldOf("addition").forGetter((arg) -> arg.addition),
+                        ItemStack.STRICT_CODEC.fieldOf("result").forGetter((arg) -> arg.result))
+                        .apply(instance, SeedUpdatingRecipe::new));
+        private static final StreamCodec<RegistryFriendlyByteBuf, SeedUpdatingRecipe> STREAM_CODEC = StreamCodec.of(SeedUpdatingRecipe.Serializer::toNetwork, SeedUpdatingRecipe.Serializer::fromNetwork);
+
+        private static SeedUpdatingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+            Ingredient ingredient1 = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+            Ingredient ingredient2 = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+            ItemStack itemStack = ItemStack.STREAM_CODEC.decode(buffer);
+            return new SeedUpdatingRecipe(ingredient1, ingredient2, itemStack);
+        }
+
+        private static void toNetwork(RegistryFriendlyByteBuf buffer, @NotNull SeedUpdatingRecipe recipe) {
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.base);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.addition);
+            ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
         }
 
         @Override
-        public @NotNull SeedUpdatingRecipe fromNetwork(ResourceLocation identifier, FriendlyByteBuf packetByteBuf) {
-            Ingredient ingredient = Ingredient.fromNetwork(packetByteBuf);
-            Ingredient ingredient2 = Ingredient.fromNetwork(packetByteBuf);
-            ItemStack itemStack = packetByteBuf.readItem();
-            return new SeedUpdatingRecipe(identifier, ingredient, ingredient2, itemStack);
+        public @NotNull MapCodec<SeedUpdatingRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, @NotNull SeedUpdatingRecipe recipe) {
-            recipe.base.toNetwork(buf);
-            recipe.addition.toNetwork(buf);
-            buf.writeItem(recipe.result);
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, SeedUpdatingRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

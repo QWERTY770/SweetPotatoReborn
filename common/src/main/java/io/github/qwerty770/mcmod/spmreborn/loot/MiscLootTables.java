@@ -1,7 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.loot;
 
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 
 public class MiscLootTables {
     // Update to Minecraft 1.20 -- 2023/12/9
@@ -9,22 +9,19 @@ public class MiscLootTables {
     // The following functions now return LootPool.Builder in order to adapt to LootEvent of Architectury API
     public static LootPool.Builder pillagerOutpost() {
         LootPool.Builder pool = LootPool.lootPool();
-        pool.add(LootTableReference.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(4));
+        pool.add(NestedLootTable.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(4));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 1, LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(4));
     }
 
     public static LootPool.Builder shipwreckSupply() {
         LootPool.Builder pool = LootPool.lootPool();
-        pool.add(LootTableReference.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(7));
+        pool.add(NestedLootTable.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(7));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0, LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(7));
     }
 
     public static LootPool.Builder woodlandMansion() {
         LootPool.Builder pool = LootPool.lootPool();
-        pool.add(LootTableReference.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(15));
+        pool.add(NestedLootTable.lootTableReference(SPRLootTables.MORE_RAW_SWEET_POTATOES).setWeight(15));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 1, LootTableReference.lootTableReference(SPMLootTables.MORE_RAW_SWEET_POTATOES).setWeight(15));
     }
 }

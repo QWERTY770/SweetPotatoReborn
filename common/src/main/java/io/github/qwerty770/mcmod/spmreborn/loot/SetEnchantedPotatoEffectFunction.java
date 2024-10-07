@@ -30,7 +30,7 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
     private final @Nullable Integer displayIndex;
     private final boolean displayRandomly;
 
-    protected SetEnchantedPotatoEffectFunction(LootItemCondition[] lootItemConditions,
+    protected SetEnchantedPotatoEffectFunction(List<LootItemCondition> lootItemConditions,
                                                List<Pair<MobEffectInstance, Float>> effects,
                                                @Nullable Integer displayIndex,
                                                boolean displayRandomly) {
@@ -56,7 +56,7 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
     }
 
     @Override
-    public @NotNull LootItemFunctionType getType() {
+    public @NotNull LootItemFunctionType<SetEnchantedPotatoEffectFunction> getType() {
         return SweetPotatoLootFunctions.SET_ENCHANTED_POTATO_EFFECT.get();
     }
 

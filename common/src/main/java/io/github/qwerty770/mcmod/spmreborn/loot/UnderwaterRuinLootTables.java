@@ -1,7 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn.loot;
 
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 
 import static io.github.qwerty770.mcmod.spmreborn.loot.SPRLootTables.MORE_RAW_SWEET_POTATOES;
 
@@ -11,15 +11,13 @@ public class UnderwaterRuinLootTables {
     // The following functions now return LootPool.Builder in order to adapt to LootEvent of Architectury API
     public static LootPool.Builder big() {
         LootPool.Builder pool = LootPool.lootPool();
-        pool.add(LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(10));
+        pool.add(NestedLootTable.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(10));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0, LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(10));
     }
 
     public static LootPool.Builder small() {
         LootPool.Builder pool = LootPool.lootPool();
-        pool.add(LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(5));
+        pool.add(NestedLootTable.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(5));
         return pool;
-        // LootUtils.addEntry(((LootTableBuilderAccessor) hooks).getPools(), 0, LootTableReference.lootTableReference(MORE_RAW_SWEET_POTATOES).setWeight(5));
     }
 }

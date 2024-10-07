@@ -2,6 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn.magic;
 
 import com.google.gson.*;
 import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -49,7 +50,7 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener i
                 int amplifier = GsonHelper.getAsInt(eachObj, "amplifier", 0);
                 int weight = GsonHelper.getAsInt(eachObj, "weight", 1);
                 int addWithPowder = GsonHelper.getAsInt(eachObj, "powder_adds", 10);
-                set.add(new WeightedStatusEffect(new MobEffectInstance(effect, duration, amplifier), weight, addWithPowder));
+                set.add(new WeightedStatusEffect(new MobEffectInstance(Holder.direct(effect), duration, amplifier), weight, addWithPowder));
                 ++i;
             } WeightedStatusEffect.EFFECTS.addAll(set);
         });

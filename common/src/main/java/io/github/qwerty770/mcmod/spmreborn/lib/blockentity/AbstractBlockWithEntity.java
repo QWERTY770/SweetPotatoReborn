@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-@SuppressWarnings("deprecation")
 @ApiStatus.Experimental
 public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable> extends BaseEntityBlock {
     protected abstract boolean blockEntityPredicate(BlockEntity blockEntity);

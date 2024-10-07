@@ -108,7 +108,7 @@ public abstract class RegistryHelper {
                 Arrays.stream(blocks).map(Supplier::get).toArray(Block[]::new)).build(type));
     }
 
-    public static <T extends Recipe<RecipeInput>> RegistrySupplier<RecipeType<T>> recipeType(String id) {
+    public static <I extends RecipeInput, T extends Recipe<I>> RegistrySupplier<RecipeType<T>> recipeType(String id) {
         ResourceLocation id2 = id(id);
         return recipeTypeRegistry.register(id, () -> new RecipeType<>() {
             @Override

@@ -7,7 +7,6 @@ import io.github.qwerty770.mcmod.spmreborn.items.*;
 import io.github.qwerty770.mcmod.spmreborn.loot.SPRLootTables;
 import io.github.qwerty770.mcmod.spmreborn.loot.SweetPotatoLootFunctions;
 import io.github.qwerty770.mcmod.spmreborn.magic.MagicalEnchantmentLoader;
-import io.github.qwerty770.mcmod.spmreborn.mixin.acc.ParrotEntityAccessor;
 import io.github.qwerty770.mcmod.spmreborn.recipe.SweetPotatoRecipes;
 import io.github.qwerty770.mcmod.spmreborn.client.SweetPotatoMenuTypes;
 import io.github.qwerty770.mcmod.spmreborn.sound.SweetPotatoSoundEvents;
@@ -21,8 +20,6 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Set;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.*;
 
@@ -54,7 +51,6 @@ public class SPRMain {
 		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
 		ComposterHelper.register();
 		SPRLootTables.init();
-		SPRMain.configureParrot();
 		LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
 		LOGGER.info("This is for Minecraft 1.20 and above!");
 	}
@@ -75,12 +71,5 @@ public class SPRMain {
 		// About pig food, parrot food and chicken food
 		PIG_BREEDING_INGREDIENTS = itemTag("pig_breeding_ingredients");
 		CHICKEN_BREEDING_INGREDIENTS = itemTag("chicken_breeding_ingredients");
-	}
-
-	@SuppressWarnings("UnreachableCode")
-	public static void configureParrot() {
-		Set<Item> parrotTamingIngredients = ParrotEntityAccessor.getTamingIngredients();
-		parrotTamingIngredients.add(SweetPotatoItems.ENCHANTED_BEETROOT_SEEDS.get());
-		parrotTamingIngredients.add(SweetPotatoItems.ENCHANTED_WHEAT_SEEDS.get());
 	}
 }

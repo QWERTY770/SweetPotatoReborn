@@ -1,7 +1,8 @@
 package io.github.qwerty770.mcmod.spmreborn.util.credits;
 
 import com.mojang.logging.LogUtils;
-import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
+import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -25,7 +26,7 @@ public record CreditsPrinter(Minecraft client,
                              IntSet centeredLines,
                              List<FormattedCharSequence> credits) {
     private static final Component SEPARATOR_LINE = Component.literal("============").withStyle(ChatFormatting.WHITE);
-    private static final ResourceLocation SPR_FILE = RegistryHelper.id("credits.json");
+    private static final ResourceLocation SPR_FILE = ResourceLocationTool.create(SPRMain.MODID,"credits.json");
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public static void print(Minecraft client, IntConsumer creditsHeight,
