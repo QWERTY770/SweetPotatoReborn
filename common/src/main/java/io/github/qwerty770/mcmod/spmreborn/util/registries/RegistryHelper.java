@@ -165,8 +165,8 @@ public abstract class RegistryHelper {
         return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
     }
 
-    public static RegistrySupplier<LootItemFunctionType<?>> lootFunction(String id, MapCodec<? extends LootItemFunction> serializer) {
-        return lootFunctionRegistry.register(id, () -> new LootItemFunctionType<>(serializer));
+    public static <T extends LootItemFunction> RegistrySupplier<LootItemFunctionType<T>> lootFunction(String id, MapCodec<T> codec) {
+        return lootFunctionRegistry.register(id, () -> new LootItemFunctionType<>(codec));
     }
 
     public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab){

@@ -43,6 +43,7 @@ public class StatusEffectInstances {
     }
 
     @Nullable
+    @Deprecated(since = "1.21.1-1.0.0")
     public static MobEffectInstance readJson(JsonObject json) {
         if (!GsonHelper.isStringValue(json, "id")) {
             LOGGER.warn("Expected id as string, found {}", json.get("id"));
@@ -83,6 +84,7 @@ public class StatusEffectInstances {
         json.addProperty("amplifier", effect.getAmplifier());
     }
 
+    @Deprecated(since = "1.21.1-1.0.0")
     public static JsonObject writeJson(MobEffectInstance effect) {
         var obj = new JsonObject();
         writeJson(obj, effect);

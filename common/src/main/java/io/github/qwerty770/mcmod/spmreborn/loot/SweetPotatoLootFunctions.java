@@ -10,5 +10,5 @@ public class SweetPotatoLootFunctions {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("loot_functions");
     // Loot
     public static final RegistrySupplier<LootItemFunctionType<SetEnchantedPotatoEffectFunction>> SET_ENCHANTED_POTATO_EFFECT =
-            lootFunction("set_enchanted_potato_effect", new SetEnchantedPotatoEffectFunction.Serializer());
+            lootFunction("set_enchanted_potato_effect", SetEnchantedPotatoEffectFunction.CODEC);
 }
