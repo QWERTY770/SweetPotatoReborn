@@ -1,17 +1,13 @@
 package io.github.qwerty770.mcmod.spmreborn.items;
 
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
-import io.github.qwerty770.mcmod.spmreborn.util.effects.StatusEffectInstances;
 import io.github.qwerty770.mcmod.spmreborn.util.inventory.PeelInserter;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoStatus;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoStatus;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -28,11 +24,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPotatoProperties {
-    // Update to Minecraft 1.20 -- 2023/10/30
-    // Removed all usages of net.fabricmc.fabric.api.util.NbtType
+    // Update to Minecraft 1.20 -- 2023/10/30  Removed all usages of net.fabricmc.fabric.api.util.NbtType
+    // Update to Minecraft 1.21 -- 2024/10/17  Replace NBT with Data Component
     private final SweetPotatoType sweetPotatoType;
 
     public EnchantedSweetPotatoItem(Properties settings, SweetPotatoType type) {
@@ -54,40 +49,26 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
                 if (!statusEffectInstance.getEffect().value().isInstantenous()) {
                     user.addEffect(new MobEffectInstance(statusEffectInstance));
                 } else {
-                    statusEffectInstance.getEffect().value().applyInstantenousEffect(user, user, user, statusEffectInstance.getAmplifier(), 1.0D);
+                    statusEffectInstance.getEffect().value()
+                    .applyInstantenousEffect(user, user, user, statusEffectInstance.getAmplifier(), 1.0D);
                 }
             }));
         }
 
         return super.finishUsingItem(stack, world, user);
     }
+
     public static Optional<List<MobEffectInstance>> calcEffect(ItemStack stack) {
         Item item = stack.getItem();
         if (!(item instanceof EnchantedSweetPotatoItem)) return Optional.empty();
-        CompoundTag compoundNbtElement = stack.getOrCreateTag();
-        if (!compoundNbtElement.contains("statusEffects", Tag.TAG_LIST)) return Optional.empty();
-        ListTag statusEffects = compoundNbtElement.getList("statusEffects", Tag.TAG_COMPOUND);
-
-        List<MobEffectInstance> effectInstances = new ObjectArrayList<>();
-        for (Tag oneStatusEffect: statusEffects) {
-            //if (NbtUtils.notCompoundTag(oneStatusEffect)) continue;
-            if (oneStatusEffect.getId() != Tag.TAG_COMPOUND) continue;
-            CompoundTag compoundNbtElement1 = (CompoundTag) oneStatusEffect;
-            MobEffectInstance statusEffectInstance = StatusEffectInstances.readNbt(compoundNbtElement1);
-            if (statusEffectInstance == null) continue;
-            effectInstances.add(statusEffectInstance);
-        }
-        return Optional.of(effectInstances);
+        List<MobEffectInstance> effects = stack.get(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get());
+        return Optional.ofNullable(effects);
     }
 
-    public static void applyEffects(ItemStack stack, Stream<MobEffectInstance> effects,
-                                    @Nullable Integer displayIndex) {
-        CompoundTag root = stack.getOrCreateTag();
-        ListTag listTag = new ListTag();
-        effects.map(StatusEffectInstances::writeNbt).forEachOrdered(listTag::add);
-        root.put("statusEffects", listTag);
+    public static void applyEffects(ItemStack stack, List<MobEffectInstance> effects, @Nullable Integer displayIndex) {
+        stack.applyComponents(DataComponentMap.builder().set(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get(), effects).build());
         if (displayIndex != null) {
-            root.putInt("displayIndex", displayIndex);
+            stack.applyComponents(DataComponentMap.builder().set(SweetPotatoDataComponentTypes.DISPLAY_INDEX.get(), displayIndex).build());
         }
     }
 
@@ -112,23 +93,21 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
 
     @Override
     @Environment(EnvType.CLIENT)
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
-        super.appendHoverText(stack, world, tooltip, context);
-
-        CompoundTag root = stack.getOrCreateTag();
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag flag) {
+        super.appendHoverText(stack, context, components, flag);
         MutableComponent mainTip = Component.translatable("tooltip.spmreborn.enchanted_sweet_potato.effects");
-        tooltip.add(mainTip);
+        components.add(mainTip);
 
-        short index = root.getShort("displayIndex");
-        if (index == -1 || root.isEmpty()) {
+        List<MobEffectInstance> effects = stack.get(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get());
+        int index = stack.getOrDefault(SweetPotatoDataComponentTypes.DISPLAY_INDEX.get(), 0);
+        if (index == -1 || effects == null) {
             mainTip.append(Component.translatable("effect.none").withStyle(ChatFormatting.ITALIC));
             return;
         }
-        if (!root.contains("displayIndex", 99)) {
+        if (index == 99) {
             mainTip.append(Component.literal("???").withStyle(ChatFormatting.ITALIC));
             return;
         }
-
         Optional<List<MobEffectInstance>> statusEffectInstances = calcEffect(stack);
         if (statusEffectInstances.isEmpty()) {
             mainTip.append(Component.literal("???").withStyle(ChatFormatting.ITALIC));

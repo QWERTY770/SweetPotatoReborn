@@ -11,8 +11,7 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public final class RandomTickHelper {
-    // Update to Minecraft 1.20 -- 2023/12/16
-    // Deleted getCropAge(T, BlockState)
+    // Update to Minecraft 1.20 -- 2023/12/16  Deleted getCropAge(T, BlockState)
     /**
      * <h3>From: Vanilla-1.20.1 (formerly 1.16.1):
      *             {@link CropBlock}</h3>

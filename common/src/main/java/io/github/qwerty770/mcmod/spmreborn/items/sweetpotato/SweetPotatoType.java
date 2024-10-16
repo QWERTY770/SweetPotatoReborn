@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.util.sweetpotato;
+package io.github.qwerty770.mcmod.spmreborn.items.sweetpotato;
 
 import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;

@@ -1,4 +1,4 @@
-package io.github.qwerty770.mcmod.spmreborn.util.sweetpotato;
+package io.github.qwerty770.mcmod.spmreborn.items.sweetpotato;
 
 import io.github.qwerty770.mcmod.spmreborn.util.registries.ComposterHelper;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.GrindingUtils;
@@ -52,6 +52,5 @@ public class SweetPotatoComponent {
                 GrindingUtils.registerGrindableItem(this.grindData, item);  // grindable
             }
         }
-        // Legacy code: this.grindData.ifPresent(aDouble -> GrindingUtils.registerGrindableItem(aDouble, item));
     }
 }

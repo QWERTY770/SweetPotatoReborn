@@ -37,6 +37,7 @@ public class SPRMain {
 		SweetPotatoBlocks.LOG_WRAPPER.run();
 		SweetPotatoBlockEntityTypes.LOG_WRAPPER.run();
 		SweetPotatoItems.LOG_WRAPPER.run();
+		SweetPotatoDataComponentTypes.LOG_WRAPPER.run();
 		SweetPotatoRecipes.LOG_WRAPPER.run();
 		SweetPotatoLootFunctions.LOG_WRAPPER.run();
 		SweetPotatoStats.LOG_WRAPPER.run();

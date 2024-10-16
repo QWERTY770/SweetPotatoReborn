@@ -34,5 +34,4 @@ public class EnchantedSaplings extends SaplingBlock {
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
         return (double)world.random.nextFloat() < 0.8D;
     }
-
 }

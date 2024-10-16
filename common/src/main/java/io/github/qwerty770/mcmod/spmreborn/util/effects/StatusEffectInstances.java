@@ -14,14 +14,16 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Deprecated(since = "1.21.1-1.0.0")
 public class StatusEffectInstances {
-    // Update to Minecraft 1.20 -- 2023/12/16
+    // Update to Minecraft 1.21 -- 2024/10/17  Replace NBT with Data Component, NBT operations are deprecated
     private static final Logger LOGGER = LoggerFactory.getLogger("SPR Status Effect Manager");
 
     /**
      * For Enchanted Sweet Potatoes only. Not compatible with ordinal ones.
      */
-    @Nullable   // null: empty status
+    @Nullable
+    @Deprecated
     public static MobEffectInstance readNbt(CompoundTag tag) {
         if (!tag.contains("id", Tag.TAG_STRING)) return null;
         String raw = tag.getString("id");
@@ -43,7 +45,7 @@ public class StatusEffectInstances {
     }
 
     @Nullable
-    @Deprecated(since = "1.21.1-1.0.0")
+    @Deprecated
     public static MobEffectInstance readJson(JsonObject json) {
         if (!GsonHelper.isStringValue(json, "id")) {
             LOGGER.warn("Expected id as string, found {}", json.get("id"));
@@ -60,6 +62,7 @@ public class StatusEffectInstances {
     /**
      * For Enchanted Sweet Potatoes only. Not compatible with ordinal ones.
      */
+    @Deprecated
     public static CompoundTag writeNbt(MobEffectInstance effect) {
         CompoundTag tag = new CompoundTag();
         MobEffect statusEffect = effect.getEffect().value();
@@ -84,7 +87,7 @@ public class StatusEffectInstances {
         json.addProperty("amplifier", effect.getAmplifier());
     }
 
-    @Deprecated(since = "1.21.1-1.0.0")
+    @Deprecated
     public static JsonObject writeJson(MobEffectInstance effect) {
         var obj = new JsonObject();
         writeJson(obj, effect);

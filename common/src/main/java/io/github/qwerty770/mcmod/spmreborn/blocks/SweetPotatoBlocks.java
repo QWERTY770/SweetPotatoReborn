@@ -3,11 +3,10 @@ package io.github.qwerty770.mcmod.spmreborn.blocks;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.blocks.plants.*;
 import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoType;
 import net.minecraft.world.level.block.Block;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.BlockUtils.*;
-import static io.github.qwerty770.mcmod.spmreborn.util.registries.BlockUtils.createLeaves;
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.block;
 import static io.github.qwerty770.mcmod.spmreborn.world.tree.SweetPotatoTreeGrowers.*;
 
@@ -55,8 +54,7 @@ public class SweetPotatoBlocks {
     public static final RegistrySupplier<Block> ENCHANTED_SPRUCE_LEAVES;
 
     static {
-        // Update to Minecraft 1.20 -- 2023/11/26
-        // Deleted util.objsettings.BlockSettings
+        // Update to Minecraft 1.20 -- 2023/11/26  Deleted util.objsettings.BlockSettings
         // Block
         MAGIC_CUBE = block("magic_cube", new MagicCubeBlock(createFunctionalBlock(10.0F, 1200.0F)));
         GRINDER = block("grinder", new GrinderBlock(createFunctionalBlock(3.5F, 6.0F)));

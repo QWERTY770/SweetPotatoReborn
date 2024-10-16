@@ -1,9 +1,9 @@
 package io.github.qwerty770.mcmod.spmreborn.util.registries;
 
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoComponent;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoStatus;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoComponent;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoStatus;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.ComposterBlock;
 import org.jetbrains.annotations.ApiStatus;

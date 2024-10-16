@@ -3,7 +3,7 @@ package io.github.qwerty770.mcmod.spmreborn.items;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
@@ -59,8 +59,7 @@ public class SweetPotatoItems {
     public static final RegistrySupplier<Item> ENCHANTED_SUGAR_CANE_ITEM;
 
     static {
-        // Update to Minecraft 1.20 -- 2023/10/30
-        // Deleted util.objsettings.ItemSettings
+        // Update to Minecraft 1.20 -- 2023/10/30  Deleted util.objsettings.ItemSettings
         // Item
         PEEL = defaultItem("peel", defaultProp());
         POTATO_POWDER = defaultItem("potato_powder", defaultProp());

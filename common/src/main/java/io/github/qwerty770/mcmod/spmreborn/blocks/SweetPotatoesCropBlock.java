@@ -1,6 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks;
 
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;

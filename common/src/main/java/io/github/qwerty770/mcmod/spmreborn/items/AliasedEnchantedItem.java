@@ -12,8 +12,7 @@ import org.jetbrains.annotations.ApiStatus;
 
 @StableApi
 public class AliasedEnchantedItem extends ItemNameBlockItem {
-    // Update to Minecraft 1.20 -- 2023/10/30
-    // Removed all usages of net.fabricmc.fabric.api.item.v1.FabricItemSettings
+    // Update to Minecraft 1.20 -- 2023/10/30  Removed all usages of net.fabricmc.fabric.api.item.v1.FabricItemSettings
     public AliasedEnchantedItem(Block block, Properties settings) {
         super(block, settings);
     }

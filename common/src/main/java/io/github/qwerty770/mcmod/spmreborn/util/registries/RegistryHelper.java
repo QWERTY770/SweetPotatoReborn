@@ -11,6 +11,7 @@ import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -58,6 +59,7 @@ public abstract class RegistryHelper {
     private static final List<DeferredRegister<?>> modRegistries = new ArrayList<>();
     public static final DeferredRegister<Block> blockRegistry = ofModRegistry(Registries.BLOCK);
     public static final DeferredRegister<Item> itemRegistry = ofModRegistry(Registries.ITEM);
+    public static final DeferredRegister<DataComponentType<?>> dataComponentTypeRegistry = ofModRegistry(Registries.DATA_COMPONENT_TYPE);
     public static final DeferredRegister<BlockEntityType<?>> blockEntityRegistry = ofModRegistry(Registries.BLOCK_ENTITY_TYPE);
     public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
     public static final DeferredRegister<RecipeSerializer<?>> recipeSerializerRegistry = ofModRegistry(Registries.RECIPE_SERIALIZER);
@@ -97,6 +99,10 @@ public abstract class RegistryHelper {
 
     public static RegistrySupplier<BlockItem> blockItem(String id, Supplier<Block> block2, @NotNull Item.Properties settings) {
         return itemRegistry.register(id, () -> new BlockItem(block2.get(), settings));
+    }
+
+    public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType){
+        return dataComponentTypeRegistry.register(id, componentType);
     }
 
     // Update to Minecraft 1.20 -- 2023/12/16

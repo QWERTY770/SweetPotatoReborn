@@ -2,8 +2,8 @@ package io.github.qwerty770.mcmod.spmreborn.items;
 
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import io.github.qwerty770.mcmod.spmreborn.util.inventory.PeelInserter;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoStatus;
-import io.github.qwerty770.mcmod.spmreborn.util.sweetpotato.SweetPotatoType;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoStatus;
+import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
