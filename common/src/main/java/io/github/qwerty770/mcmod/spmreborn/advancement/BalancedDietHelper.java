@@ -1,33 +1,34 @@
 package io.github.qwerty770.mcmod.spmreborn.advancement;
 
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
-import io.github.qwerty770.mcmod.spmreborn.mixin.acc.AdvancementTaskAccessor;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ConsumeItemTrigger;
 import net.minecraft.world.item.Item;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public final class BalancedDietHelper {
     private BalancedDietHelper() {}
 
-    public static void setupCriteria(Advancement.Builder task) {
-        List<Item> itemList = SPRMain.ALL_SWEET_POTATOES.stream().toList();
-        int itemListSize = itemList.size();
-
-        AdvancementTaskAccessor taskAccessor = (AdvancementTaskAccessor) task;
-        String[][] requirementsOld = taskAccessor.getRequirements();
-        String[][] requirementsNew = new String[requirementsOld.length + itemListSize][];
-        System.arraycopy(requirementsOld, 0, requirementsNew, itemListSize, requirementsOld.length);
-
-        // Update to Minecraft 1.20 -- 2023/06/29
-        int i = 0;
-        for (Item item : itemList) {
-            String requirementName = "spmreborn:balanced_diet_food_" + item.toString();
-            task.addCriterion(requirementName, ConsumeItemTrigger.TriggerInstance.usedItem(item));
-            requirementsNew[i] = new String[] {requirementName};
-            ++i;
+    // Update to Minecraft 1.21 -- 2024/10/19 Modify the advancement holder
+    public static AdvancementHolder setupCriteria(AdvancementHolder holder) {
+        Advancement advancement = holder.value();
+        List<Item> items = SPRMain.ALL_SWEET_POTATOES.stream().toList();
+        Map<String, Criterion<?>> criteria = advancement.criteria();
+        List<List<String>> requirements = advancement.requirements().requirements();
+        for (Item item : items) {
+            String name = "spmreborn:balanced_diet_food_" + item.toString();
+            criteria.put(name, ConsumeItemTrigger.TriggerInstance.usedItem(item));
+            ArrayList<String> requirement = new ArrayList<>();
+            requirement.add(name);
+            requirements.add(requirement);
         }
-        taskAccessor.setRequirements(requirementsNew);
+        return new AdvancementHolder(holder.id(), new Advancement(advancement.parent(), advancement.display(),
+                advancement.rewards(), criteria, new AdvancementRequirements(requirements), advancement.sendsTelemetryEvent()));
     }
 }

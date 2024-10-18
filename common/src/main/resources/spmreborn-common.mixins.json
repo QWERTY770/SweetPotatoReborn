@@ -6,7 +6,6 @@
   "mixins": [
     "AdvancementTaskMixin",
     "FeatureUtilsMixin",
-    "acc.AdvancementTaskAccessor",
     "modinfo.LevelPropertiesMixin",
     "modinfo.ServerPropertiesMixin"
   ],
