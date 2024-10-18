@@ -2,6 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn.lib.blockentity;
 
 import com.google.common.collect.ImmutableList;
 import io.github.qwerty770.mcmod.spmreborn.util.tick.ITickable;
+import net.minecraft.core.component.DataComponents;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,17 +37,17 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
         super(settings);
     }
 
-    public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, InteractionHand hand, BlockHitResult blockHitResult) {
+    public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
         return ImmutableList.of();
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         if (!world.isClientSide) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof MenuProvider && blockEntityPredicate(blockEntity)) {
                 player.openMenu((MenuProvider) blockEntity);
-                incrementWhileOnUse(state, world, pos, (ServerPlayer) player, hand, hit).forEach(player::awardStat);
+                incrementWhileOnUse(state, world, pos, (ServerPlayer) player, hit).forEach(player::awardStat);
             }
             return InteractionResult.CONSUME;
         }
@@ -56,10 +56,11 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
 
     @Override
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.hasCustomHoverName()) {
+        if (itemStack.get(DataComponents.CUSTOM_NAME) != null || itemStack.get(DataComponents.ITEM_NAME) != null) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof BaseContainerBlockEntity && blockEntityPredicate(blockEntity))
-                ((BaseContainerBlockEntity) blockEntity).setCustomName(itemStack.getHoverName());
+            if (blockEntity instanceof BaseContainerBlockEntity && blockEntityPredicate(blockEntity)){
+                ((BaseContainerBlockEntity) blockEntity).name = itemStack.getHoverName();
+            }
         }
     }
 

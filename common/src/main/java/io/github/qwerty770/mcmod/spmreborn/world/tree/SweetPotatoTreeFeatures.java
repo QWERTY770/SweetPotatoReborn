@@ -36,9 +36,10 @@ import static io.github.qwerty770.mcmod.spmreborn.world.tree.SweetPotatoTreeFeat
  * @see net.minecraft.world.level.block.grower.TreeGrower
  * @see net.minecraft.data.worldgen.features.TreeFeatures#FANCY_OAK
  */
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public final class SweetPotatoTreeFeatures {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("tree_features");
-    public static Map<ResourceKey<ConfiguredFeature<?, ?>>, TreeConfiguration> featureMap = new HashMap<>();
+    public static final Map<ResourceKey<ConfiguredFeature<?, ?>>, TreeConfiguration> featureMap = new HashMap<>();
     
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> bootstapContext){
         for (ResourceKey<ConfiguredFeature<?, ?>> resourceKey : featureMap.keySet()){

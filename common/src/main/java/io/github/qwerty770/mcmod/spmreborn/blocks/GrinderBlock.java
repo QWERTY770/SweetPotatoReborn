@@ -1,12 +1,12 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.MapCodec;
 import io.github.qwerty770.mcmod.spmreborn.blocks.entities.GrinderBlockEntity;
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractBlockWithEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -21,6 +21,7 @@ import java.util.List;
 
 import io.github.qwerty770.mcmod.spmreborn.blocks.entities.SweetPotatoBlockEntityTypes;
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
+import org.jetbrains.annotations.NotNull;
 
 public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
     public static final BooleanProperty GRINDING = BooleanProperty.create("grinding");
@@ -28,6 +29,11 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
     public GrinderBlock(BlockBehaviour.Properties settings) {
         super(settings);
         registerDefaultState(this.getStateDefinition().any().setValue(GRINDING, false));
+    }
+
+    @Override
+    public @NotNull MapCodec<GrinderBlock> codec(){
+        return simpleCodec(GrinderBlock::new);
     }
 
     @Override
@@ -41,7 +47,7 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
     }
 
     @Override
-    public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, InteractionHand hand, BlockHitResult blockHitResult) {
+    public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
         return ImmutableList.of(SweetPotatoStats.INTERACT_WITH_GRINDER);
     }
 

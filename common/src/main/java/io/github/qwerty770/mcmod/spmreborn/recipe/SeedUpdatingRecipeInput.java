@@ -2,11 +2,12 @@ package io.github.qwerty770.mcmod.spmreborn.recipe;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import org.jetbrains.annotations.NotNull;
 
 public record SeedUpdatingRecipeInput(ItemStack base, ItemStack addition) implements RecipeInput {
     // see net.minecraft.world.item.crafting.SmithingRecipeInput
     @Override
-    public ItemStack getItem(int index) {
+    public @NotNull ItemStack getItem(int index) {
         ItemStack stack;
         switch (index) {
             case 0 -> stack = this.base;

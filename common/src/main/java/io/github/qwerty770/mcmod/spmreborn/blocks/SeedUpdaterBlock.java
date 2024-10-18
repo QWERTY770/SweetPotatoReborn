@@ -4,7 +4,6 @@ import io.github.qwerty770.mcmod.spmreborn.client.handlers.SeedUpdaterScreenHand
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
@@ -33,22 +32,11 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
 
     public SeedUpdaterBlock(Properties settings) {
         super(settings);
-        // setDefaultState(getStateManager().getDefaultState().with(WATERLOGGED, false));
     }
 
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
-
-    // TODO
-    //public FluidState getFluidState(BlockState state) {
-    //    return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
-    //}
-
-    //public BlockState getPlacementState(ItemPlacementContext context) {
-    //    FluidState fluidState = context.getWorld().getFluidState(context.getBlockPos());
-    //    return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-    //}
 
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
@@ -58,7 +46,7 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (world.isClientSide)
             return InteractionResult.SUCCESS;
         player.openMenu(state.getMenuProvider(world, pos));
