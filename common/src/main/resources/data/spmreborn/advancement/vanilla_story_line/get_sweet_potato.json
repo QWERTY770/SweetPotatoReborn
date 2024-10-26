@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "id": "spmreborn:white_potato"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "title": {
+      "translate": "advancement.husbandry.spmreborn.get_sweet_potato.title"
+    },
+    "description": {
+      "translate": "advancement.husbandry.spmreborn.get_sweet_potato.description"
+    }
+  },
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "spmreborn:get_sweet_potato": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "spmreborn:sweet_potatoes"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "spmreborn:get_sweet_potato"
+    ]
+  ]
+}

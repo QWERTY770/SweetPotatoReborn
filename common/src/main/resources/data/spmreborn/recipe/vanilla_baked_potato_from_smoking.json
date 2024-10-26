@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "spmreborn:enchanted_potato"
+  },
+  "result": {
+    "id": "minecraft:baked_potato"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

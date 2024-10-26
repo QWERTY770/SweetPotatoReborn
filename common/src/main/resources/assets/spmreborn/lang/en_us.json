@@ -1,6 +1,7 @@
 {
   "_comment": "This is the old translation of Sweet Potato Mod and may not work on Sweet Potato Reborn mod",
   "mod.spmreborn": "Sweet Potato Reborn",
+
   "tab.spmreborn": "Sweet Potato+",
   "item.spmreborn.purple_potato": "Purple Potato",
   "item.spmreborn.red_potato": "Red Potato",
@@ -65,6 +66,14 @@
   "stat.spmreborn.sweet_potato_eaten": "Sweet Potatoes eaten",
   "stat.spmreborn.interact_with_magic_cube": "Interactions with Magic Cube",
 
+  "tag.item.spmreborn.baked_sweet_potatoes": "Baked Sweet Potatoes",
+  "tag.item.spmreborn.blackstones": "Black Stones",
+  "tag.item.spmreborn.chicken_breeding_ingredients": "Chicken Breeding Ingredients",
+  "tag.item.spmreborn.enchanted_sweet_potatoes": "Enchanted Sweet Potatoes",
+  "tag.item.spmreborn.parrot_breeding_ingredients": "Parrot Breeding Ingredients",
+  "tag.item.spmreborn.pig_breeding_ingredients": "Pig Breeding Ingredients",
+  "tag.item.spmreborn.raw_sweet_potatoes": "Raw Sweet Potatoes",
+  "tag.item.spmreborn.sweet_potatoes": "Sweet Potatoes",
   "tooltip.spmreborn.enchanted_sweet_potato.effects": "Effects: ",
 
   "block.spmreborn.enchanted_phoenix_sapling": "Enchanted Phoenix Sapling",

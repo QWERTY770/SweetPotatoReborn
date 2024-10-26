@@ -1,11 +1,11 @@
 modLoader = "javafml"
-loaderVersion = "[21,)"
-issueTrackerURL = "https://github.com/QWERTY770/SweetPotatoReborn/issues"
+loaderVersion = "[2,)"
 license = "Apache-2.0"
+issueTrackerURL = "https://github.com/QWERTY770/SweetPotatoReborn/issues"
 
 [[mods]]
 modId = "spmreborn"
-version = "${version}"
+version = "1.21.1-1.0.0"
 displayName = "Sweet Potato Reborn"
 displayURL="https://github.com/QWERTY770/SweetPotatoReborn"
 authors = "QWERTY770"
@@ -15,26 +15,26 @@ Try new kinds of food, crops & magic in Sweet Potato Mod!
 logoFile = "icon.png"
 
 [[mixins]]
-config1="spmreborn-common.mixins.json"
+config="spmreborn-common.mixins.json"
 config2="spmreborn.mixins.json"
 
 [[dependencies.spmreborn]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21,)"
+versionRange = "[21.0.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.spmreborn]]
 modId = "minecraft"
-mandatory = true
+type = "required"
 versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.spmreborn]]
 modId = "architectury"
-mandatory = true
+type = "required"
 versionRange = "[13.0,)"
 ordering = "NONE"
 side = "BOTH"

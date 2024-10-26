@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "spmreborn:white_potato"
+  },
+  "result": {
+    "id": "spmreborn:baked_white_potato"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

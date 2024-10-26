@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+	"B#B",
+	"ccc"
+  ],
+  "key": {
+    "B": {
+      "tag": "spmreborn:blackstones"
+    },
+	"#": {
+	  "item": "minecraft:smoker"
+	},
+	"c": {
+	  "item": "minecraft:crying_obsidian"
+	}
+  },
+  "result": {
+    "id": "spmreborn:magic_cube"
+  }
+}

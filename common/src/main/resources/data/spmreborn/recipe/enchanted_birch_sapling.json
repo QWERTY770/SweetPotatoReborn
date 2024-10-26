@@ -1,0 +1,12 @@
+{
+  "type": "spmreborn:seed_updating",
+  "base": {
+    "item": "minecraft:birch_sapling"
+  },
+  "addition": {
+    "item": "spmreborn:potato_powder"
+  },
+  "result": {
+    "id": "spmreborn:enchanted_birch_sapling"
+  }
+}

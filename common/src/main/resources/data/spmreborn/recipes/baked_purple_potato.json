@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "spmreborn:purple_potato"
-  },
-  "result": "spmreborn:baked_purple_potato",
-  "experience": 0.35,
-  "cookingtime": 200
-}

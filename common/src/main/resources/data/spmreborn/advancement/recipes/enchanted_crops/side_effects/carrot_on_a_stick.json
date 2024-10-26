@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "spmreborn:carrot_on_a_stick"
+    ]
+  },
+  "criteria": {
+    "crt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spmreborn:enchanted_carrot"
+            ]
+          }
+        ]
+      }
+    },
+    "_": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "spmreborn:carrot_on_a_stick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crt",
+      "_"
+    ]
+  ]
+}

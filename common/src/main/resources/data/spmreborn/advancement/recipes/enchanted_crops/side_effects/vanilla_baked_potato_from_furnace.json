@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "spmreborn:vanilla_baked_potato"
+    ]
+  },
+  "criteria": {
+    "r": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spmreborn:enchanted_potato"
+            ]
+          }
+        ]
+      }
+    },
+    "_": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "spmreborn:vanilla_baked_potato"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "r",
+      "_"
+    ]
+  ]
+}

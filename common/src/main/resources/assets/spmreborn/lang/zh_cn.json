@@ -2,6 +2,7 @@
   "_comment": "这是Sweet Potato Mod的旧翻译，可能不适用于Sweet Potato Reborn mod",
   "mod.spmreborn": "烤地瓜：重生",
   "tab.spmreborn": "烤地瓜+",
+
   "item.spmreborn.purple_potato": "紫薯",
   "item.spmreborn.red_potato": "红薯",
   "item.spmreborn.white_potato": "白薯",
@@ -65,6 +66,14 @@
   "stat.spmreborn.sweet_potato_eaten": "吃掉的地瓜数",
   "stat.spmreborn.interact_with_magic_cube": "与魔法锅互动次数",
 
+  "tag.item.spmreborn.baked_sweet_potatoes": "烤地瓜",
+  "tag.item.spmreborn.blackstones": "黑色石头",
+  "tag.item.spmreborn.chicken_breeding_ingredients": "鸡饲养原料",
+  "tag.item.spmreborn.enchanted_sweet_potatoes": "附魔地瓜",
+  "tag.item.spmreborn.parrot_breeding_ingredients": "鹦鹉饲养原料",
+  "tag.item.spmreborn.pig_breeding_ingredients": "猪饲养原料",
+  "tag.item.spmreborn.raw_sweet_potatoes": "生地瓜",
+  "tag.item.spmreborn.sweet_potatoes": "地瓜",
   "tooltip.spmreborn.enchanted_sweet_potato.effects": "效果： ",
 
   "block.spmreborn.enchanted_phoenix_sapling": "附魔梧桐树苗",

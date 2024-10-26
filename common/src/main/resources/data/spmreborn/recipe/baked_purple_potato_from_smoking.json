@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "spmreborn:purple_potato"
+  },
+  "result": {
+    "id": "spmreborn:baked_purple_potato"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

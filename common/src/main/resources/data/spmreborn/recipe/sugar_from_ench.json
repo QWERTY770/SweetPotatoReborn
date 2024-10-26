@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "sugar",
+  "ingredients": [
+    {
+      "item": "spmreborn:enchanted_sugar_cane"
+    }
+  ],
+  "result": {
+    "id": "minecraft:sugar"
+  }
+}

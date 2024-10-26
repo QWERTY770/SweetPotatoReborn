@@ -1,0 +1,50 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "spmreborn:agroforestry_table"
+    ]
+  },
+  "criteria": {
+    "_": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "spmreborn:agroforestry_table"
+      }
+    },
+    "sppowder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spmreborn:potato_powder"
+            ]
+          }
+        ]
+      }
+    },
+    "golden_i | blackstones": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:gold_ingot"
+            ]
+          },
+          {
+            "tag": "spmreborn:blackstones"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "_",
+      "sppowder",
+      "golden_i | blackstones"
+    ]
+  ]
+}
