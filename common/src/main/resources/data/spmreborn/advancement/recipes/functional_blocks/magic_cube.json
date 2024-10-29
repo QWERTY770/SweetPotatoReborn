@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "spmreborn:blackstones"
+            "items": "#spmreborn:blackstones"
           }
         ]
       }

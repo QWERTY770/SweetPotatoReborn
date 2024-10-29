@@ -27,7 +27,7 @@ import java.util.Optional;
 
 public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPotatoProperties {
     // Update to Minecraft 1.20 -- 2023/10/30  Removed all usages of net.fabricmc.fabric.api.util.NbtType
-    // Update to Minecraft 1.21 -- 2024/10/17  Replace NBT with Data Component
+    // Update to Minecraft 1.21 -- 2024/10/17  Replaced NBT with Data Component
     private final SweetPotatoType sweetPotatoType;
 
     public EnchantedSweetPotatoItem(Properties settings, SweetPotatoType type) {

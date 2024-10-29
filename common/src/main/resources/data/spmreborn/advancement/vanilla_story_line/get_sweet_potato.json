@@ -16,12 +16,12 @@
   },
   "parent": "minecraft:husbandry/root",
   "criteria": {
-    "spmreborn:get_sweet_potato": {
+    "get_sweet_potato": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "spmreborn:sweet_potatoes"
+            "items": "#spmreborn:sweet_potatoes"
           }
         ]
       }
@@ -29,7 +29,7 @@
   },
   "requirements": [
     [
-      "spmreborn:get_sweet_potato"
+      "get_sweet_potato"
     ]
   ]
 }
