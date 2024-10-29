@@ -10,6 +10,8 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 
 import java.util.List;
 
@@ -30,7 +32,9 @@ public class SPRLootTables {
         LootEvent.MODIFY_LOOT_TABLE.register((key, context, builtin) -> {
             if (!isVanilla(key) || !builtin) return;
             if (zombies.contains(key)){
-                LootPool.Builder pool = LootPool.lootPool().add(NestedLootTable.lootTableReference(RAW_SWEET_POTATOES));
+                LootPool.Builder pool = LootPool.lootPool().add(NestedLootTable.lootTableReference(RAW_SWEET_POTATOES))
+                        .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                        .when(LootItemRandomChanceCondition.randomChance(0.025F));
                 context.addPool(pool);
             } else if (BuiltInLootTables.VILLAGE_PLAINS_HOUSE.equals(key)) {
                 context.addPool(VillagerLootTables.plains());
