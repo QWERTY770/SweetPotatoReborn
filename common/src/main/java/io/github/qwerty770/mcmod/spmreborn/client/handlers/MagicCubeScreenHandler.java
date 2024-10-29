@@ -136,5 +136,4 @@ public class MagicCubeScreenHandler extends AbstractContainerMenu {
             return 64;
         }
     }
-
 }

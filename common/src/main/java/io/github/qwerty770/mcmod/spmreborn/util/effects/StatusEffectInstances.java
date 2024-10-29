@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 @Deprecated(since = "1.21.1-1.0.0")
 public class StatusEffectInstances {
-    // Update to Minecraft 1.21 -- 2024/10/17  Replace NBT with Data Component, NBT operations are deprecated
+    // Update to Minecraft 1.21 -- 2024/10/17  Replaced NBT with Data Component, NBT operations are deprecated
     private static final Logger LOGGER = LoggerFactory.getLogger("SPR Status Effect Manager");
 
     /**

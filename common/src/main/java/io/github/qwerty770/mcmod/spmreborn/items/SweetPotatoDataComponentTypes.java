@@ -13,7 +13,7 @@ import java.util.List;
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.componentType;
 
 public class SweetPotatoDataComponentTypes {
-    // Update to Minecraft 1.21 -- 2024/10/17  Replace NBT with Data Component
+    // Update to Minecraft 1.21 -- 2024/10/17  Replaced NBT with Data Component
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("data_components");
     // "statusEffects" tag in 1.20
     public static final RegistrySupplier<DataComponentType<List<MobEffectInstance>>> STATUS_EFFECTS = componentType("status_effects",

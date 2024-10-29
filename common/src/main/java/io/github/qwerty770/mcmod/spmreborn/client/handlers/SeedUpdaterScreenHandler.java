@@ -27,8 +27,7 @@ import java.util.OptionalInt;
 public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
     // see net.minecraft.world.inventory.SmithingMenu
     private final Level level;
-    @Nullable
-    private RecipeHolder<SeedUpdatingRecipe> selectedRecipe;
+    private @Nullable RecipeHolder<SeedUpdatingRecipe> selectedRecipe;
     private final List<RecipeHolder<SeedUpdatingRecipe>> recipes;
 
     public SeedUpdaterScreenHandler(int syncId, Inventory inventory) {
