@@ -25,8 +25,6 @@ subprojects {
         // mappings "net.fabricmc:yarn:1.19.4+build.2:v2"
         implementation 'com.google.code.findbugs:jsr305:3.0.2'
         implementation 'com.google.errorprone:error_prone_annotations:2.11.0'
-        //implementation 'com.intellij:annotations:+@jar'
-        //implementation 'com.google.guava:guava:32.0.0-android'
     }
 }
 

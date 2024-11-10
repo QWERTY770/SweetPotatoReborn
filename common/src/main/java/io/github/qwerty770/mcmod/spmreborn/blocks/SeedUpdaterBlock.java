@@ -33,22 +33,11 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
 
     public SeedUpdaterBlock(Properties settings) {
         super(settings);
-        // setDefaultState(getStateManager().getDefaultState().with(WATERLOGGED, false));
     }
 
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
-
-    // TODO
-    //public FluidState getFluidState(BlockState state) {
-    //    return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
-    //}
-
-    //public BlockState getPlacementState(ItemPlacementContext context) {
-    //    FluidState fluidState = context.getWorld().getFluidState(context.getBlockPos());
-    //    return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-    //}
 
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
