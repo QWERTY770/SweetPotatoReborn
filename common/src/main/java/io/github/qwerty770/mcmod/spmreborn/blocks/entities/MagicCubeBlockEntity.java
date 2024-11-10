@@ -4,8 +4,8 @@ import com.mojang.logging.LogUtils;
 import dev.architectury.registry.menu.ExtendedMenuProvider;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.blocks.MagicCubeBlock;
+import io.github.qwerty770.mcmod.spmreborn.items.EnchantedSweetPotatoItem;
 import io.github.qwerty770.mcmod.spmreborn.items.RawSweetPotatoBlockItem;
-import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoDataComponentTypes;
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractLockableContainerBlockEntity;
 import io.github.qwerty770.mcmod.spmreborn.magic.WeightedStatusEffect;
@@ -18,7 +18,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -241,17 +240,13 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
 
     private ItemStack enchant(ItemStack originRaw) {
         Item item = originRaw.getItem();
-        // Item element = item = originRaw.getItem();
         if (!SPRMain.RAW_SWEET_POTATOES.contains(item) || !(item instanceof RawSweetPotatoBlockItem sweetPotato))
             return originRaw;
         List<MobEffectInstance> enchantments = calcEnchantments();
         int length = enchantments.size();
         int randomIndex = length == 0 ? -1 : random.nextInt(length);
         ItemStack outputStack = new ItemStack(sweetPotato.asType().getEnchanted(), originRaw.getCount());
-        outputStack.applyComponents(DataComponentMap.builder()
-                .set(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get(), enchantments)
-                .set(SweetPotatoDataComponentTypes.DISPLAY_INDEX.get(), randomIndex)
-                .build());
+        EnchantedSweetPotatoItem.applyEffects(outputStack, enchantments, randomIndex);
         return outputStack;
     }
 

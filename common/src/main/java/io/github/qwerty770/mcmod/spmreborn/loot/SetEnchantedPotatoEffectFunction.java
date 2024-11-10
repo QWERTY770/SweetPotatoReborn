@@ -24,12 +24,11 @@ import java.util.stream.Stream;
 public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunction {
     private final List<EffectEntry> effects;
     private final @Nullable Integer displayIndex;
-    // private final boolean displayRandomly;
     public static final MapCodec<SetEnchantedPotatoEffectFunction> CODEC = RecordCodecBuilder.mapCodec(
-            (instance) -> instance.group(LootItemCondition.DIRECT_CODEC.listOf().optionalFieldOf("conditions", List.of())
-                    .forGetter((function) -> function.predicates))
-                    .and(Codec.list(EffectEntry.CODEC).fieldOf("effects").forGetter((function -> function.effects)))
-                    .and(Codec.INT.optionalFieldOf("displayIndex", -1).forGetter(function -> function.displayIndex))
+            (instance) -> instance.group(
+                    LootItemCondition.DIRECT_CODEC.listOf().optionalFieldOf("conditions", List.of()).forGetter((function) -> function.predicates),
+                    EffectEntry.CODEC.listOf().fieldOf("effects").forGetter((function -> function.effects)),
+                    Codec.INT.optionalFieldOf("displayIndex", -1).forGetter(function -> function.displayIndex))
             .apply(instance, SetEnchantedPotatoEffectFunction::new)
     );
 
@@ -39,7 +38,6 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
         super(lootItemConditions);
         this.effects = effects;
         this.displayIndex = displayIndex;
-        // this.displayRandomly = displayRandomly;
     }
 
     @Override
@@ -64,15 +62,15 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
 
     public record EffectEntry(MobEffectInstance effect, float chance) {
         public static final MapCodec<MobEffectInstance> EFFECT_MAP_CODEC = RecordCodecBuilder.mapCodec(
-                (instance) -> instance.group(MobEffect.CODEC.fieldOf("id").forGetter(MobEffectInstance::getEffect))
-                        .and(Codec.INT.optionalFieldOf("duration", 100).forGetter(MobEffectInstance::getDuration))
-                        .and(Codec.INT.optionalFieldOf("amplifier", 0).forGetter(MobEffectInstance::getAmplifier))
+                (instance) -> instance.group(MobEffect.CODEC.fieldOf("id").forGetter(MobEffectInstance::getEffect),
+                                Codec.INT.optionalFieldOf("duration", 100).forGetter(MobEffectInstance::getDuration),
+                                Codec.INT.optionalFieldOf("amplifier", 0).forGetter(MobEffectInstance::getAmplifier))
                         .apply(instance, MobEffectInstance::new)
         );
         public static final Codec<MobEffectInstance> EFFECT_CODEC = EFFECT_MAP_CODEC.codec();
         public static final Codec<SetEnchantedPotatoEffectFunction.EffectEntry> CODEC = RecordCodecBuilder.create(
-                (instance) -> instance.group(EFFECT_MAP_CODEC.forGetter(EffectEntry::effect))
-                        .and(Codec.FLOAT.optionalFieldOf("chance", 1.0f).forGetter(EffectEntry::chance))
+                (instance) -> instance.group(EFFECT_MAP_CODEC.forGetter(EffectEntry::effect),
+                                Codec.FLOAT.optionalFieldOf("chance", 1.0f).forGetter(EffectEntry::chance))
                         .apply(instance, EffectEntry::new)
         );
 

@@ -1,9 +1,11 @@
 package io.github.qwerty770.mcmod.spmreborn.blocks;
 
+import dev.architectury.registry.menu.MenuRegistry;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.SeedUpdaterScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
@@ -49,7 +51,7 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (world.isClientSide)
             return InteractionResult.SUCCESS;
-        player.openMenu(state.getMenuProvider(world, pos));
+        MenuRegistry.openMenu((ServerPlayer) player, state.getMenuProvider(world, pos)); // Multi-platform support
         player.awardStat(SweetPotatoStats.INTERACT_WITH_AGRO);
         return InteractionResult.CONSUME;
     }

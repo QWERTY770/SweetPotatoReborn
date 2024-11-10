@@ -29,6 +29,8 @@ public class SeedUpdaterScreen extends ItemCombinerScreen<SeedUpdaterScreenHandl
 
     @Override
     protected void renderErrorIcon(GuiGraphics guiGraphics, int i, int j) {
-        // TODO
+        if ((this.menu.getSlot(0).hasItem() || this.menu.getSlot(1).hasItem()) && !this.menu.getSlot(this.menu.getResultSlot()).hasItem()) {
+            guiGraphics.blitSprite(ResourceLocationTool.withDefaultNamespace("container/anvil/error"), i + 99, j + 45, 28, 21);
+        }
     }
 }
