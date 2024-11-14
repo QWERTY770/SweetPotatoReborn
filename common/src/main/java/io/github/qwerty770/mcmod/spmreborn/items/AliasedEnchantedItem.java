@@ -4,14 +4,14 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.ApiStatus;
 
 @StableApi
-public class AliasedEnchantedItem extends ItemNameBlockItem {
+public class AliasedEnchantedItem extends BlockItem {
     // Update to Minecraft 1.20 -- 2023/10/30  Removed all usages of net.fabricmc.fabric.api.item.v1.FabricItemSettings
     public AliasedEnchantedItem(Block block, Properties settings) {
         super(block, settings);

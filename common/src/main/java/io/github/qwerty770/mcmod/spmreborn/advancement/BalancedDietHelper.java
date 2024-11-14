@@ -6,11 +6,15 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ConsumeItemTrigger;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public final class BalancedDietHelper {
     private BalancedDietHelper() {}
@@ -23,7 +27,9 @@ public final class BalancedDietHelper {
         List<List<String>> requirements = advancement.requirements().requirements();
         for (Item item : items) {
             String name = "spmreborn:balanced_diet_food_" + item.toString();
-            criteria.put(name, ConsumeItemTrigger.TriggerInstance.usedItem(item));
+            ItemPredicate.Builder builder = ItemPredicate.Builder.item();
+            builder.items = Optional.of(HolderSet.direct(Holder.direct(item)));
+            criteria.put(name, ConsumeItemTrigger.TriggerInstance.usedItem(builder);
             ArrayList<String> requirement = new ArrayList<>();
             requirement.add(name);
             requirements.add(requirement);

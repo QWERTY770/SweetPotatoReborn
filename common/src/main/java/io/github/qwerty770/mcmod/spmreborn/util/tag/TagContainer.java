@@ -7,17 +7,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
-public record TagContainer<T> (Registry<T> registry,
-                               TagKey<T> tagKey) {
+public record TagContainer<T> (Registry<T> registry, TagKey<T> tagKey) {
     public static <T> TagContainer<T> register(ResourceLocation id, Registry<T> registry) {
         var tagKey = TagKey.create(registry.key(), id);
         return new TagContainer<>(registry, tagKey);
     }
 
-    public HolderSet.Named<T> entries() {
-        return registry.getOrCreateTag(tagKey);
+    public HolderSet<T> entries() {
+        Optional<HolderSet.Named<T>> optional = registry.get(tagKey);
+        return optional.isPresent() ? optional.get() : HolderSet.empty();
     }
 
     public Stream<T> stream() {

@@ -1,9 +1,11 @@
 package io.github.qwerty770.mcmod.spmreborn.util.inventory;
 
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public interface PeelInserter {
     enum PeelActionResult {
@@ -35,7 +37,10 @@ public interface PeelInserter {
 
     static void run(Player player) {
         if (insert(player).equals(PeelActionResult.SPAWN)) {
-            player.spawnAtLocation(SweetPotatoItems.PEEL.get());
+            Level world = player.level();
+            if (!world.isClientSide()){
+                player.spawnAtLocation((ServerLevel) world,SweetPotatoItems.PEEL.get());
+            }
         } else {
             player.getInventory().setChanged();
         }

@@ -10,6 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -50,7 +51,7 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
                     user.addEffect(new MobEffectInstance(statusEffectInstance));
                 } else {
                     statusEffectInstance.getEffect().value()
-                    .applyInstantenousEffect(user, user, user, statusEffectInstance.getAmplifier(), 1.0D);
+                    .applyInstantenousEffect((ServerLevel) world, user, user, user, statusEffectInstance.getAmplifier(), 1.0D);
                 }
             }));
         }

@@ -3,13 +3,13 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 import io.github.qwerty770.mcmod.spmreborn.util.MathUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiPredicate;
@@ -18,12 +18,12 @@ import java.util.function.BiPredicate;
 public class KeepPlayingSoundInstance extends SimpleSoundInstance implements TickableSoundInstance {
     public final LocalPlayer player;
     @NotNull
-    public final ClientLevel world;
+    public final Level world;
     public final BlockPos pos;
     protected boolean done = false;
-    protected final BiPredicate<ClientLevel, BlockPos> playCondition;
+    protected final BiPredicate<Level, BlockPos> playCondition;
 
-    public KeepPlayingSoundInstance(SoundEvent sound, float pitch, @NotNull ClientLevel world, BlockPos pos, LocalPlayer player, BiPredicate<ClientLevel, BlockPos> playCondition) {
+    public KeepPlayingSoundInstance(SoundEvent sound, float pitch, @NotNull Level world, BlockPos pos, LocalPlayer player, BiPredicate<Level, BlockPos> playCondition) {
         super(sound, SoundSource.BLOCKS, 1.0F, pitch, world.getRandom(), pos);
         this.looping = true;
         this.pos = pos;

@@ -22,9 +22,10 @@ public class SPRLootTables {
     public static final ResourceKey<LootTable> RAW_SWEET_POTATOES = createKey("misc/raw_sweet_potatoes");
     public static final ResourceKey<LootTable> MORE_RAW_SWEET_POTATOES = createKey("misc/more_raw_sweet_potatoes");
     public static final ResourceKey<LootTable> MORE_BAKED_SWEET_POTATOES = createKey("misc/more_baked_sweet_potatoes");
+    public static final ResourceKey<LootTable> EMPTY = createKey("empty_loot_table");
 
-    private static final List<ResourceKey<LootTable>> zombies = List.of(EntityType.ZOMBIE.getDefaultLootTable(),
-            EntityType.HUSK.getDefaultLootTable(), EntityType.ZOMBIE_VILLAGER.getDefaultLootTable());
+    private static final List<ResourceKey<LootTable>> zombies = List.of(EntityType.ZOMBIE.getDefaultLootTable().orElse(EMPTY),
+            EntityType.HUSK.getDefaultLootTable().orElse(EMPTY), EntityType.ZOMBIE_VILLAGER.getDefaultLootTable().orElse(EMPTY));
     private static final List<ResourceKey<LootTable>> ancient_cities = List.of(BuiltInLootTables.ANCIENT_CITY,
             BuiltInLootTables.ANCIENT_CITY_ICE_BOX);
 
