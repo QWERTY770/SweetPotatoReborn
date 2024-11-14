@@ -5,7 +5,7 @@ issueTrackerURL = "https://github.com/QWERTY770/SweetPotatoReborn/issues"
 
 [[mods]]
 modId = "spmreborn"
-version = "1.21.1-1.0.0"
+version = "${version}"
 displayName = "Sweet Potato Reborn"
 displayURL="https://github.com/QWERTY770/SweetPotatoReborn"
 authors = "QWERTY770"
@@ -21,20 +21,20 @@ config2="spmreborn.mixins.json"
 [[dependencies.spmreborn]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.0.0,)"
+versionRange = "[21.2.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.spmreborn]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21,)"
+versionRange = "[1.21.2,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.spmreborn]]
 modId = "architectury"
 type = "required"
-versionRange = "[13.0,)"
+versionRange = "[14.0,)"
 ordering = "NONE"
 side = "BOTH"
