@@ -6,7 +6,7 @@ import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoStatus;
 import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class RawSweetPotatoBlockItem extends ItemNameBlockItem implements SweetPotatoProperties {
+public class RawSweetPotatoBlockItem extends BlockItem implements SweetPotatoProperties {
     private final SweetPotatoType sweetPotatoType;
 
     public RawSweetPotatoBlockItem(Block block, Properties settings, SweetPotatoType type) {

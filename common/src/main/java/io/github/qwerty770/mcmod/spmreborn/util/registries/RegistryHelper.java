@@ -29,10 +29,8 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeInput;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -49,7 +47,8 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 @StableApi
 public abstract class RegistryHelper {
-    // Update to Minecraft 1.20 -- 2023/10/30  net.minecraft.core.Registry -> net.minecraft.core.registries.BuiltInRegistries.XXX
+    // Update to Minecraft 1.20
+    // 2023/10/30: net.minecraft.core.Registry -> net.minecraft.core.registries.BuiltInRegistries.XXX
     // 2023/12/16: Use DeferredRegister for cross-platform support
     // 2023/12/16: Rewrite the whole class (mark PlatformRegister, RegistryContainer and RegistryImpl as deprecated)
 
@@ -58,8 +57,10 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<Item> itemRegistry = ofModRegistry(Registries.ITEM);
     public static final DeferredRegister<DataComponentType<?>> dataComponentTypeRegistry = ofModRegistry(Registries.DATA_COMPONENT_TYPE);
     public static final DeferredRegister<BlockEntityType<?>> blockEntityRegistry = ofModRegistry(Registries.BLOCK_ENTITY_TYPE);
-    public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
+    public static final DeferredRegister<RecipeBookCategory> recipeBookCategoryRegistry = ofModRegistry(Registries.RECIPE_BOOK_CATEGORY);
+    public static final DeferredRegister<RecipeDisplay.Type<?>> recipeDisplayRegistry = ofModRegistry(Registries.RECIPE_DISPLAY);
     public static final DeferredRegister<RecipeSerializer<?>> recipeSerializerRegistry = ofModRegistry(Registries.RECIPE_SERIALIZER);
+    public static final DeferredRegister<RecipeType<?>> recipeTypeRegistry = ofModRegistry(Registries.RECIPE_TYPE);
     public static final DeferredRegister<MenuType<?>> menuRegistry = ofModRegistry(Registries.MENU);
     public static final DeferredRegister<SoundEvent> soundRegistry = ofModRegistry(Registries.SOUND_EVENT);
     public static final DeferredRegister<ParticleType<?>> particleTypeRegistry = ofModRegistry(Registries.PARTICLE_TYPE);
@@ -102,13 +103,23 @@ public abstract class RegistryHelper {
         return dataComponentTypeRegistry.register(id, componentType);
     }
 
-    // Update to Minecraft 1.20 -- 2023/12/16
     @SafeVarargs
     public static <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Supplier<Block>... blocks) {
         Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, id);
         assert type != null;
-        return blockEntityRegistry.register(id, () -> BlockEntityType.Builder.of(supplier,
-                Arrays.stream(blocks).map(Supplier::get).toArray(Block[]::new)).build(type));
+        return blockEntityRegistry.register(id, () -> new BlockEntityType<>(supplier, Set.copyOf(Arrays.stream(blocks).map(Supplier::get).toList())));
+    }
+
+    public static RegistrySupplier<RecipeBookCategory> recipeBookCategory(String id) {
+        return recipeBookCategoryRegistry.register(id, RecipeBookCategory::new);
+    }
+
+    public static <T extends RecipeDisplay> RegistrySupplier<RecipeDisplay.Type<T>> recipeDisplay(String id, Supplier<RecipeDisplay.Type<T>> typeSupplier) {
+        return recipeDisplayRegistry.register(id, typeSupplier);
+    }
+
+    public static <S extends RecipeSerializer<?>> RegistrySupplier<S> recipeSerializer(String id, Supplier<S> serializerSupplier) {
+        return recipeSerializerRegistry.register(id, serializerSupplier);
     }
 
     public static <I extends RecipeInput, T extends Recipe<I>> RegistrySupplier<RecipeType<T>> recipeType(String id) {
@@ -119,10 +130,6 @@ public abstract class RegistryHelper {
                 return id2.toString();
             }
         });
-    }
-
-    public static <S extends RecipeSerializer<?>> RegistrySupplier<S> recipeSerializer(String id, Supplier<S> serializerSupplier) {
-        return recipeSerializerRegistry.register(id, serializerSupplier);
     }
 
     public static <H extends AbstractContainerMenu> RegistrySupplier<MenuType<H>> simpleMenuType(String id, MenuType.MenuSupplier<H> factory) {
@@ -143,7 +150,7 @@ public abstract class RegistryHelper {
     }
 
     public <E extends Entity> RegistrySupplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder) {
-        return entityTypeRegistry.register(id, () -> builder.get().build(id(id).toString()));
+        return entityTypeRegistry.register(id, () -> builder.get().build(ResourceKey.create(Registries.ENTITY_TYPE, id(id))));
     }
 
     public static TagContainer<Item> itemTag(String id) {

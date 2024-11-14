@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.effect.MobEffect;
@@ -21,12 +22,12 @@ import java.util.Map;
 import java.util.Set;
 
 @ParametersAreNonnullByDefault
-public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener implements PreparableReloadListener {
-    private static final Gson GSON = new GsonBuilder().create();
+public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener<JsonElement> implements PreparableReloadListener {
     private static final Logger LOGGER = LoggerFactory.getLogger("MagicalEnchantmentLoader");
+    private static final String folder = "spm__magical_enchantments";
 
     public MagicalEnchantmentLoader() {
-        super(GSON, "spm__magical_enchantments");
+        super(ExtraCodecs.JSON, folder);
     }
 
     @Override

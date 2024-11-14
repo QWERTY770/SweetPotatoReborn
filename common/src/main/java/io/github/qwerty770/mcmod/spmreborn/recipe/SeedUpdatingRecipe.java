@@ -2,23 +2,25 @@ package io.github.qwerty770.mcmod.spmreborn.recipe;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+import java.util.Optional;
 
 @ParametersAreNonnullByDefault
 public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStack result) implements Recipe<SeedUpdatingRecipeInput> {
-
+    // Update to Minecraft 1.21.3 -- 2024/11/15
+    // see net.minecraft.world.item.crafting.SmithingTransformRecipe
     @Override
     public boolean matches(SeedUpdatingRecipeInput input, Level level) {
         return this.base.test(input.base()) && this.addition.test(input.addition());
@@ -31,31 +33,32 @@ public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStack
         return itemstack;
     }
 
-    @Environment(EnvType.CLIENT)
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return width * height >= 2;
-    }
-
-    @Override
-    public @NotNull ItemStack getResultItem(HolderLookup.Provider registries) {
-        return this.result;
-    }
-
-    @Environment(EnvType.CLIENT)
-    @Override
-    public @NotNull ItemStack getToastSymbol() {
-        return new ItemStack(SweetPotatoBlocks.SEED_UPDATER.get());
-    }
-
-    @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<? extends Recipe<SeedUpdatingRecipeInput>> getSerializer() {
         return SweetPotatoRecipes.SEED_UPDATING_RECIPE_SERIALIZER.get();
     }
 
     @Override
-    public @NotNull RecipeType<?> getType() {
+    public @NotNull RecipeType<? extends Recipe<SeedUpdatingRecipeInput>> getType() {
         return SweetPotatoRecipes.SEED_UPDATING_RECIPE_TYPE.get();
+    }
+
+    @Override
+    public @NotNull PlacementInfo placementInfo(){
+        return PlacementInfo.create(List.of(this.base(), this.addition()));
+    }
+
+    @Override
+    public @NotNull List<RecipeDisplay> display() {
+        return List.of(new SeedUpdatingRecipeDisplay(Ingredient.optionalIngredientToDisplay(Optional.of(this.base)),
+                Ingredient.optionalIngredientToDisplay(Optional.of(this.addition)),
+                new SlotDisplay.ItemStackSlotDisplay(this.result),
+                new SlotDisplay.ItemSlotDisplay(SweetPotatoItems.SEED_UPDATER_ITEM.get())));
+    }
+
+    @Override
+    public @NotNull RecipeBookCategory recipeBookCategory(){
+        return SweetPotatoRecipes.SEED_UPDATING_CATEGORY.get();
     }
 
     public boolean isBaseIngredient(ItemStack itemStack) {
@@ -64,12 +67,6 @@ public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStack
 
     public boolean isAdditionIngredient(ItemStack itemStack) {
         return this.addition.test(itemStack);
-    }
-
-    @Override
-    public @NotNull NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(Ingredient.EMPTY,
-                this.base(), this.addition());
     }
 
     public static class Serializer implements RecipeSerializer<SeedUpdatingRecipe> {
