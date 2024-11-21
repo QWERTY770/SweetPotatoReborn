@@ -8,7 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -32,18 +32,17 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderScreenHandler>
                 8, 59, 0);
     }
 
-    // Update to Minecraft 1.20 -- 2023/06/29
+    // Update to Minecraft 1.21.3 -- 2024/11/22
     @Override
     public void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-        guiGraphics.blit(BACKGROUND_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        // GuiGraphics.blit added 2 paramaters
+        guiGraphics.blit(RenderType::guiTextured, BACKGROUND_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         int l = this.menu.getGrindProgress();
-        guiGraphics.blit(BACKGROUND_TEXTURE, i + 74, j + 35, 176, 0, l + 1, 16);  // arrow
-
+        guiGraphics.blit(RenderType::guiTextured, BACKGROUND_TEXTURE, i + 74, j + 35, 176, 0, l + 1, 16, 256, 256);  // arrow
     }
 
     @Override

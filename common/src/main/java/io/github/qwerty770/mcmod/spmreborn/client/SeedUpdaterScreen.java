@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -30,7 +31,7 @@ public class SeedUpdaterScreen extends ItemCombinerScreen<SeedUpdaterScreenHandl
     @Override
     protected void renderErrorIcon(GuiGraphics guiGraphics, int i, int j) {
         if ((this.menu.getSlot(0).hasItem() || this.menu.getSlot(1).hasItem()) && !this.menu.getSlot(this.menu.getResultSlot()).hasItem()) {
-            guiGraphics.blitSprite(ResourceLocationTool.withDefaultNamespace("container/anvil/error"), i + 99, j + 45, 28, 21);
+            guiGraphics.blitSprite(RenderType::guiTextured, ResourceLocationTool.withDefaultNamespace("container/anvil/error"), i + 99, j + 45, 28, 21);
         }
     }
 }

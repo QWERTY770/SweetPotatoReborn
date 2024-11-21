@@ -8,7 +8,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.CoreShaders;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,22 +25,23 @@ public class MagicCubeScreen extends AbstractContainerScreen<MagicCubeScreenHand
         this.inventoryLabelY = imageHeight - 94;
     }
 
-    // Update to Minecraft 1.20 -- 2023/06/29
+    // Update to Minecraft 1.21.3 -- 2024/11/22
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(CoreShaders.POSITION_TEX);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, BACKGROUND);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-        guiGraphics.blit(BACKGROUND, x, y, 0, 0, imageWidth, imageHeight);
+        // GuiGraphics.blit added 2 paramaters
+        guiGraphics.blit(RenderType::guiTextured, BACKGROUND, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
         short m = this.menu.getMainFuelTime(), v = this.menu.getViceFuelTime();
         int md = mainFuelDisplayHeight(m), vd = viceFuelDisplayHeight(v);
-        if (m >= 0) guiGraphics.blit(BACKGROUND, x + 55,  y + 59, 176, 29, 18, 4);
-        if (v >  0) guiGraphics.blit(BACKGROUND, x + 101, y + 59, 176, 29, 17, 4);
-        guiGraphics.blit(BACKGROUND, x + 57 , y + 58 - md, 199, 13 - md, 13, md);
-        guiGraphics.blit(BACKGROUND, x + 105, y + 57 - vd, 176, 28 - vd, 10, vd);
+        if (m >= 0) guiGraphics.blit(RenderType::guiTextured, BACKGROUND, x + 55,  y + 59, 176, 29, 18, 4, 256, 256);
+        if (v >  0) guiGraphics.blit(RenderType::guiTextured, BACKGROUND, x + 101, y + 59, 176, 29, 17, 4, 256, 256);
+        guiGraphics.blit(RenderType::guiTextured, BACKGROUND, x + 57 , y + 58 - md, 199, 13 - md, 13, md, 256, 256);
+        guiGraphics.blit(RenderType::guiTextured, BACKGROUND, x + 105, y + 57 - vd, 176, 28 - vd, 10, vd, 256, 256);
     }
 
     private static int mainFuelDisplayHeight(short mfTime) {

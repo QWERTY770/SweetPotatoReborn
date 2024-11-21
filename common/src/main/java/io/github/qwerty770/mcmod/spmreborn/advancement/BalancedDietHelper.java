@@ -29,7 +29,7 @@ public final class BalancedDietHelper {
             String name = "spmreborn:balanced_diet_food_" + item.toString();
             ItemPredicate.Builder builder = ItemPredicate.Builder.item();
             builder.items = Optional.of(HolderSet.direct(Holder.direct(item)));
-            criteria.put(name, ConsumeItemTrigger.TriggerInstance.usedItem(builder);
+            criteria.put(name, ConsumeItemTrigger.TriggerInstance.usedItem(builder));
             ArrayList<String> requirement = new ArrayList<>();
             requirement.add(name);
             requirements.add(requirement);
