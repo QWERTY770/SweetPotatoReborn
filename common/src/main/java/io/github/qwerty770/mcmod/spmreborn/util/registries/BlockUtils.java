@@ -20,27 +20,22 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.function.Supplier;
 
 // Added on 2023/11/26 after deleting io.github.qwerty770.mcmod.spmreborn.util.objsettings.BlockSettings
-// Update to Minecraft 1.20 -- 2023/12/16
+// Update to Minecraft 1.21.3 -- 2024/11/22  Update block properties
 @StableApi
 public class BlockUtils {
-    public static final BlockBehaviour.Properties crop = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
-    public static final BlockBehaviour.Properties grass = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY);
-
-    public static BlockBehaviour.Properties createFunctionalBlock(float hardness, float blastResistance) {
-        return BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).destroyTime(hardness).explosionResistance(blastResistance).requiresCorrectToolForDrops();
-    }
     public static RegistrySupplier<Block> createEnchantedSapling(String id, Supplier<TreeGrower> saplingGeneratorSupplier) {
-        return RegistryHelper.block(id, new EnchantedSaplings(saplingGeneratorSupplier.get(),
-                BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY)));
+        return RegistryHelper.block(id, (properties) -> new EnchantedSaplings(saplingGeneratorSupplier.get(), properties),
+                BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY));
     }
 
     public static RegistrySupplier<Block> createPotted(String id, RegistrySupplier<Block> inside) {
-        return RegistryHelper.block(id, () -> new FlowerPotBlock(inside.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
+        return RegistryHelper.block(id, (properties) -> new FlowerPotBlock(inside.get(), properties),
+                BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY));
     }
 
     public static RegistrySupplier<Block> createLeaves(String id) {
-        return RegistryHelper.block(id,
-                new LeavesBlock(BlockBehaviour.Properties.of()
+        return RegistryHelper.block(id, LeavesBlock::new,
+                BlockBehaviour.Properties.of()
                         .mapColor(MapColor.PLANT)
                         .strength(0.2f)
                         .randomTicks()
@@ -51,7 +46,14 @@ public class BlockUtils {
                         .isViewBlocking(BlockUtils::never)
                         .ignitedByLava()
                         .pushReaction(PushReaction.DESTROY)
-                        .isRedstoneConductor(BlockUtils::never)));
+                        .isRedstoneConductor(BlockUtils::never));
+    }
+
+    public static final BlockBehaviour.Properties crop = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
+    public static final BlockBehaviour.Properties grass = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY);
+
+    public static BlockBehaviour.Properties createFunctionalBlock(float hardness, float blastResistance) {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).destroyTime(hardness).explosionResistance(blastResistance).requiresCorrectToolForDrops();
     }
 
     // private methods from net.minecraft.world.level.block.Blocks

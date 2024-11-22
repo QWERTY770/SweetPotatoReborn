@@ -55,20 +55,21 @@ public class SweetPotatoBlocks {
 
     static {
         // Update to Minecraft 1.20 -- 2023/11/26  Deleted util.objsettings.BlockSettings
+        // Update to Minecraft 1.21.3 -- 2024/11/22  Update block properties
         // Block
-        MAGIC_CUBE = block("magic_cube", new MagicCubeBlock(createFunctionalBlock(10.0F, 1200.0F)));
-        GRINDER = block("grinder", new GrinderBlock(createFunctionalBlock(3.5F, 6.0F)));
-        SEED_UPDATER = block("agroforestry_table", new SeedUpdaterBlock(createFunctionalBlock(3.5F, 6.0F)));
+        MAGIC_CUBE = block("magic_cube", MagicCubeBlock::new, createFunctionalBlock(10.0F, 1200.0F));
+        GRINDER = block("grinder", GrinderBlock::new, createFunctionalBlock(3.5F, 6.0F));
+        SEED_UPDATER = block("agroforestry_table", SeedUpdaterBlock::new, createFunctionalBlock(3.5F, 6.0F));
 
         // Crops
-        PURPLE_POTATO_CROP = block("purple_potatoes", new SweetPotatoesCropBlock(crop, SweetPotatoType.PURPLE));
-        RED_POTATO_CROP = block("red_potatoes", new SweetPotatoesCropBlock(crop, SweetPotatoType.RED));
-        WHITE_POTATO_CROP = block("white_potatoes", new SweetPotatoesCropBlock(crop, SweetPotatoType.WHITE));
-        ENCHANTED_WHEAT_CROP = block("enchanted_wheat", new EnchantedWheatBlock(crop));
-        ENCHANTED_BEETROOTS_CROP = block("enchanted_beetroots", new EnchantedBeetrootsBlock(crop));
-        ENCHANTED_VANILLA_POTATOES_CROP = block("enchanted_potatoes", new EnchantedVanillaPotatoesBlock(crop));
-        ENCHANTED_CARROTS_CROP = block("enchanted_carrots", new EnchantedCarrotsBlock(crop));
-        ENCHANTED_SUGAR_CANE = block("enchanted_sugar_cane", new EnchantedSugarCaneBlock(grass));
+        PURPLE_POTATO_CROP = block("purple_potatoes", (properties) -> new SweetPotatoesCropBlock(properties, SweetPotatoType.PURPLE), crop);
+        RED_POTATO_CROP = block("red_potatoes", (properties) -> new SweetPotatoesCropBlock(properties, SweetPotatoType.RED), crop);
+        WHITE_POTATO_CROP = block("white_potatoes", (properties) -> new SweetPotatoesCropBlock(properties, SweetPotatoType.WHITE), crop);
+        ENCHANTED_WHEAT_CROP = block("enchanted_wheat", EnchantedWheatBlock::new, crop);
+        ENCHANTED_BEETROOTS_CROP = block("enchanted_beetroots", EnchantedBeetrootsBlock::new, crop);
+        ENCHANTED_VANILLA_POTATOES_CROP = block("enchanted_potatoes", EnchantedVanillaPotatoesBlock::new, crop);
+        ENCHANTED_CARROTS_CROP = block("enchanted_carrots", EnchantedCarrotsBlock::new, crop);
+        ENCHANTED_SUGAR_CANE = block("enchanted_sugar_cane", EnchantedSugarCaneBlock::new, grass);
         // Saplings
         ENCHANTED_OAK_SAPLING = createEnchantedSapling("enchanted_oak_sapling", ENCHANTED_OAK_GROWER);
         ENCHANTED_SPRUCE_SAPLING = createEnchantedSapling("enchanted_spruce_sapling", ENCHANTED_SPRUCE_GROWER);

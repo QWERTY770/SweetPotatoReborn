@@ -25,11 +25,11 @@ public class AliasedEnchantedItem extends BlockItem {
     // Update to Minecraft 1.20 -- 2023/12/16  RegistrySupplier
     @ApiStatus.Internal
     public static RegistrySupplier<Item> of(String id, RegistrySupplier<Block> original, Properties properties) {
-        return RegistryHelper.item(id, () -> new AliasedEnchantedItem(original.get(), properties));
+        return RegistryHelper.item(id, (p) -> new AliasedEnchantedItem(original.get(), p), properties);
     }
 
     @ApiStatus.Internal
     public static RegistrySupplier<Item> ofFood(String id, RegistrySupplier<Block> original, FoodProperties foodComponent, Properties properties) {
-        return RegistryHelper.item(id, () -> new AliasedEnchantedItem(original.get(), properties.food(foodComponent)));
+        return RegistryHelper.item(id, (p) -> new AliasedEnchantedItem(original.get(), p), properties.food(foodComponent));
     }
 }

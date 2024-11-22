@@ -22,7 +22,7 @@ public class EnchantedBlockItem extends BlockItem {
 
     // Update to Minecraft 1.20 -- 2023/12/16  RegistrySupplier
     @ApiStatus.Internal
-    public static RegistrySupplier<Item> of(String id, RegistrySupplier<Block> original, Properties settings) {
-        return RegistryHelper.item(id, () -> new EnchantedBlockItem(original.get(), settings));
+    public static RegistrySupplier<Item> of(String id, RegistrySupplier<Block> original, Properties properties) {
+        return RegistryHelper.item(id, (p) -> new EnchantedBlockItem(original.get(), p), properties);
     }
 }

@@ -34,14 +34,15 @@ import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -75,28 +76,36 @@ public abstract class RegistryHelper {
         return ResourceLocationTool.create(SPRMain.MODID, id);
     }
 
-    public static RegistrySupplier<Block> block(String id, Block block2) {
-        return blockRegistry.register(id, () -> block2);
+    public static ResourceKey<Block> blockId(String id) {
+        return ResourceKey.create(Registries.BLOCK, id(id));
     }
 
-    public static RegistrySupplier<Block> block(String id, Supplier<Block> supplier) {
-        return blockRegistry.register(id, supplier);
+    public static ResourceKey<Item> itemId(String id) {
+        return ResourceKey.create(Registries.ITEM, id(id));
     }
 
-    public static RegistrySupplier<Item> item(String id, Item item2) {
-        return itemRegistry.register(id, () -> item2);
+    public static <B extends Block> RegistrySupplier<B> block(String id, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {
+        return block(blockId(id), function, properties);
     }
 
-    public static RegistrySupplier<Item> item(String id, Supplier<Item> supplier) {
-        return itemRegistry.register(id, supplier);
+    public static <B extends Block> RegistrySupplier<B> block(ResourceKey<Block> resourceKey, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {
+        return blockRegistry.register(resourceKey.location(), () -> function.apply(properties.setId(resourceKey)));
     }
 
-    public static RegistrySupplier<Item> defaultItem(String id, @NotNull Item.Properties settings) {
-        return itemRegistry.register(id, () -> new Item(settings));
+    public static <I extends Item> RegistrySupplier<I> item(String id, Function<Item.Properties, I> function, Item.Properties properties) {
+        return item(itemId(id), function, properties);
     }
 
-    public static RegistrySupplier<BlockItem> blockItem(String id, Supplier<Block> block2, @NotNull Item.Properties settings) {
-        return itemRegistry.register(id, () -> new BlockItem(block2.get(), settings));
+    public static <I extends Item> RegistrySupplier<I> item(ResourceKey<Item> resourceKey, Function<Item.Properties, I> function, Item.Properties properties) {
+        return itemRegistry.register(resourceKey.location(), () -> function.apply(properties.setId(resourceKey)));
+    }
+
+    public static RegistrySupplier<Item> defaultItem(String id, Item.Properties properties) {
+        return item(id, Item::new, properties);
+    }
+
+    public static RegistrySupplier<BlockItem> blockItem(String id, Supplier<Block> block2, Item.Properties properties) {
+        return item(id, (p) -> new BlockItem(block2.get(), p), properties.useBlockDescriptionPrefix());
     }
 
     public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType){

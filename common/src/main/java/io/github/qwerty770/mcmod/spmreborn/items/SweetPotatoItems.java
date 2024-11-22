@@ -64,16 +64,16 @@ public class SweetPotatoItems {
         PEEL = defaultItem("peel", defaultProp());
         POTATO_POWDER = defaultItem("potato_powder", defaultProp());
         XMAS_TREATING_BOWL = defaultItem("treating_bowl", new Item.Properties());
-        BAKED_PURPLE_POTATO = item("baked_purple_potato", new BakedSweetPotatoItem(defaultProp(), SweetPotatoType.PURPLE));
-        BAKED_RED_POTATO = item("baked_red_potato", new BakedSweetPotatoItem(defaultProp(), SweetPotatoType.RED));
-        BAKED_WHITE_POTATO = item("baked_white_potato", new BakedSweetPotatoItem(defaultProp(), SweetPotatoType.WHITE));
-        ENCHANTED_PURPLE_POTATO = item("enchanted_purple_potato", new EnchantedSweetPotatoItem(defaultProp().stacksTo(1), SweetPotatoType.PURPLE));
-        ENCHANTED_RED_POTATO = item("enchanted_red_potato", new EnchantedSweetPotatoItem(defaultProp().stacksTo(1), SweetPotatoType.RED));
-        ENCHANTED_WHITE_POTATO = item("enchanted_white_potato", new EnchantedSweetPotatoItem(defaultProp().stacksTo(1), SweetPotatoType.WHITE));
+        BAKED_PURPLE_POTATO = item("baked_purple_potato", (properties) -> new BakedSweetPotatoItem(properties, SweetPotatoType.PURPLE), defaultProp());
+        BAKED_RED_POTATO = item("baked_red_potato", (properties) -> new BakedSweetPotatoItem(properties, SweetPotatoType.RED), defaultProp());
+        BAKED_WHITE_POTATO = item("baked_white_potato", (properties) -> new BakedSweetPotatoItem(properties, SweetPotatoType.WHITE), defaultProp());
+        ENCHANTED_PURPLE_POTATO = item("enchanted_purple_potato", (properties) -> new EnchantedSweetPotatoItem(properties, SweetPotatoType.PURPLE), defaultProp().stacksTo(1));
+        ENCHANTED_RED_POTATO = item("enchanted_red_potato", (properties) -> new EnchantedSweetPotatoItem(properties, SweetPotatoType.RED), defaultProp().stacksTo(1));
+        ENCHANTED_WHITE_POTATO = item("enchanted_white_potato", (properties) -> new EnchantedSweetPotatoItem(properties, SweetPotatoType.WHITE), defaultProp().stacksTo(1));
         // Block Items
-        PURPLE_POTATO = item("purple_potato", () -> new RawSweetPotatoBlockItem(PURPLE_POTATO_CROP.get(), defaultProp(), SweetPotatoType.PURPLE));
-        RED_POTATO = item("red_potato", () -> new RawSweetPotatoBlockItem(RED_POTATO_CROP.get(), defaultProp(), SweetPotatoType.RED));
-        WHITE_POTATO = item("white_potato", () -> new RawSweetPotatoBlockItem(WHITE_POTATO_CROP.get(), defaultProp(), SweetPotatoType.WHITE));
+        PURPLE_POTATO = item("purple_potato", (properties) -> new RawSweetPotatoBlockItem(PURPLE_POTATO_CROP.get(), properties, SweetPotatoType.PURPLE), defaultProp());
+        RED_POTATO = item("red_potato", (properties) -> new RawSweetPotatoBlockItem(RED_POTATO_CROP.get(), properties, SweetPotatoType.RED), defaultProp());
+        WHITE_POTATO = item("white_potato", (properties) -> new RawSweetPotatoBlockItem(WHITE_POTATO_CROP.get(), properties, SweetPotatoType.WHITE), defaultProp());
 
         ENCHANTED_WHEAT_SEEDS = AliasedEnchantedItem.of("enchanted_wheat_seeds", ENCHANTED_WHEAT_CROP, defaultProp());
         ENCHANTED_BEETROOT_SEEDS = AliasedEnchantedItem.of("enchanted_beetroot_seeds", ENCHANTED_BEETROOTS_CROP, defaultProp());
