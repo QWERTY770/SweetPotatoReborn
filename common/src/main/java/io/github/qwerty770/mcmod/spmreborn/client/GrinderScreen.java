@@ -18,7 +18,8 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderScreenHandler>
     private static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocationTool.create(SPRMain.MODID, "textures/gui/container/grinder.png");
 
     public GrinderScreen(GrinderScreenHandler handler, Inventory inventory, Component title) {
-        super(handler, inventory, title);
+        // Hardcoded in Minecraft 1.21.3+, correcting the translation string
+        super(handler, inventory, title.getString().equals("item.spmreborn.grinder") ? Component.translatable("block.spmreborn.grinder") : title);
     }
 
     @Override

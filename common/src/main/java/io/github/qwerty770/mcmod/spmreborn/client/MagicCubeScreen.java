@@ -2,7 +2,6 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
-import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.MagicCubeScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.fabricmc.api.EnvType;
@@ -20,7 +19,8 @@ public class MagicCubeScreen extends AbstractContainerScreen<MagicCubeScreenHand
     private static final ResourceLocation BACKGROUND = ResourceLocationTool.create(SPRMain.MODID, "textures/gui/container/magic_cube.png");
 
     public MagicCubeScreen(MagicCubeScreenHandler handler, Inventory inventory, Component title) {
-        super(handler, inventory, title);
+        // Hardcoded in Minecraft 1.21.3+, correcting the translation string
+        super(handler, inventory, title.getString().equals("item.spmreborn.magic_cube") ? Component.translatable("block.spmreborn.magic_cube") : title);
         this.imageWidth = 176;
         this.imageHeight = 181;    // overwrite
         this.inventoryLabelY = imageHeight - 94;
