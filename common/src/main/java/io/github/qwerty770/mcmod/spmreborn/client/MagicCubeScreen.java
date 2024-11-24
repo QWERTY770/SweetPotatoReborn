@@ -2,6 +2,7 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.qwerty770.mcmod.spmreborn.SPRMain;
+import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
 import io.github.qwerty770.mcmod.spmreborn.client.handlers.MagicCubeScreenHandler;
 import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.fabricmc.api.EnvType;

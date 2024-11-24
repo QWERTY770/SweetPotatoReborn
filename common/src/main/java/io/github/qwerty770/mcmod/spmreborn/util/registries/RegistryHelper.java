@@ -105,7 +105,7 @@ public abstract class RegistryHelper {
     }
 
     public static RegistrySupplier<BlockItem> blockItem(String id, Supplier<Block> block2, Item.Properties properties) {
-        return item(id, (p) -> new BlockItem(block2.get(), p), properties.useBlockDescriptionPrefix());
+        return itemRegistry.register(id, () -> new BlockItem(block2.get(), properties.setId(itemId(id)).useBlockDescriptionPrefix()));
     }
 
     public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType){
