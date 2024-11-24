@@ -5,15 +5,9 @@
     "BBB"
   ],
   "key": {
-    "A": {
-      "item": "spmreborn:potato_powder"
-    },
-    "#": {
-      "item": "minecraft:gold_ingot"
-    },
-    "B": {
-      "tag": "spmreborn:blackstones"
-    }
+    "A": "spmreborn:potato_powder",
+    "#": "minecraft:gold_ingot",
+    "B": "#spmreborn:blackstones"
   },
   "result": {
     "id": "spmreborn:agroforestry_table"

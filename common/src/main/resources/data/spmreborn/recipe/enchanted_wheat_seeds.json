@@ -1,11 +1,7 @@
 {
   "type": "spmreborn:seed_updating",
-  "base": {
-    "item": "minecraft:wheat_seeds"
-  },
-  "addition": {
-    "item": "spmreborn:potato_powder"
-  },
+  "base": "minecraft:wheat_seeds",
+  "addition": "spmreborn:potato_powder",
   "result": {
     "id": "spmreborn:enchanted_wheat_seeds"
   }

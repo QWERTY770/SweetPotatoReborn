@@ -1,8 +1,7 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "spmreborn:white_potato"
-  },
+  "category": "food",
+  "ingredient": "spmreborn:white_potato",
   "result": {
     "id": "spmreborn:baked_white_potato"
   },

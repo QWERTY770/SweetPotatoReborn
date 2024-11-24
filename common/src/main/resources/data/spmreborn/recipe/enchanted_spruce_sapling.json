@@ -1,11 +1,7 @@
 {
   "type": "spmreborn:seed_updating",
-  "base": {
-    "item": "minecraft:spruce_sapling"
-  },
-  "addition": {
-    "item": "spmreborn:potato_powder"
-  },
+  "base": "minecraft:spruce_sapling",
+  "addition": "spmreborn:potato_powder",
   "result": {
     "id": "spmreborn:enchanted_spruce_sapling"
   }

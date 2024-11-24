@@ -1,11 +1,7 @@
 {
   "type": "spmreborn:seed_updating",
-  "base": {
-    "item": "minecraft:sugar_cane"
-  },
-  "addition": {
-    "item": "spmreborn:potato_powder"
-  },
+  "base": "minecraft:sugar_cane",
+  "addition": "spmreborn:potato_powder",
   "result": {
     "id": "spmreborn:enchanted_sugar_cane"
   }

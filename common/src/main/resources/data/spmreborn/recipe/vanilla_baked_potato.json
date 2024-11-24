@@ -1,8 +1,7 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "spmreborn:enchanted_potato"
-  },
+  "category": "food",
+  "ingredient": "spmreborn:enchanted_potato",
   "result": {
     "id": "minecraft:baked_potato"
   },

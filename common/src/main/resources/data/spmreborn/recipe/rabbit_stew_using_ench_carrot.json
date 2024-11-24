@@ -2,25 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "group": "rabbit_stew",
   "ingredients": [
-    {
-      "item": "minecraft:baked_potato"
-    },
-    {
-      "item": "minecraft:cooked_rabbit"
-    },
-    {
-      "item": "minecraft:bowl"
-    },
-    {
-      "item": "spmreborn:enchanted_carrot"
-    },
+    "minecraft:baked_potato",
+    "minecraft:cooked_rabbit",
+    "minecraft:bowl",
+    "spmreborn:enchanted_carrot",
     [
-      {
-        "item": "minecraft:red_mushroom"
-      },
-      {
-        "item": "minecraft:brown_mushroom"
-      }
+      "minecraft:red_mushroom",
+      "minecraft:brown_mushroom"
     ]
   ],
   "result": {

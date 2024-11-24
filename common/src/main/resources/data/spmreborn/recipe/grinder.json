@@ -6,18 +6,10 @@
     "BBB"
   ],
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "#": {
-      "item": "minecraft:redstone"
-    },
-    "_": {
-      "item": "minecraft:smooth_stone_slab"
-    },
-    "B": {
-      "tag": "spmreborn:blackstones"
-    }
+    "I": "minecraft:iron_ingot",
+    "#": "minecraft:redstone",
+    "_": "minecraft:smooth_stone_slab",
+    "B": "#spmreborn:blackstones"
   },
   "result": {
     "id": "spmreborn:grinder"

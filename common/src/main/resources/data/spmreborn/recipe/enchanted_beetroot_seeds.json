@@ -1,11 +1,7 @@
 {
   "type": "spmreborn:seed_updating",
-  "base": {
-    "item": "minecraft:beetroot_seeds"
-  },
-  "addition": {
-    "item": "spmreborn:potato_powder"
-  },
+  "base": "minecraft:beetroot_seeds",
+  "addition": "spmreborn:potato_powder",
   "result": {
     "id": "spmreborn:enchanted_beetroot_seeds"
   }

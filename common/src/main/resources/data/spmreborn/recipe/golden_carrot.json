@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:gold_nugget"
-    },
-    "X": {
-      "item": "spmreborn:enchanted_carrot"
-    }
+    "#": "minecraft:gold_nugget",
+    "X": "spmreborn:enchanted_carrot"
   },
   "result": {
     "id": "minecraft:golden_carrot"

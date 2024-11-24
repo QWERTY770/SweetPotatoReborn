@@ -5,12 +5,8 @@
   ],
   "key": {
     "#": [
-      {
-        "item": "spmreborn:enchanted_sugar_cane"
-      },
-      {
-        "item": "minecraft:sugar_cane"
-      }
+      "spmreborn:enchanted_sugar_cane",
+      "minecraft:sugar_cane"
     ]
   },
   "result": {

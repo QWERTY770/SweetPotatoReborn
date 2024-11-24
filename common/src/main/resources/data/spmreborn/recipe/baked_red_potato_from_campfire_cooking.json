@@ -1,8 +1,7 @@
 {
   "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "spmreborn:red_potato"
-  },
+  "category": "food",
+  "ingredient": "spmreborn:red_potato",
   "result": {
     "id": "spmreborn:baked_red_potato"
   },
