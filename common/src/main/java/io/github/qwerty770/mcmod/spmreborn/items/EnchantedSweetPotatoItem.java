@@ -1,5 +1,6 @@
 package io.github.qwerty770.mcmod.spmreborn.items;
 
+import io.github.qwerty770.mcmod.spmreborn.loot.SetEnchantedPotatoEffectFunction;
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import io.github.qwerty770.mcmod.spmreborn.util.inventory.PeelInserter;
 import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoStatus;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -61,12 +63,17 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
     public static Optional<List<MobEffectInstance>> calcEffect(ItemStack stack) {
         Item item = stack.getItem();
         if (!(item instanceof EnchantedSweetPotatoItem)) return Optional.empty();
-        List<MobEffectInstance> effects = stack.get(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get());
-        return Optional.ofNullable(effects);
+        List<SetEnchantedPotatoEffectFunction.EffectEntry> entries = stack.get(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get());
+        if (entries == null) return Optional.empty();
+        List<MobEffectInstance> effects = new ArrayList<>();
+        for (SetEnchantedPotatoEffectFunction.EffectEntry entry : entries) {
+            effects.add(entry.getEffect());
+        }
+        return Optional.of(effects);
     }
 
     public static void applyEffects(ItemStack stack, List<MobEffectInstance> effects, @Nullable Integer displayIndex) {
-        stack.applyComponents(DataComponentMap.builder().set(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get(), effects).build());
+        stack.applyComponents(DataComponentMap.builder().set(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get(), effects.stream().map(SetEnchantedPotatoEffectFunction.EffectEntry::new).toList()).build());
         if (displayIndex != null) {
             stack.applyComponents(DataComponentMap.builder().set(SweetPotatoDataComponentTypes.DISPLAY_INDEX.get(), displayIndex).build());
         }
@@ -98,7 +105,8 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
         MutableComponent mainTip = Component.translatable("tooltip.spmreborn.enchanted_sweet_potato.effects");
         components.add(mainTip);
 
-        List<MobEffectInstance> effects = stack.get(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get());
+        List<SetEnchantedPotatoEffectFunction.EffectEntry> list = stack.get(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get());
+        List<MobEffectInstance> effects = list == null ? null : list.stream().map(SetEnchantedPotatoEffectFunction.EffectEntry::getEffect).toList();
         int index = stack.getOrDefault(SweetPotatoDataComponentTypes.DISPLAY_INDEX.get(), 0);
         if (index == -1 || effects == null) {
             mainTip.append(Component.translatable("effect.none").withStyle(ChatFormatting.ITALIC));

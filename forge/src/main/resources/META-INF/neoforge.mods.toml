@@ -5,7 +5,7 @@ issueTrackerURL = "https://github.com/QWERTY770/SweetPotatoReborn/issues"
 
 [[mods]]
 modId = "spmreborn"
-version = "1.21.1-1.0.0"
+version = "1.21.1-1.0.1"
 displayName = "Sweet Potato Reborn"
 displayURL="https://github.com/QWERTY770/SweetPotatoReborn"
 authors = "QWERTY770"

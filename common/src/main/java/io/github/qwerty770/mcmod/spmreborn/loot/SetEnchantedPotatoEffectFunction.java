@@ -6,6 +6,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.qwerty770.mcmod.spmreborn.items.EnchantedSweetPotatoItem;
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoProperties;
 import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoStatus;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
@@ -48,7 +52,7 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
         Stream<MobEffectInstance> stream = effects.stream().flatMap(p -> {
             var source = lootContext.getRandom();
             if (source.nextFloat() < p.chance)
-                return Stream.of(p.effect);
+                return Stream.of(p.getEffect());
             return Stream.empty();
         });
         EnchantedSweetPotatoItem.applyEffects(itemStack, stream.toList(), displayIndex);
@@ -60,26 +64,30 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
         return SweetPotatoLootFunctions.SET_ENCHANTED_POTATO_EFFECT.get();
     }
 
-    public record EffectEntry(MobEffectInstance effect, float chance) {
-        public static final MapCodec<MobEffectInstance> EFFECT_MAP_CODEC = RecordCodecBuilder.mapCodec(
-                (instance) -> instance.group(MobEffect.CODEC.fieldOf("id").forGetter(MobEffectInstance::getEffect),
-                                Codec.INT.optionalFieldOf("duration", 100).forGetter(MobEffectInstance::getDuration),
-                                Codec.INT.optionalFieldOf("amplifier", 0).forGetter(MobEffectInstance::getAmplifier))
-                        .apply(instance, MobEffectInstance::new)
-        );
-        public static final Codec<MobEffectInstance> EFFECT_CODEC = EFFECT_MAP_CODEC.codec();
+    public record EffectEntry(Holder<MobEffect> effect, int duration, int amplifier, float chance) {
         public static final Codec<SetEnchantedPotatoEffectFunction.EffectEntry> CODEC = RecordCodecBuilder.create(
-                (instance) -> instance.group(EFFECT_MAP_CODEC.forGetter(EffectEntry::effect),
+                (instance) -> instance.group(MobEffect.CODEC.fieldOf("id").forGetter(EffectEntry::effect),
+                                Codec.INT.optionalFieldOf("duration", 100).forGetter(EffectEntry::duration),
+                                Codec.INT.optionalFieldOf("amplifier", 0).forGetter(EffectEntry::amplifier),
                                 Codec.FLOAT.optionalFieldOf("chance", 1.0f).forGetter(EffectEntry::chance))
                         .apply(instance, EffectEntry::new)
         );
 
-        public MobEffectInstance effect() {
-            return this.effect;
+        public static final StreamCodec<RegistryFriendlyByteBuf, EffectEntry> STREAM_CODEC = StreamCodec.composite(
+                MobEffect.STREAM_CODEC, EffectEntry::effect,
+                ByteBufCodecs.VAR_INT, EffectEntry::duration,
+                ByteBufCodecs.VAR_INT, EffectEntry::amplifier,
+                ByteBufCodecs.FLOAT, EffectEntry::chance,
+                EffectEntry::new
+        );
+
+
+        public EffectEntry(MobEffectInstance effect){
+            this(effect.getEffect(), effect.getDuration(), effect.getAmplifier(), 1.0f);
         }
 
-        public float chance() {
-            return this.chance;
+        public MobEffectInstance getEffect() {
+            return new MobEffectInstance(effect, duration, amplifier);
         }
     }
 }

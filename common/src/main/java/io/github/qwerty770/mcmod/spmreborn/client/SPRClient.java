@@ -2,7 +2,6 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
-import dev.architectury.registry.menu.MenuRegistry;
 import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import net.fabricmc.api.EnvType;
@@ -14,12 +13,6 @@ import net.minecraft.world.level.FoliageColor;
 @Environment(EnvType.CLIENT)
 public class SPRClient {
     public static void init() {
-        /* Client Screens */
-        // Update to Minecraft 1.20 -- 2023/12/3
-        MenuRegistry.registerScreenFactory(SweetPotatoMenuTypes.SEED_UPDATER_SCREEN_HANDLER_TYPE.get(), SeedUpdaterScreen::new);
-        MenuRegistry.registerScreenFactory(SweetPotatoMenuTypes.GRINDER_SCREEN_HANDLER_TYPE.get(), GrinderScreen::new);
-        MenuRegistry.registerScreenFactory(SweetPotatoMenuTypes.MAGIC_CUBE_SCREEN_HANDLER_TYPE.get(), MagicCubeScreen::new);
-
         /* Color Providers */
         // Update to Minecraft 1.20 -- 2023/11/26 and 2023/12/16
         ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.getDefaultColor(),
