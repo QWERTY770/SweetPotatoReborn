@@ -17,7 +17,7 @@ public class SweetPotatoDataComponentTypes {
     // "statusEffects" tag in 1.20
     public static final RegistrySupplier<DataComponentType<List<EffectEntry>>> STATUS_EFFECTS = componentType("status_effects",
             () -> new DataComponentType.Builder<List<EffectEntry>>().persistent(EffectEntry.CODEC.listOf())
-                    .networkSynchronized(EffectEntry.STREAM_CODEC.apply(ByteBufCodecs.list())).build());
+                    .networkSynchronized(EffectEntry.STREAM_CODEC.apply(ByteBufCodecs.list())).cacheEncoding().build());
     // "displayIndex" tag in 1.20
     public static final RegistrySupplier<DataComponentType<Integer>> DISPLAY_INDEX = componentType("display_index",
             () -> new DataComponentType.Builder<Integer>().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build());

@@ -44,14 +44,17 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener<J
                     LOGGER.error("Invalid status effect id: {}", id);
                     continue;
                 }
-                MobEffect effect = BuiltInRegistries.MOB_EFFECT.getOptional(id)
+                // Use Holder.Reference<MobEffect> instead of MobEffect and Holder.Direct<MobEffect> !!!
+                // Otherwise, the game will fail to save chunks due to the following error
+                // java.lang.IllegalStateException: Unregistered holder in ResourceKey[minecraft:root / minecraft:mob_effect]: Direct{net.minecraft.world.effect.MobEffect@xxx}
+                Holder.Reference<MobEffect> effect = BuiltInRegistries.MOB_EFFECT.get(id)
                         .orElseThrow(() -> new IllegalArgumentException(
                                 "Missing mob effect id: " + id));
                 int duration = GsonHelper.getAsInt(eachObj, "duration", 0);
                 int amplifier = GsonHelper.getAsInt(eachObj, "amplifier", 0);
                 int weight = GsonHelper.getAsInt(eachObj, "weight", 1);
                 int addWithPowder = GsonHelper.getAsInt(eachObj, "powder_adds", 10);
-                set.add(new WeightedStatusEffect(new MobEffectInstance(Holder.direct(effect), duration, amplifier), weight, addWithPowder));
+                set.add(new WeightedStatusEffect(new MobEffectInstance(effect, duration, amplifier), weight, addWithPowder));
                 ++i;
             } WeightedStatusEffect.EFFECTS.addAll(set);
         });

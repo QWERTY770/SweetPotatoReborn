@@ -2,7 +2,6 @@ package io.github.qwerty770.mcmod.spmreborn.client;
 
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
-import dev.architectury.registry.menu.MenuRegistry;
 import io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks;
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
 import net.fabricmc.api.EnvType;
