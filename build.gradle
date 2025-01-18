@@ -14,6 +14,10 @@ subprojects {
             name = 'ParchmentMC'
             url = 'https://maven.parchmentmc.org'
         }
+        maven { url 'https://mirrors.jcut.edu.cn/bmclapi/' }
+        maven { url 'https://mirrors.lzu.edu.cn/bmclapi' }
+        maven { url 'https://lss233.littleservice.cn/repositories/minecraft/' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url = 'https://maven.neoforged.net/releases' }
         maven { url "https://maven.fabricmc.net/" }
         maven { url "https://maven.architectury.dev/" }
@@ -34,7 +38,7 @@ subprojects {
         // The following line declares the mojmap mappings, you may use other mappings as well
         mappings loom.layered {
             officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-1.21:${rootProject.parchment_version}")
+            parchment("org.parchmentmc.data:parchment-1.21.4:${rootProject.parchment_version}")
         }
         // The following line declares the yarn mappings you may select this one as well.
         // mappings "net.fabricmc:yarn:1.19.4+build.2:v2"

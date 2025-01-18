@@ -1,0 +1,12 @@
+{
+	"model": {
+		"type": "model",
+		"model": "spmreborn:item/enchanted_spruce_leaves",
+		"tints": [
+			{
+				"type": "minecraft:constant",
+				"value": -10380959
+			}
+		]
+	}
+}
