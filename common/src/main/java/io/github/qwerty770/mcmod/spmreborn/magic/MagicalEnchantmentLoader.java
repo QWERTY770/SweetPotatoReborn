@@ -4,6 +4,7 @@ import com.google.gson.*;
 import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -27,7 +28,7 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener<J
     private static final String folder = "spm__magical_enchantments";
 
     public MagicalEnchantmentLoader() {
-        super(ExtraCodecs.JSON, folder);
+        super(ExtraCodecs.JSON, FileToIdConverter.json(folder));
     }
 
     @Override
