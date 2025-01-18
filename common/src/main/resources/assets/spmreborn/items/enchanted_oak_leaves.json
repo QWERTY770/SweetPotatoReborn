@@ -1,0 +1,12 @@
+{
+	"model": {
+		"type": "model",
+		"model": "spmreborn:item/enchanted_oak_leaves",
+		"tints": [
+			{
+				"type": "minecraft:constant",
+				"value": -12012264
+			}
+		]
+	}
+}
