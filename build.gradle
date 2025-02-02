@@ -2,6 +2,8 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
+    id "com.modrinth.minotaur" version "2.+" apply false
+    id 'maven-publish'
 }
 
 architectury {
@@ -23,7 +25,7 @@ subprojects {
     apply plugin: "maven-publish"
 
     base {
-        archivesName = "${archives_base_name}"
+        archivesName = rootProject.archives_base_name + "-" + project.name
     }
     loom {
         silentMojangMappingsLicense()
@@ -36,8 +38,6 @@ subprojects {
             officialMojangMappings()
             parchment("org.parchmentmc.data:parchment-1.21:${rootProject.parchment_version}")
         }
-        // The following line declares the yarn mappings you may select this one as well.
-        // mappings "net.fabricmc:yarn:1.19.4+build.2:v2"
         implementation 'com.google.code.findbugs:jsr305:3.0.2'
         implementation 'com.google.errorprone:error_prone_annotations:2.18.0'
     }
@@ -57,4 +57,41 @@ subprojects {
 allprojects {
     archives_base_name = rootProject.archives_base_name
     version = rootProject.mod_version
+}
+
+subprojects {
+    if (System.getenv("MR_TOKEN")) {
+        apply plugin: 'com.modrinth.minotaur'
+        def modLoaders = project.mr_loader.toString().split(",") as List
+        modrinth {
+            token.set System.getenv("MR_TOKEN")
+            projectId.set "42Oytc0x"
+            versionNumber.set "${project.version}-${modLoaders[0]}"
+            versionName.set String.format(
+                    /*format=*/ rootProject.mr_version_name_format.toString(),
+                    rootProject.mr_version_game_range,
+                    project.mr_loader_display,
+                    rootProject.mr_version_mod_abbr,
+                    rootProject.mr_version_display
+            )
+            changelog.set rootProject.mr_version_changelog
+            versionType.set rootProject.mr_version_type
+            gameVersions = rootProject.mr_version_game.toString().split(",") as List
+            loaders.set modLoaders
+            detectLoaders.set false
+            autoAddDependsOn.set false
+
+            dependencies {
+                required.project 'architectury-api'
+                if (modLoaders.contains("fabric")) {
+                    required.project 'fabric-api'
+                }
+            }
+
+            uploadFile.set tasks.remapJar
+            additionalFiles = [tasks.remapSourcesJar]
+
+            debugMode = System.getenv("MR_DEBUG_MODE") == '1'
+        }
+    }
 }
