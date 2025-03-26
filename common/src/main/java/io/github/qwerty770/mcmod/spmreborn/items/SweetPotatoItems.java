@@ -11,6 +11,7 @@ import net.minecraft.world.item.*;
 import static io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks.*;
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.*;
 
+@SuppressWarnings("unused")
 public class SweetPotatoItems {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("items");
 

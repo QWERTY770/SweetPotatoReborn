@@ -4,14 +4,14 @@
   "package": "io.github.qwerty770.mcmod.spmreborn.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AdvancementTaskMixin",
+    "advancements.MinecraftServerMixin",
+    "advancements.ServerAdvancementManagerMixin",
     "modinfo.LevelPropertiesMixin",
     "modinfo.ServerPropertiesMixin"
   ],
   "client": [
     "WorldEventMixinC",
-    "modinfo.CreditsScreenMixinC",
-    "modinfo.TitleScreenMixinC"
+    "modinfo.CreditsScreenMixinC"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -9,6 +9,7 @@ version = "${version}"
 displayName = "Sweet Potato Reborn"
 displayURL="https://github.com/QWERTY770/SweetPotatoReborn"
 authors = "QWERTY770"
+credits = "雨音浅夏"
 description = '''
 Try new kinds of food, crops & magic in Sweet Potato Mod!
 '''

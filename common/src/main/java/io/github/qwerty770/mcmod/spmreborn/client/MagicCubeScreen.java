@@ -35,7 +35,7 @@ public class MagicCubeScreen extends AbstractContainerScreen<MagicCubeScreenHand
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-        // GuiGraphics.blit added 2 paramaters
+        // GuiGraphics.blit added 2 parameters
         guiGraphics.blit(RenderType::guiTextured, BACKGROUND, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
         short m = this.menu.getMainFuelTime(), v = this.menu.getViceFuelTime();
         int md = mainFuelDisplayHeight(m), vd = viceFuelDisplayHeight(v);

@@ -23,54 +23,47 @@ import org.slf4j.LoggerFactory;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.*;
 
+@SuppressWarnings("unused")
 @StableApi
 public class SPRMain {
-	private SPRMain() { }
-	private static final Logger LOGGER = LoggerFactory.getLogger("Sweet Potato Reborn");
-	public static final String MODID = "spmreborn";
+    private SPRMain() {
+    }
 
-	public static Logger getLogger() {
-		return LOGGER;
-	}
+    private static final Logger LOGGER = LoggerFactory.getLogger("Sweet Potato Reborn");
+    public static final String MODID = "spmreborn";
 
-	public static void register(){
-		SweetPotatoBlocks.LOG_WRAPPER.run();
-		SweetPotatoBlockEntityTypes.LOG_WRAPPER.run();
-		SweetPotatoItems.LOG_WRAPPER.run();
-		SweetPotatoDataComponentTypes.LOG_WRAPPER.run();
-		SweetPotatoRecipes.LOG_WRAPPER.run();
-		SweetPotatoLootFunctions.LOG_WRAPPER.run();
-		SweetPotatoStats.LOG_WRAPPER.run();
-		SweetPotatoSoundEvents.LOG_WRAPPER.run();
-		SweetPotatoMenuTypes.LOG_WRAPPER.run();
-		SweetPotatoTreeFeatures.LOG_WRAPPER.run();
-		RegistryHelper.registerAll();
-	}
+    public static Logger getLogger() {
+        return LOGGER;
+    }
 
-	public static void init() {
-		// FabricLoader.getInstance().getEntrypoints(MODID, SPRLinkage.class).forEach(SPRLinkage::init);
-		ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
-		ComposterHelper.register();
-		SPRLootTables.init();
-		LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
-		LOGGER.info("This is for Minecraft 1.20 and above!");
-	}
+    public static void register() {
+        SweetPotatoBlocks.LOG_WRAPPER.run();
+        SweetPotatoBlockEntityTypes.LOG_WRAPPER.run();
+        SweetPotatoItems.LOG_WRAPPER.run();
+        SweetPotatoDataComponentTypes.LOG_WRAPPER.run();
+        SweetPotatoRecipes.LOG_WRAPPER.run();
+        SweetPotatoLootFunctions.LOG_WRAPPER.run();
+        SweetPotatoStats.LOG_WRAPPER.run();
+        SweetPotatoSoundEvents.LOG_WRAPPER.run();
+        SweetPotatoMenuTypes.LOG_WRAPPER.run();
+        SweetPotatoTreeFeatures.LOG_WRAPPER.run();
+        RegistryHelper.registerAll();
+    }
 
-	// Item Tags
-	public static final TagContainer<Item> RAW_SWEET_POTATOES;
-	public static final TagContainer<Item> ENCHANTED_SWEET_POTATOES;
-	public static final TagContainer<Item> ALL_SWEET_POTATOES;
-	// About Pigs & Parrots
-	public static final TagContainer<Item> PIG_BREEDING_INGREDIENTS;
-	public static final TagContainer<Item> CHICKEN_BREEDING_INGREDIENTS;
+    public static void init() {
+        // FabricLoader.getInstance().getEntrypoints(MODID, SPRLinkage.class).forEach(SPRLinkage::init);
+        ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
+        ComposterHelper.register();
+        SPRLootTables.init();
+        LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
+        LOGGER.info("This is for Minecraft 1.20 and above!");
+    }
 
-	static {
-		// Item Tags
-		RAW_SWEET_POTATOES = itemTag("raw_sweet_potatoes");
-		ENCHANTED_SWEET_POTATOES = itemTag("enchanted_sweet_potatoes");
-		ALL_SWEET_POTATOES = itemTag("sweet_potatoes");
-		// About pig food, parrot food and chicken food
-		PIG_BREEDING_INGREDIENTS = itemTag("pig_breeding_ingredients");
-		CHICKEN_BREEDING_INGREDIENTS = itemTag("chicken_breeding_ingredients");
-	}
+    // Item Tags
+    public static final TagContainer<Item> RAW_SWEET_POTATOES = itemTag("raw_sweet_potatoes");
+    public static final TagContainer<Item> ENCHANTED_SWEET_POTATOES = itemTag("enchanted_sweet_potatoes");
+    public static final TagContainer<Item> ALL_SWEET_POTATOES = itemTag("sweet_potatoes");
+    // About Pig & Chicken Food
+    public static final TagContainer<Item> PIG_BREEDING_INGREDIENTS = itemTag("pig_breeding_ingredients");
+    public static final TagContainer<Item> CHICKEN_BREEDING_INGREDIENTS = itemTag("chicken_breeding_ingredients");
 }

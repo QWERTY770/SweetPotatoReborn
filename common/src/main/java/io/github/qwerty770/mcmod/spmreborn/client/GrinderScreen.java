@@ -40,7 +40,7 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderScreenHandler>
         RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-        // GuiGraphics.blit added 2 paramaters
+        // GuiGraphics.blit added 2 parameters
         guiGraphics.blit(RenderType::guiTextured, BACKGROUND_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         int l = this.menu.getGrindProgress();
         guiGraphics.blit(RenderType::guiTextured, BACKGROUND_TEXTURE, i + 74, j + 35, 176, 0, l + 1, 16, 256, 256);  // arrow
