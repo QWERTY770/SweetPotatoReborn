@@ -61,14 +61,6 @@ public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStack
         return SweetPotatoRecipes.SEED_UPDATING_CATEGORY.get();
     }
 
-    public boolean isBaseIngredient(ItemStack itemStack) {
-        return this.base.test(itemStack);
-    }
-
-    public boolean isAdditionIngredient(ItemStack itemStack) {
-        return this.addition.test(itemStack);
-    }
-
     public static class Serializer implements RecipeSerializer<SeedUpdatingRecipe> {
         private static final MapCodec<SeedUpdatingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(Ingredient.CODEC.fieldOf("base").forGetter((arg) -> arg.base),

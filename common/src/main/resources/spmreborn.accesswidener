@@ -1,5 +1,8 @@
 accessWidener   v2  named
-accessible method net/minecraft/world/level/levelgen/feature/treedecorators/TreeDecoratorType <init> (Lcom/mojang/serialization/MapCodec;)V
 accessible field net/minecraft/world/level/block/entity/BaseContainerBlockEntity name Lnet/minecraft/network/chat/Component;
 accessible method net/minecraft/world/level/block/entity/BlockEntityType <init> (Lnet/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier;Ljava/util/Set;)V
 accessible field net/minecraft/advancements/critereon/ItemPredicate$Builder items Ljava/util/Optional;
+accessible field net/minecraft/advancements/Advancement criteria Ljava/util/Map;
+mutable field net/minecraft/advancements/Advancement criteria Ljava/util/Map;
+accessible field net/minecraft/advancements/Advancement requirements Lnet/minecraft/advancements/AdvancementRequirements;
+mutable field net/minecraft/advancements/Advancement requirements Lnet/minecraft/advancements/AdvancementRequirements;

@@ -1,13 +1,9 @@
 package io.github.qwerty770.mcmod.spmreborn.mixin.modinfo;
 
-import com.mojang.serialization.Dynamic;
-import com.mojang.serialization.Lifecycle;
 import io.github.qwerty770.mcmod.spmreborn.world.levelmeta.SPRLevelProperties;
 import io.github.qwerty770.mcmod.spmreborn.world.levelmeta.SPRLevelPropertiesHelper;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.LevelSettings;
-import net.minecraft.world.level.levelgen.WorldOptions;
 import net.minecraft.world.level.storage.PrimaryLevelData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -32,7 +28,7 @@ public class LevelPropertiesMixin implements SPRLevelProperties {
     }
 
     @Inject(at = @At("RETURN"), method = "parse")
-    private static void onReadProperties(Dynamic<?> tag, LevelSettings levelSettings, PrimaryLevelData.SpecialWorldProperty specialWorldProperty, WorldOptions worldOptions, Lifecycle worldGenSettingsLifecycle, CallbackInfoReturnable<PrimaryLevelData> cir) {
+    private static void onReadProperties(CallbackInfoReturnable<PrimaryLevelData> cir) {
         PrimaryLevelData levelProperties = cir.getReturnValue();
         SPRLevelPropertiesHelper.setCurrentSPRDataVersion((SPRLevelProperties) levelProperties);
     }

@@ -36,8 +36,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
@@ -67,7 +65,6 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<ParticleType<?>> particleTypeRegistry = ofModRegistry(Registries.PARTICLE_TYPE);
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
     public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
-    public static final DeferredRegister<TreeDecoratorType<?>> treeDecoratorTypeRegistry = ofModRegistry(Registries.TREE_DECORATOR_TYPE);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
     public static final DeferredRegister<LootItemFunctionType<?>> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
     public static final DeferredRegister<CreativeModeTab> creativeTabRegistry = ofModRegistry(Registries.CREATIVE_MODE_TAB);
@@ -108,7 +105,7 @@ public abstract class RegistryHelper {
         return itemRegistry.register(id, () -> new BlockItem(block2.get(), properties.setId(itemId(id)).useBlockDescriptionPrefix()));
     }
 
-    public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType){
+    public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType) {
         return dataComponentTypeRegistry.register(id, componentType);
     }
 
@@ -151,14 +148,14 @@ public abstract class RegistryHelper {
     }
 
     public static Supplier<SoundEvent> sound(String id) {
-        return () -> SoundEvent.createVariableRangeEvent(id(id));
+        return soundRegistry.register(id, () -> SoundEvent.createVariableRangeEvent(id(id)));
     }
 
-    public <P extends ParticleType<?>> RegistrySupplier<P> particleType(String id, Supplier<P> particleTypeSup) {
+    public static  <P extends ParticleType<?>> RegistrySupplier<P> particleType(String id, Supplier<P> particleTypeSup) {
         return particleTypeRegistry.register(id, particleTypeSup);
     }
 
-    public <E extends Entity> RegistrySupplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder) {
+    public static  <E extends Entity> RegistrySupplier<EntityType<E>> entityType(String id, Supplier<EntityType.Builder<E>> builder) {
         return entityTypeRegistry.register(id, () -> builder.get().build(ResourceKey.create(Registries.ENTITY_TYPE, id(id))));
     }
 
@@ -169,15 +166,11 @@ public abstract class RegistryHelper {
     public static ResourceLocation stat(String id, StatFormatter statFormatter) {
         ResourceLocation id2 = id(id);
         statRegistry.register(id, () -> id2);
-        // TODO: Update the next line
-        // Stats.CUSTOM.get(id2, statFormatter);
         return id2;
     }
 
-    public static ResourceLocation stat(String id) { return stat(id, StatFormatter.DEFAULT); }
-
-    public static <P extends TreeDecorator> RegistrySupplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<MapCodec<P>> codecGetter) {
-        return treeDecoratorTypeRegistry.register(id, () -> new TreeDecoratorType<>(codecGetter.get()));
+    public static ResourceLocation stat(String id) {
+        return stat(id, StatFormatter.DEFAULT);
     }
 
     public static RegistrySupplier<PoiType> poiType(String id, int maxTickets, int validRange, Supplier<Set<BlockState>> matchingStatesSup) {
@@ -188,7 +181,7 @@ public abstract class RegistryHelper {
         return lootFunctionRegistry.register(id, () -> new LootItemFunctionType<>(codec));
     }
 
-    public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab){
+    public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab) {
         return creativeTabRegistry.register(id, () -> tab);
     }
 
@@ -198,7 +191,7 @@ public abstract class RegistryHelper {
         return reg;
     }
 
-    public static void registerAll(){
+    public static void registerAll() {
         for (var reg : modRegistries) {
             reg.register();
         }

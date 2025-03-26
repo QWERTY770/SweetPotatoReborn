@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.display.RecipeDisplay;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.*;
 
+@SuppressWarnings("unused")
 public class SweetPotatoRecipes {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("recipes");
     // Recipe Book Category, for 1.21.2+

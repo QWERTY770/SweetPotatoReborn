@@ -1,7 +1,7 @@
 //file:noinspection GroovyAssignabilityCheck
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
+    id "dev.architectury.loom" version "1.9-SNAPSHOT" apply false
     id "com.modrinth.minotaur" version "2.+" apply false
     id 'maven-publish'
 }
@@ -68,7 +68,7 @@ subprojects {
             projectId.set "42Oytc0x"
             versionNumber.set "${project.version}-${modLoaders[0]}"
             versionName.set String.format(
-                    /*format=*/ rootProject.mr_version_name_format.toString(),
+                    rootProject.mr_version_name_format.toString(),
                     rootProject.mr_version_game_range,
                     project.mr_loader_display,
                     rootProject.mr_version_mod_abbr,

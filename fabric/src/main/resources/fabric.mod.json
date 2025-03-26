@@ -2,14 +2,16 @@
   "schemaVersion": 1,
   "id": "spmreborn",
   "version": "${version}",
-
   "name": "Sweet Potato Reborn",
   "description": "Try new kinds of food, crops & magic in Sweet Potato Mod!",
   "authors": [
     "QWERTY770"
   ],
+  "contributors": [
+    "雨音浅夏"
+  ],
   "contact": {
-    "homepage": "",
+    "homepage": "https://github.com/QWERTY770/",
     "sources": "https://github.com/QWERTY770/SweetPotatoReborn",
     "issues": "https://github.com/QWERTY770/SweetPotatoReborn/issues"
   },
@@ -40,7 +42,6 @@
     "java": ">=21"
   },
   "suggests": {
-    "shurlin": "*",
     "enchlevel-langpatch": ">1.0.0"
   },
   "custom": {
