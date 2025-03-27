@@ -1,6 +1,7 @@
 package io.github.qwerty770.mcmod.spmreborn;
 
 import dev.architectury.registry.ReloadListenerRegistry;
+import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import io.github.qwerty770.mcmod.spmreborn.blocks.*;
 import io.github.qwerty770.mcmod.spmreborn.blocks.entities.SweetPotatoBlockEntityTypes;
 import io.github.qwerty770.mcmod.spmreborn.items.*;
@@ -52,7 +53,7 @@ public class SPRMain {
 
     public static void init() {
         // FabricLoader.getInstance().getEntrypoints(MODID, SPRLinkage.class).forEach(SPRLinkage::init);
-        ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader());
+        ReloadListenerRegistry.register(PackType.SERVER_DATA, new MagicalEnchantmentLoader(), ResourceLocationTool.create("spmreborn:magical_enchantments"));
         ComposterHelper.register();
         SPRLootTables.init();
         LOGGER.info("Successfully loaded Sweet Potato Reborn mod! Not the same as Sweet Potato Mod!");
