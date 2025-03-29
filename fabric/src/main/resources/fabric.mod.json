@@ -30,8 +30,7 @@
     ]
   },
   "mixins": [
-    "spmreborn-common.mixins.json",
-    "spmreborn.mixins.json"
+    "spmreborn-common.mixins.json"
   ],
 
   "depends": {

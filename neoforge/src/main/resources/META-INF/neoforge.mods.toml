@@ -15,9 +15,11 @@ Try new kinds of food, crops & magic in Sweet Potato Mod!
 '''
 logoFile = "icon.png"
 
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
 [[mixins]]
 config="spmreborn-common.mixins.json"
-config2="spmreborn.mixins.json"
 
 [[dependencies.spmreborn]]
 modId = "neoforge"
