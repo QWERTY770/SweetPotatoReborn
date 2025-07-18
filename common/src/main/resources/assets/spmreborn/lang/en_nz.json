@@ -1,11 +1,6 @@
 {
-  "_comment": "This is the old translation of Sweet Potato Mod and may not work on Sweet Potato Reborn mod",
-  "tab.spmreborn": "Sweet Potato+",
   "mod.spmreborn": "§mSweet Potato§r §oKūmara§r Mod",
-  "mod.spmreborn.0": ", by Pigeonia Featurehouse",
-  "mod.spmreborn.1": "Contributors:",
-  "mod.spmreborn.2": "Agent in \u00A7oMinecraft China\u00A7: ",
-
+  "tab.spmreborn": "Sweet Potato+",
   "item.spmreborn.purple_potato": "Waiporoporo Kūmara",
   "item.spmreborn.red_potato": "Beauregard Kūmara",
   "item.spmreborn.white_potato": "Owairaka Kūmara",
@@ -22,7 +17,6 @@
   "item.spmreborn.enchanted_potato": "Enchanted Potato",
   "item.spmreborn.enchanted_beetroot_seeds": "Enchanted Beetroot Seeds",
   "item.spmreborn.treating_bowl": "Treating Bowl",
-
   "block.spmreborn.purple_potatoes": "Waiporoporo Kūmaras",
   "block.spmreborn.red_potatoes": "Beauregard Kūmaras",
   "block.spmreborn.white_potatoes": "Owairaka Kūmaras",
@@ -46,28 +40,38 @@
   "block.spmreborn.enchanted_carrots": "Enchanted Carrots",
   "block.spmreborn.enchanted_potatoes": "Enchanted Potatoes",
   "block.spmreborn.enchanted_beetroots": "Enchanted Beetroots",
-
   "subtitles.block.spmreborn.agroforestry_table.finish": "Crop Upgraded",
   "subtitles.block.spmreborn.grinder.grind": "Grinder Grinds",
   "subtitles.block.spmreborn.magic_cube.activate": "Magic Cube Activates",
   "subtitles.block.spmreborn.magic_cube.deactivate": "Magic Cube Deactivates",
   "subtitles.block.spmreborn.magic_cube.ambient": "Magic Cube Hums",
-
   "advancement.husbandry.spmreborn.get_sweet_potato.title": "Sweet and Soft",
   "advancement.husbandry.spmreborn.get_sweet_potato.description": "Obtain Kūmara",
   "advancement.nether.spmreborn.get_magic_cube.title": "Magic in Soul",
   "advancement.nether.spmreborn.get_magic_cube.description": "Obtain Magic Cube",
-
   "container.spmreborn.magic_cube": "Magic Cube",
   "container.spmreborn.seed_updating": "Crop Upgrading",
   "container.spmreborn.grinding": "Grinding",
   "container.grinding.ingredientData": "Added %f unit(s) of ingredient",
-
   "stat.spmreborn.interact_with_grinder": "Interactions with Grinder",
   "stat.spmreborn.interact_with_agroforestry_table": "Interactions with Agroforestry Table",
   "stat.spmreborn.crop_upgraded": "Crops upgraded",
   "stat.spmreborn.sweet_potato_eaten": "Kūmara eaten",
   "stat.spmreborn.interact_with_magic_cube": "Interactions with Magic Cube",
-
-  "tooltip.spmreborn.enchanted_sweet_potato.effects": "Effects: "
+  "tag.item.spmreborn.baked_sweet_potatoes": "Baked Sweet Potatoes",
+  "tag.item.spmreborn.blackstones": "Black Stones",
+  "tag.item.spmreborn.chicken_breeding_ingredients": "Chicken Feedstuffs",
+  "tag.item.spmreborn.enchanted_sweet_potatoes": "Enchanted Sweet Potatoes",
+  "tag.item.spmreborn.parrot_breeding_ingredients": "Parrot Feedstuffs",
+  "tag.item.spmreborn.pig_breeding_ingredients": "Pig Feedstuffs",
+  "tag.item.spmreborn.raw_sweet_potatoes": "Raw Sweet Potatoes",
+  "tag.item.spmreborn.sweet_potatoes": "Sweet Potatoes",
+  "tooltip.spmreborn.enchanted_sweet_potato.effects": "Effects: ",
+  "block.spmreborn.enchanted_phoenix_sapling": "Enchanted Phoenix Sapling",
+  "block.spmreborn.enchanted_phoenix_leaves": "Enchanted Phoenix Leaves",
+  "block.spmreborn.potted_enchanted_phoenix_sapling": "Potted Enchanted Phoenix Sapling",
+  "block.spmreborn.enchanted_pear_sapling": "Enchanted Pear Sapling",
+  "block.spmreborn.enchanted_pear_leaves": "Enchanted Pear Leaves",
+  "block.spmreborn.enchanted_pear_ripe_leaves": "Ripe Enchanted Pear Leaves",
+  "block.spmreborn.potted_enchanted_pear_sapling": "Potted Enchanted Pear Sapling"
 }

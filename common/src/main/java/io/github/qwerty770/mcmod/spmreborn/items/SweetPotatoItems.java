@@ -5,7 +5,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.qwerty770.mcmod.spmreborn.api.InternalRegistryLogWrapper;
 import io.github.qwerty770.mcmod.spmreborn.items.sweetpotato.SweetPotatoType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.Foods;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 
 import static io.github.qwerty770.mcmod.spmreborn.blocks.SweetPotatoBlocks.*;
@@ -78,8 +78,8 @@ public class SweetPotatoItems {
 
         ENCHANTED_WHEAT_SEEDS = AliasedEnchantedItem.of("enchanted_wheat_seeds", ENCHANTED_WHEAT_CROP, defaultProp());
         ENCHANTED_BEETROOT_SEEDS = AliasedEnchantedItem.of("enchanted_beetroot_seeds", ENCHANTED_BEETROOTS_CROP, defaultProp());
-        ENCHANTED_VANILLA_POTATO_ITEM = AliasedEnchantedItem.ofFood("enchanted_potato", ENCHANTED_VANILLA_POTATOES_CROP, Foods.POTATO, defaultProp());
-        ENCHANTED_CARROT_ITEM = AliasedEnchantedItem.ofFood("enchanted_carrot", ENCHANTED_CARROTS_CROP, Foods.CARROT, defaultProp());
+        ENCHANTED_VANILLA_POTATO_ITEM = AliasedEnchantedItem.ofFood("enchanted_potato", ENCHANTED_VANILLA_POTATOES_CROP, new FoodProperties.Builder().nutrition(2).saturationModifier(0.3F).build(), defaultProp());
+        ENCHANTED_CARROT_ITEM = AliasedEnchantedItem.ofFood("enchanted_carrot", ENCHANTED_CARROTS_CROP, new FoodProperties.Builder().nutrition(5).saturationModifier(0.6F).build(), defaultProp());
         ENCHANTED_SUGAR_CANE_ITEM = EnchantedBlockItem.of("enchanted_sugar_cane", ENCHANTED_SUGAR_CANE, defaultProp());
 
         ENCHANTED_ACACIA_LEAVES_ITEM = EnchantedBlockItem.of("enchanted_acacia_leaves", ENCHANTED_ACACIA_LEAVES, defaultProp());

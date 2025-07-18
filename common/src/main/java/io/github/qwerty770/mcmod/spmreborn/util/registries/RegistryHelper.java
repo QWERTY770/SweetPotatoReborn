@@ -1,6 +1,5 @@
 package io.github.qwerty770.mcmod.spmreborn.util.registries;
 
-import com.mojang.datafixers.types.Type;
 import com.mojang.serialization.MapCodec;
 import dev.architectury.registry.menu.MenuRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
@@ -9,7 +8,6 @@ import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.tag.TagContainer;
-import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleType;
@@ -19,7 +17,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
-import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -111,8 +108,6 @@ public abstract class RegistryHelper {
 
     @SafeVarargs
     public static <E extends BlockEntity> RegistrySupplier<BlockEntityType<E>> blockEntity(String id, BlockEntityType.BlockEntitySupplier<E> supplier, Supplier<Block>... blocks) {
-        Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, id);
-        assert type != null;
         return blockEntityRegistry.register(id, () -> new BlockEntityType<>(supplier, Set.copyOf(Arrays.stream(blocks).map(Supplier::get).toList())));
     }
 
