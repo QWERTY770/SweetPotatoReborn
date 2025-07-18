@@ -1,8 +1,6 @@
 {
-  "_comment": "这是Sweet Potato Mod的旧翻译，可能不适用于Sweet Potato Reborn mod",
   "mod.spmreborn": "烤地瓜：重生",
   "tab.spmreborn": "烤地瓜+",
-
   "item.spmreborn.purple_potato": "紫薯",
   "item.spmreborn.red_potato": "红薯",
   "item.spmreborn.white_potato": "白薯",
@@ -19,7 +17,6 @@
   "item.spmreborn.enchanted_potato": "附魔马铃薯",
   "item.spmreborn.enchanted_beetroot_seeds": "附魔甜菜种子",
   "item.spmreborn.treating_bowl": "许愿碗",
-
   "block.spmreborn.purple_potatoes": "紫薯",
   "block.spmreborn.red_potatoes": "红薯",
   "block.spmreborn.white_potatoes": "白薯",
@@ -43,44 +40,38 @@
   "block.spmreborn.enchanted_carrots": "附魔胡萝卜",
   "block.spmreborn.enchanted_potatoes": "附魔马铃薯",
   "block.spmreborn.enchanted_beetroots": "附魔甜菜根",
-
   "subtitles.block.spmreborn.agroforestry_table.finish": "农林台：升级",
   "subtitles.block.spmreborn.grinder.grind": "研磨器：研磨",
   "subtitles.block.spmreborn.magic_cube.activate": "魔法锅：激活",
   "subtitles.block.spmreborn.magic_cube.deactivate": "魔法锅：失效",
   "subtitles.block.spmreborn.magic_cube.ambient": "魔法锅：轰鸣",
-
   "advancement.husbandry.spmreborn.get_sweet_potato.title": "香甜软糯",
   "advancement.husbandry.spmreborn.get_sweet_potato.description": "获得地瓜",
   "advancement.nether.spmreborn.get_magic_cube.title": "灵魂魔法",
   "advancement.nether.spmreborn.get_magic_cube.description": "获得魔法锅",
-
   "container.spmreborn.magic_cube": "魔法锅",
   "container.spmreborn.seed_updating": "升级作物",
   "container.spmreborn.grinding": "研磨",
   "container.grinding.ingredientData": "已添加 %f 份原料",
-
   "stat.spmreborn.interact_with_grinder": "与研磨器互动次数",
   "stat.spmreborn.interact_with_agroforestry_table": "与农林台互动次数",
   "stat.spmreborn.crop_upgraded": "升级作物次数",
   "stat.spmreborn.sweet_potato_eaten": "吃掉的地瓜数",
   "stat.spmreborn.interact_with_magic_cube": "与魔法锅互动次数",
-
   "tag.item.spmreborn.baked_sweet_potatoes": "烤地瓜",
   "tag.item.spmreborn.blackstones": "黑色石头",
-  "tag.item.spmreborn.chicken_breeding_ingredients": "鸡饲养原料",
+  "tag.item.spmreborn.chicken_breeding_ingredients": "鸡饲料",
   "tag.item.spmreborn.enchanted_sweet_potatoes": "附魔地瓜",
-  "tag.item.spmreborn.parrot_breeding_ingredients": "鹦鹉饲养原料",
-  "tag.item.spmreborn.pig_breeding_ingredients": "猪饲养原料",
+  "tag.item.spmreborn.parrot_breeding_ingredients": "鹦鹉饲料",
+  "tag.item.spmreborn.pig_breeding_ingredients": "猪饲料",
   "tag.item.spmreborn.raw_sweet_potatoes": "生地瓜",
   "tag.item.spmreborn.sweet_potatoes": "地瓜",
   "tooltip.spmreborn.enchanted_sweet_potato.effects": "效果： ",
-
   "block.spmreborn.enchanted_phoenix_sapling": "附魔梧桐树苗",
   "block.spmreborn.enchanted_phoenix_leaves": "附魔梧桐树叶",
   "block.spmreborn.potted_enchanted_phoenix_sapling": "附魔梧桐树苗盆栽",
   "block.spmreborn.enchanted_pear_sapling": "附魔梨树苗",
   "block.spmreborn.enchanted_pear_leaves": "附魔梨树叶",
-  "block.spmreborn.enchanted_pear_ripe_leaves": "结梨子的附魔梨树叶",
-  "block.spmreborn.potted_enchanted_pear_sapling": "梨树苗盆栽"
+  "block.spmreborn.enchanted_pear_ripe_leaves": "结果的附魔梨树叶",
+  "block.spmreborn.potted_enchanted_pear_sapling": "附魔梨树苗盆栽"
 }
