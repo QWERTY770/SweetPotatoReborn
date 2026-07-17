@@ -1,15 +1,11 @@
 //file:noinspection GroovyAssignabilityCheck
 pluginManagement {
     repositories {
-        maven {
-            name = 'ParchmentMC'
-            url = 'https://maven.parchmentmc.org'
-        }
-        maven { url 'https://mirrors.lzu.edu.cn/bmclapi' }
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url = 'https://maven.neoforged.net/releases' }
-        maven { url "https://maven.fabricmc.net/" }
         maven { url "https://maven.architectury.dev/" }
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.minecraftforge.net/" }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenCentral()
         gradlePluginPortal()
     }
 }
