@@ -23,7 +23,7 @@ public class KeepPlayingSoundInstance extends SimpleSoundInstance implements Tic
     protected boolean done = false;
     protected final BiPredicate<Level, BlockPos> playCondition;
 
-    public KeepPlayingSoundInstance(SoundEvent sound, float pitch, @NotNull Level world, BlockPos pos, LocalPlayer player, BiPredicate<Level, BlockPos> playCondition) {
+    public KeepPlayingSoundInstance(SoundEvent sound, float pitch, Level world, BlockPos pos, LocalPlayer player, BiPredicate<Level, BlockPos> playCondition) {
         super(sound, SoundSource.BLOCKS, 1.0F, pitch, world.getRandom(), pos);
         this.looping = true;
         this.pos = pos;

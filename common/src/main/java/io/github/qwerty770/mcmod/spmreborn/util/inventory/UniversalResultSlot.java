@@ -42,7 +42,7 @@ public class UniversalResultSlot extends Slot {
     }
 
     protected void checkTakeAchievements(ItemStack stack) {
-        stack.onCraftedBy(this.player.level(), this.player, this.amount);
+        stack.onCraftedBy(this.player, this.amount);
         this.amount = 0;
     }
 }

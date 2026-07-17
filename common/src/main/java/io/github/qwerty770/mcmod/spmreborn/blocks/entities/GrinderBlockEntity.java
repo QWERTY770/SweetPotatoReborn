@@ -9,8 +9,6 @@ import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntGrinderProperties;
 import io.github.qwerty770.mcmod.spmreborn.util.registries.GrindingUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,6 +18,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -101,24 +101,24 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
     }
 
     @Override
-    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        this.grindTime = tag.getShort("GrindTime");
-        this.grindTimeTotal = tag.getShort("GrindTimeTotal");
+    public void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        this.grindTime = input.getShortOr("GrindTime", (short) -1);
+        this.grindTimeTotal = input.getShortOr("GrindTimeTotal", (short) 0);
         //this.propertyDelegate.set(2 /*IngredientData*/, tag.getInt("IngredientData"));
-        this.ingredientData = tag.getDouble("IngredientData");
-        this.absorbCooldown = tag.getByte("absorbCooldown");
+        this.ingredientData = input.getDoubleOr("IngredientData", 0.0D);
+        this.absorbCooldown = input.getByteOr("absorbCooldown", (byte) -1);
 
     }
 
     @Override
-    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putShort("GrindTime", (short) grindTime);
-        tag.putShort("GrindTimeTotal", (short) grindTimeTotal);
+    public void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.putShort("GrindTime", (short) grindTime);
+        output.putShort("GrindTimeTotal", (short) grindTimeTotal);
         //Inventories.writeNbt(tag, this.inventory);
-        tag.putDouble("IngredientData", ingredientData);
-        tag.putByte("absorbCooldown", absorbCooldown);
+        output.putDouble("IngredientData", ingredientData);
+        output.putByte("absorbCooldown", absorbCooldown);
     }
 
     @Override
@@ -137,10 +137,10 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
     }
 
     @Override
-    public void tick(@NotNull Level world, BlockPos pos, BlockState state) {
+    public void tick(Level world, BlockPos pos, BlockState state) {
         boolean shallMarkDirty = false;
 
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
             // Grind Process
             if (this.grindTime >= this.grindTimeTotal && this.grindTimeTotal != 0 && this.canAcceptRecipeOutput()) { // 200+, 200, yesOutput
                 // Output

@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Objects;
 import java.util.OptionalDouble;
@@ -76,7 +77,7 @@ public final class GrindingUtils {
         }
 
         @Override
-        public String toString() {
+        public @NonNull String toString() {
             return map.toString();
         }
     }

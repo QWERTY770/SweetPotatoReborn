@@ -20,7 +20,7 @@ public class SweetPotatoRecipes {
             recipeDisplay("seed_updating", () -> SeedUpdatingRecipeDisplay.TYPE);
     // Recipe Serializer
     public static final RegistrySupplier<RecipeSerializer<SeedUpdatingRecipe>> SEED_UPDATING_RECIPE_SERIALIZER =
-            recipeSerializer("seed_updating", SeedUpdatingRecipe.Serializer::new);
+            recipeSerializer("seed_updating", () -> new RecipeSerializer<>(SeedUpdatingRecipe.CODEC, SeedUpdatingRecipe.STREAM_CODEC));
     // Recipe Type
     public static final RegistrySupplier<RecipeType<SeedUpdatingRecipe>> SEED_UPDATING_RECIPE_TYPE =
             recipeType("seed_updating");

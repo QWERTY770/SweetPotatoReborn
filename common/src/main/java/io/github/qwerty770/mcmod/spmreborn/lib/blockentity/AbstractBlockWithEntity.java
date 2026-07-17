@@ -1,15 +1,16 @@
 package io.github.qwerty770.mcmod.spmreborn.lib.blockentity;
 
 import com.google.common.collect.ImmutableList;
+import io.github.qwerty770.mcmod.spmreborn.util.annotation.StableApi;
 import io.github.qwerty770.mcmod.spmreborn.util.tick.ITickable;
 import net.minecraft.core.component.DataComponents;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
@@ -28,8 +29,9 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jspecify.annotations.NonNull;
 
-@ApiStatus.Experimental
+@StableApi(since = "1.2.0+26.2")
 public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable> extends BaseEntityBlock {
     protected abstract boolean blockEntityPredicate(BlockEntity blockEntity);
 
@@ -37,13 +39,13 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
         super(settings);
     }
 
-    public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
+    public List<Identifier> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
         return ImmutableList.of();
     }
 
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof MenuProvider && blockEntityPredicate(blockEntity)) {
                 player.openMenu((MenuProvider) blockEntity);
@@ -56,7 +58,7 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
 
     @Override
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.get(DataComponents.CUSTOM_NAME) != null || itemStack.get(DataComponents.ITEM_NAME) != null) {
+        if (itemStack.get(DataComponents.CUSTOM_NAME) != null) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof BaseContainerBlockEntity && blockEntityPredicate(blockEntity)){
                 ((BaseContainerBlockEntity) blockEntity).name = itemStack.getHoverName();
@@ -75,24 +77,22 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
         return RenderShape.MODEL;
     }
 
-    public abstract BlockEntityType<E> getBlockEntityType();
+    public abstract BlockEntityType<@NonNull E> getBlockEntityType();
 
     @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
-        if (!state.is(newState.getBlock())) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof Container && blockEntityPredicate(blockEntity)) {
-                Containers.dropContents(world, pos, (Container) blockEntity);
-                world.updateNeighbourForOutputSignal(pos, this);
-            }
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean movedByPiston) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof Container && blockEntityPredicate(blockEntity)) {
+            Containers.dropContents(world, pos, (Container) blockEntity);
+            world.updateNeighbourForOutputSignal(pos, this);
         }
-        super.onRemove(state, world, pos, newState, moved);
+        super.affectNeighborsAfterRemoval(state, world, pos, movedByPiston);
     }
 
     @Override
     public abstract E newBlockEntity(BlockPos pos, BlockState state);
 
-    public BlockEntityTicker<E> ticker() {
+    public BlockEntityTicker<@NonNull E> ticker() {
         return ITickable::iTick;
     }
 
@@ -102,7 +102,7 @@ public abstract class AbstractBlockWithEntity<E extends BlockEntity & ITickable>
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        return world.isClientSide ? null : createTickerHelper(type, getBlockEntityType(), ticker());
+        return world.isClientSide() ? null : createTickerHelper(type, getBlockEntityType(), ticker());
     }
 
     public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {

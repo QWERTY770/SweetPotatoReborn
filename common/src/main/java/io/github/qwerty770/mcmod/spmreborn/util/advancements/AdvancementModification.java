@@ -6,10 +6,10 @@ import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.ConsumeItemTrigger;
+import net.minecraft.advancements.triggers.ConsumeItemTrigger;
+import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Objects;
 public class AdvancementModification {
     public static void checkBalancedDiet(AdvancementHolder holder, Registry<Item> registry) {
         // Used in mixin classes
-        ResourceLocation location = holder.id();
+        Identifier location = holder.id();
         if ("husbandry/balanced_diet".equals(location.getPath()) && "minecraft".equals(location.getNamespace())) {
             Advancement advancement = holder.value();
             Map<String, Criterion<?>> criteria = advancement.criteria();

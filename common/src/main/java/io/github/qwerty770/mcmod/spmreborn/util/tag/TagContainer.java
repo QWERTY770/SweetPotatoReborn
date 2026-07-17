@@ -3,15 +3,16 @@ package io.github.qwerty770.mcmod.spmreborn.util.tag;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 public record TagContainer<T> (Registry<T> registry, TagKey<T> tagKey) {
-    public static <T> TagContainer<T> register(ResourceLocation id, Registry<T> registry) {
+    public static <T> TagContainer<T> register(Identifier id, Registry<T> registry) {
         var tagKey = TagKey.create(registry.key(), id);
         return new TagContainer<>(registry, tagKey);
     }
@@ -30,8 +31,8 @@ public record TagContainer<T> (Registry<T> registry, TagKey<T> tagKey) {
     }
 
     @Override
-    public String toString() {
-        return "TagContainer[" + registry.key().location()
+    public @NonNull String toString() {
+        return "TagContainer[" + registry.key().identifier()
                 + '/' + tagKey.location() + ']';
     }
 }

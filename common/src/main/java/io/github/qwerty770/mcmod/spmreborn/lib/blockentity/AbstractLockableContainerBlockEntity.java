@@ -6,19 +6,19 @@
 package io.github.qwerty770.mcmod.spmreborn.lib.blockentity;
 
 import io.github.qwerty770.mcmod.spmreborn.util.tick.ITickable;
-import net.minecraft.core.HolderLookup;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Iterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 
 @ApiStatus.Experimental
@@ -33,16 +33,16 @@ public abstract class AbstractLockableContainerBlockEntity extends BaseContainer
     }
 
     @Override
-    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {  // toTag
-        super.saveAdditional(tag, registries);
-        ContainerHelper.saveAllItems(tag, this.inventory, registries);
+    public void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        ContainerHelper.saveAllItems(output, this.inventory);
     }
 
     @Override
-    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {  // fromTag
-        super.loadAdditional(tag, registries);
+    public void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, this.inventory, registries);
+        ContainerHelper.loadAllItems(input, this.inventory);
     }
 
     public int getContainerSize() {

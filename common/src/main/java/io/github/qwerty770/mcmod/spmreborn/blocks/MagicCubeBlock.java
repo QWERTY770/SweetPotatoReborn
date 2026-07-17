@@ -8,7 +8,7 @@ import io.github.qwerty770.mcmod.spmreborn.blocks.entities.SweetPotatoBlockEntit
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractBlockWithEntity;
 import io.github.qwerty770.mcmod.spmreborn.stats.SweetPotatoStats;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +44,7 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
     }
 
     @Override
-    public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
+    public List<Identifier> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
         return ImmutableList.of(SweetPotatoStats.INTERACT_WITH_MAGIC_CUBE);
     }
 
@@ -55,7 +55,7 @@ public class MagicCubeBlock extends AbstractBlockWithEntity<MagicCubeBlockEntity
 
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!world.isClientSide && state.getBlock() instanceof MagicCubeBlock) {
+        if (!world.isClientSide() && state.getBlock() instanceof MagicCubeBlock) {
             if (!state.getValue(ACTIVATED)) return InteractionResult.PASS;
             if (world.getBlockEntity(pos) instanceof MagicCubeBlockEntity blockEntity) {
                 MenuRegistry.openExtendedMenu((ServerPlayer) player, blockEntity); // Multi-platform support

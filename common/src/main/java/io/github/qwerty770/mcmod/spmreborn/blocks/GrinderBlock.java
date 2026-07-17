@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import io.github.qwerty770.mcmod.spmreborn.blocks.entities.GrinderBlockEntity;
 import io.github.qwerty770.mcmod.spmreborn.lib.blockentity.AbstractBlockWithEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -47,7 +47,7 @@ public class GrinderBlock extends AbstractBlockWithEntity<GrinderBlockEntity> {
     }
 
     @Override
-    public List<ResourceLocation> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
+    public List<Identifier> incrementWhileOnUse(BlockState state, Level world, BlockPos pos, ServerPlayer serverPlayerEntity, BlockHitResult blockHitResult) {
         return ImmutableList.of(SweetPotatoStats.INTERACT_WITH_GRINDER);
     }
 

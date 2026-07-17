@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.ApiStatus;
@@ -18,7 +18,7 @@ public record ModCredits(List<String> authorGroup,
                          List<String> collaborators,
                          List<String> importantSupporters) {
 
-    public static ModCredits fromJson(final JsonObject root, ResourceLocation fileId) {
+    public static ModCredits fromJson(final JsonObject root, Identifier fileId) {
         JsonArray arr;
 
         arr = GsonHelper.getAsJsonArray(root, "author_group");

@@ -3,10 +3,10 @@ package io.github.qwerty770.mcmod.spmreborn.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.qwerty770.mcmod.spmreborn.items.SweetPotatoItems;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -18,19 +18,16 @@ import java.util.List;
 import java.util.Optional;
 
 @ParametersAreNonnullByDefault
-public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStack result) implements Recipe<SeedUpdatingRecipeInput> {
-    // Update to Minecraft 1.21.3 -- 2024/11/15
-    // see net.minecraft.world.item.crafting.SmithingTransformRecipe
+public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStackTemplate result) implements Recipe<SeedUpdatingRecipeInput> {
+    // See net.minecraft.world.item.crafting.SmithingTransformRecipe.
     @Override
     public boolean matches(SeedUpdatingRecipeInput input, Level level) {
         return this.base.test(input.base()) && this.addition.test(input.addition());
     }
 
     @Override
-    public @NotNull ItemStack assemble(SeedUpdatingRecipeInput input, HolderLookup.Provider registries) {
-        ItemStack itemstack = input.base().transmuteCopy(this.result.getItem(), this.result.getCount());
-        itemstack.applyComponents(this.result.getComponentsPatch());
-        return itemstack;
+    public @NotNull ItemStack assemble(SeedUpdatingRecipeInput input) {
+        return TransmuteRecipe.createWithOriginalComponents(this.result, input.base());
     }
 
     @Override
@@ -41,6 +38,16 @@ public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStack
     @Override
     public @NotNull RecipeType<? extends Recipe<SeedUpdatingRecipeInput>> getType() {
         return SweetPotatoRecipes.SEED_UPDATING_RECIPE_TYPE.get();
+    }
+
+    @Override
+    public boolean showNotification() {
+        return true;
+    }
+
+    @Override
+    public @NotNull String group() {
+        return "";
     }
 
     @Override
@@ -61,35 +68,23 @@ public record SeedUpdatingRecipe(Ingredient base, Ingredient addition, ItemStack
         return SweetPotatoRecipes.SEED_UPDATING_CATEGORY.get();
     }
 
-    public static class Serializer implements RecipeSerializer<SeedUpdatingRecipe> {
-        private static final MapCodec<SeedUpdatingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
-                instance.group(Ingredient.CODEC.fieldOf("base").forGetter((arg) -> arg.base),
-                        Ingredient.CODEC.fieldOf("addition").forGetter((arg) -> arg.addition),
-                        ItemStack.STRICT_CODEC.fieldOf("result").forGetter((arg) -> arg.result))
-                        .apply(instance, SeedUpdatingRecipe::new));
-        private static final StreamCodec<RegistryFriendlyByteBuf, SeedUpdatingRecipe> STREAM_CODEC = StreamCodec.of(SeedUpdatingRecipe.Serializer::toNetwork, SeedUpdatingRecipe.Serializer::fromNetwork);
+    public static final MapCodec<SeedUpdatingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+            instance.group(Ingredient.CODEC.fieldOf("base").forGetter((arg) -> arg.base),
+                    Ingredient.CODEC.fieldOf("addition").forGetter((arg) -> arg.addition),
+                    ItemStackTemplate.CODEC.fieldOf("result").forGetter((arg) -> arg.result))
+                    .apply(instance, SeedUpdatingRecipe::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, SeedUpdatingRecipe> STREAM_CODEC = StreamCodec.of(SeedUpdatingRecipe::toNetwork, SeedUpdatingRecipe::fromNetwork);
 
-        private static SeedUpdatingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-            Ingredient ingredient1 = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient ingredient2 = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            ItemStack itemStack = ItemStack.STREAM_CODEC.decode(buffer);
-            return new SeedUpdatingRecipe(ingredient1, ingredient2, itemStack);
-        }
+    private static SeedUpdatingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
+        Ingredient ingredient1 = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+        Ingredient ingredient2 = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+        ItemStackTemplate itemStack = ItemStackTemplate.STREAM_CODEC.decode(buffer);
+        return new SeedUpdatingRecipe(ingredient1, ingredient2, itemStack);
+    }
 
-        private static void toNetwork(RegistryFriendlyByteBuf buffer, @NotNull SeedUpdatingRecipe recipe) {
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.base);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.addition);
-            ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
-        }
-
-        @Override
-        public @NotNull MapCodec<SeedUpdatingRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, SeedUpdatingRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
+    private static void toNetwork(RegistryFriendlyByteBuf buffer, SeedUpdatingRecipe recipe) {
+        Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.base);
+        Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.addition);
+        ItemStackTemplate.STREAM_CODEC.encode(buffer, recipe.result);
     }
 }

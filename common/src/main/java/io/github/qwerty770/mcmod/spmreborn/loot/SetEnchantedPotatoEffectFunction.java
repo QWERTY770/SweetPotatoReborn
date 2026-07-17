@@ -15,7 +15,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -60,8 +59,8 @@ public class SetEnchantedPotatoEffectFunction extends LootItemConditionalFunctio
     }
 
     @Override
-    public @NotNull LootItemFunctionType<SetEnchantedPotatoEffectFunction> getType() {
-        return SweetPotatoLootFunctions.SET_ENCHANTED_POTATO_EFFECT.get();
+    public @NotNull MapCodec<SetEnchantedPotatoEffectFunction> codec() {
+        return CODEC;
     }
 
     public record EffectEntry(Holder<MobEffect> effect, int duration, int amplifier, float chance) {

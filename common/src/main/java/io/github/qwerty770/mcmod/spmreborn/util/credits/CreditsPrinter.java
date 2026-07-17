@@ -8,7 +8,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.GsonHelper;
 import org.apache.commons.io.IOUtils;
@@ -26,7 +26,7 @@ public record CreditsPrinter(Minecraft client,
                              IntSet centeredLines,
                              List<FormattedCharSequence> credits) {
     private static final Component SEPARATOR_LINE = Component.literal("============").withStyle(ChatFormatting.WHITE);
-    private static final ResourceLocation SPR_FILE = ResourceLocationTool.create(SPRMain.MODID,"credits.json");
+    private static final Identifier SPR_FILE = ResourceLocationTool.create(SPRMain.MODID,"credits.json");
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public static void print(Minecraft client, IntConsumer creditsHeight,

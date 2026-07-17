@@ -13,6 +13,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 public class EnchantedSaplings extends SaplingBlock {
+    private static final VoxelShape SHAPE = SaplingBlock.column(12.0D, 0.0D, 12.0D);
 
     public EnchantedSaplings(TreeGrower generator, Properties settings) {
         super(generator, settings);
@@ -32,6 +33,6 @@ public class EnchantedSaplings extends SaplingBlock {
 
     @Override
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
-        return (double)world.random.nextFloat() < 0.8D;
+        return (double)world.getRandom().nextFloat() < 0.8D;
     }
 }

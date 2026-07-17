@@ -18,7 +18,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -72,12 +71,12 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
         return new SeedUpdatingRecipeInput(this.inputSlots.getItem(0), this.inputSlots.getItem(1));
     }
 
-    protected boolean isValidBlock(@NotNull BlockState state) {
+    protected boolean isValidBlock(BlockState state) {
         return state.is(SweetPotatoBlocks.SEED_UPDATER.get());
     }
 
     @Override
-    protected void onTake(Player player, @NotNull ItemStack stack) {
+    protected void onTake(Player player, ItemStack stack) {
         this.resultSlots.awardUsedRecipes(player, Collections.singletonList(stack));
         this.shrinkStackInSlot(0);
         this.shrinkStackInSlot(1);
@@ -119,7 +118,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
             recipeHolder = Optional.empty();
         }
         recipeHolder.ifPresentOrElse((holder) -> {
-            ItemStack itemStack = holder.value().assemble(input, this.level.registryAccess());
+            ItemStack itemStack = holder.value().assemble(input);
             if (itemStack.isItemEnabled(this.level.enabledFeatures())) {
                 this.resultSlots.setRecipeUsed(holder);
                 this.resultSlots.setItem(0, itemStack);

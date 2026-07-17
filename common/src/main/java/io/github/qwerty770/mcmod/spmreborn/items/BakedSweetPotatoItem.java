@@ -25,7 +25,7 @@ public class BakedSweetPotatoItem extends Item implements SweetPotatoProperties 
         super.finishUsingItem(stack, world, user);
         if (user instanceof Player playerEntity) {
             playerEntity.awardStat(SweetPotatoStats.SWEET_POTATO_EATEN);
-            if (!((Player) user).getAbilities().instabuild)
+            if (!playerEntity.getAbilities().instabuild)
                 PeelInserter.run(playerEntity);
         }
 

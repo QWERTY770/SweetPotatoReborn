@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPotatoProperties {
     // Update to Minecraft 1.20 -- 2023/10/30  Removed all usages of net.fabricmc.fabric.api.util.NbtType
@@ -42,18 +44,18 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
     public @NotNull ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
         if (user instanceof Player playerEntity) {
             playerEntity.awardStat(SweetPotatoStats.SWEET_POTATO_EATEN);
-            if (!((Player) user).getAbilities().instabuild)
+            if (!playerEntity.getAbilities().instabuild)
                 PeelInserter.run(playerEntity);
         }
 
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
             Optional<List<MobEffectInstance>> statusEffectInstances = calcEffect(stack);
             statusEffectInstances.ifPresent(set -> set.forEach(statusEffectInstance -> {
-                if (!statusEffectInstance.getEffect().value().isInstantenous()) {
+                if (!statusEffectInstance.getEffect().value().isInstantaneous()) {
                     user.addEffect(new MobEffectInstance(statusEffectInstance));
                 } else {
                     statusEffectInstance.getEffect().value()
-                    .applyInstantenousEffect((ServerLevel) world, user, user, user, statusEffectInstance.getAmplifier(), 1.0D);
+                    .applyInstantaneousEffect((ServerLevel) world, user, user, user, statusEffectInstance.getAmplifier(), 1.0D);
                 }
             }));
         }
@@ -101,10 +103,10 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
 
     @Override
     @Environment(EnvType.CLIENT)
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> components, TooltipFlag flag) {
-        super.appendHoverText(stack, context, components, flag);
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltipDisplay, tooltip, flag);
         MutableComponent mainTip = Component.translatable("tooltip.spmreborn.enchanted_sweet_potato.effects");
-        components.add(mainTip);
+        tooltip.accept(mainTip);
 
         List<EffectEntry> list = stack.get(SweetPotatoDataComponentTypes.STATUS_EFFECTS.get());
         List<MobEffectInstance> effects = list == null ? null : list.stream().map(EffectEntry::getEffect).toList();

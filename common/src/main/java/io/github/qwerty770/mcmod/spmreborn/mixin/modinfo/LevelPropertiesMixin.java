@@ -2,7 +2,6 @@ package io.github.qwerty770.mcmod.spmreborn.mixin.modinfo;
 
 import io.github.qwerty770.mcmod.spmreborn.world.levelmeta.SPRLevelProperties;
 import io.github.qwerty770.mcmod.spmreborn.world.levelmeta.SPRLevelPropertiesHelper;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.storage.PrimaryLevelData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.UUID;
 
 @Mixin(PrimaryLevelData.class)
 public class LevelPropertiesMixin implements SPRLevelProperties {
@@ -34,7 +35,7 @@ public class LevelPropertiesMixin implements SPRLevelProperties {
     }
 
     @Inject(at = @At("RETURN"), method = "setTagData")
-    private void onWriteNbt(RegistryAccess dynamicRegistryManager, CompoundTag root, CompoundTag playerData, CallbackInfo ci) {
-        root.put("spmreborn:custom_data", this.sweetPotato_sprMeta);
+    private void onWriteNbt(CompoundTag tag, UUID singlePlayerUUID, CallbackInfo ci) {
+        tag.put("spmreborn:custom_data", this.sweetPotato_sprMeta);
     }
 }

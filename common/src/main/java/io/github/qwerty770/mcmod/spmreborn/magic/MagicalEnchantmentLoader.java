@@ -5,7 +5,7 @@ import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.FileToIdConverter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -32,7 +32,7 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener<J
     }
 
     @Override
-    protected void apply(Map<ResourceLocation, JsonElement> loader, ResourceManager manager, ProfilerFiller profiler) {
+    protected void apply(Map<Identifier, JsonElement> loader, ResourceManager manager, ProfilerFiller profiler) {
         WeightedStatusEffect.EFFECTS.clear();
         loader.forEach((fileId, json) -> {
             JsonArray root = GsonHelper.convertToJsonArray(json, fileId.toString());
@@ -40,7 +40,7 @@ public class MagicalEnchantmentLoader extends SimpleJsonResourceReloadListener<J
             int i = 0;
             for (JsonElement je: root) {
                 JsonObject eachObj = GsonHelper.convertToJsonObject(je, "Element #" + i);
-                ResourceLocation id = ResourceLocationTool.create(GsonHelper.getAsString(eachObj, "id"));
+                Identifier id = ResourceLocationTool.create(GsonHelper.getAsString(eachObj, "id"));
                 if (!BuiltInRegistries.MOB_EFFECT.keySet().contains(id)) {
                     LOGGER.error("Invalid status effect id: {}", id);
                     continue;

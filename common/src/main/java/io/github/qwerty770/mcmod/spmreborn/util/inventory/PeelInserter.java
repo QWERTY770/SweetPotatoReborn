@@ -17,17 +17,17 @@ public interface PeelInserter {
         Inventory inventory = player.getInventory();
         ItemStack eachStack;
         int i;
-        for (i = 0; i < inventory.items.size(); ++i) {
-            eachStack = inventory.items.get(i);
+        for (i = 0; i < inventory.getContainerSize(); ++i) {
+            eachStack = inventory.getItem(i);
             if (eachStack.getItem().equals(SweetPotatoItems.PEEL.get()) && eachStack.getCount() < SweetPotatoItems.PEEL.get().getDefaultMaxStackSize()) {
                 eachStack.grow(1);
                 return PeelActionResult.INSERT;
             }
         }
-        for (i = 0; i < inventory.items.size(); ++i) {
-            eachStack = inventory.items.get(i);
+        for (i = 0; i < inventory.getContainerSize(); ++i) {
+            eachStack = inventory.getItem(i);
             if (eachStack.equals(ItemStack.EMPTY)) {
-                inventory.items.set(i, new ItemStack(SweetPotatoItems.PEEL.get(), 1));
+                inventory.setItem(i, new ItemStack(SweetPotatoItems.PEEL.get(), 1));
                 return PeelActionResult.INSERT;
             }
         }

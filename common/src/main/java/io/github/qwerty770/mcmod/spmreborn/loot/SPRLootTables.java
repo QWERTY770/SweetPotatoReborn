@@ -5,7 +5,7 @@ import io.github.qwerty770.mcmod.spmreborn.SPRMain;
 import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -24,8 +24,8 @@ public class SPRLootTables {
     public static final ResourceKey<LootTable> MORE_BAKED_SWEET_POTATOES = createKey("misc/more_baked_sweet_potatoes");
     public static final ResourceKey<LootTable> EMPTY = createKey("empty_loot_table");
 
-    private static final List<ResourceKey<LootTable>> zombies = List.of(EntityType.ZOMBIE.getDefaultLootTable().orElse(EMPTY),
-            EntityType.HUSK.getDefaultLootTable().orElse(EMPTY), EntityType.ZOMBIE_VILLAGER.getDefaultLootTable().orElse(EMPTY));
+    private static final List<ResourceKey<LootTable>> zombies = List.of(EntityTypes.ZOMBIE.getDefaultLootTable().orElse(EMPTY),
+            EntityTypes.HUSK.getDefaultLootTable().orElse(EMPTY), EntityTypes.ZOMBIE_VILLAGER.getDefaultLootTable().orElse(EMPTY));
     private static final List<ResourceKey<LootTable>> ancient_cities = List.of(BuiltInLootTables.ANCIENT_CITY,
             BuiltInLootTables.ANCIENT_CITY_ICE_BOX);
 
@@ -64,7 +64,7 @@ public class SPRLootTables {
     }
 
     private static boolean isVanilla(ResourceKey<?> key) {
-        return key.location().getNamespace().equals("minecraft");
+        return key.identifier().getNamespace().equals("minecraft");
     }
 
     public static ResourceKey<LootTable> createKey(String path){

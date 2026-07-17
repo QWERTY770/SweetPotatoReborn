@@ -5,8 +5,7 @@ import io.github.qwerty770.mcmod.spmreborn.api.ResourceLocationTool;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -25,16 +24,16 @@ public class StatusEffectInstances {
     @Nullable
     @Deprecated
     public static MobEffectInstance readNbt(CompoundTag tag) {
-        if (!tag.contains("id", Tag.TAG_STRING)) return null;
-        String raw = tag.getString("id");
+        if (!tag.contains("id")) return null;
+        String raw = tag.getStringOr("id", "");
         MobEffect effect = fromId(raw);
         if (effect == null) return null;
-        int duration = tag.getInt("duration"), amplifier = tag.getInt("amplifier"); // defaulted as 0
+        int duration = tag.getIntOr("duration", 0), amplifier = tag.getIntOr("amplifier", 0); // defaulted as 0
         return new MobEffectInstance(Holder.direct(effect), duration, amplifier);
     }
 
     private static MobEffect fromId(String raw) {
-        ResourceLocation id = ResourceLocationTool.create(raw);
+        Identifier id = ResourceLocationTool.create(raw);
         if (!BuiltInRegistries.MOB_EFFECT.keySet().contains(id)) {
             LOGGER.error("Cannot apply status effect: {}", raw);
             return null;
@@ -66,7 +65,7 @@ public class StatusEffectInstances {
     public static CompoundTag writeNbt(MobEffectInstance effect) {
         CompoundTag tag = new CompoundTag();
         MobEffect statusEffect = effect.getEffect().value();
-        ResourceLocation id = BuiltInRegistries.MOB_EFFECT.getKey(statusEffect);
+        Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(statusEffect);
         if (id == null) {
             LOGGER.error("Cannot write status effect: {}", statusEffect.getDisplayName());
             return tag;
@@ -80,7 +79,7 @@ public class StatusEffectInstances {
 
     public static void writeJson(JsonObject json, MobEffectInstance effect) {
         MobEffect statusEffect = effect.getEffect().value();
-        ResourceLocation id = BuiltInRegistries.MOB_EFFECT.getKey(statusEffect);
+        Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(statusEffect);
         if (id == null) throw new IllegalArgumentException("unknown effect");
         json.addProperty("id", id.toString());
         json.addProperty("duration", effect.getDuration());

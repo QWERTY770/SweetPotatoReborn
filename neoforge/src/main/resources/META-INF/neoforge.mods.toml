@@ -24,20 +24,20 @@ config="spmreborn-common.mixins.json"
 [[dependencies.spmreborn]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.4.0,)"
+versionRange = "[26.2.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.spmreborn]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.4,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.spmreborn]]
 modId = "architectury"
 type = "required"
-versionRange = "[15.0,)"
+versionRange = "[21.0,)"
 ordering = "NONE"
 side = "BOTH"

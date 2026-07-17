@@ -20,10 +20,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-// Re：SmithingTableBlock
+// Re: SmithingTableBlock
 @ParametersAreNonnullByDefault
 public class SeedUpdaterBlock extends CraftingTableBlock {
     private static final Component SCREEN_TITLE = Component.translatable("container.spmreborn.seed_updating");
@@ -41,7 +42,7 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
     }
 
     @Override
-    public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
+    public @NonNull MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
         return new SimpleMenuProvider((syncId, inv, player) -> new SeedUpdaterScreenHandler(
                 syncId, inv, ContainerLevelAccess.create(world, pos)
         ), SCREEN_TITLE);
@@ -49,7 +50,7 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
 
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (world.isClientSide)
+        if (world.isClientSide())
             return InteractionResult.SUCCESS;
         MenuRegistry.openMenu((ServerPlayer) player, state.getMenuProvider(world, pos)); // Multi-platform support
         player.awardStat(SweetPotatoStats.INTERACT_WITH_AGRO);

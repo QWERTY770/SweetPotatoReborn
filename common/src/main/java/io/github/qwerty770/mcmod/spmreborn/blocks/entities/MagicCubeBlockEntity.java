@@ -17,8 +17,6 @@ import io.github.qwerty770.mcmod.spmreborn.util.iprops.IntMagicCubeProperties;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -34,6 +32,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -156,7 +156,7 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     public void tick(Level world, BlockPos pos, BlockState state) {
         boolean shallMarkDirty = false;
 
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
             if (world.getGameTime() % 10L == 5L) {
                 stateHelper.run();
             }
@@ -278,17 +278,17 @@ public class MagicCubeBlockEntity extends AbstractLockableContainerBlockEntity i
     }
 
     @Override
-    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        this.mainFuelTime = tag.getShort("EnergyTime");
-        this.viceFuelTime = tag.getShort("SublimateTime");
+    public void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        this.mainFuelTime = (short) input.getShortOr("EnergyTime", (short) -1);
+        this.viceFuelTime = (short) input.getShortOr("SublimateTime", (short) 0);
     }
 
     @Override
-    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putShort("EnergyTime", this.mainFuelTime);
-        tag.putShort("SublimateTime", this.viceFuelTime);
+    public void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.putShort("EnergyTime", this.mainFuelTime);
+        output.putShort("SublimateTime", this.viceFuelTime);
     }
 
     @Override

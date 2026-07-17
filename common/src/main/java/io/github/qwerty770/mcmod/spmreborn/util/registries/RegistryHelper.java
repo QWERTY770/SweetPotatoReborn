@@ -14,7 +14,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.world.entity.Entity;
@@ -34,7 +34,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
 import java.util.*;
 import java.util.function.Function;
@@ -61,12 +60,12 @@ public abstract class RegistryHelper {
     public static final DeferredRegister<SoundEvent> soundRegistry = ofModRegistry(Registries.SOUND_EVENT);
     public static final DeferredRegister<ParticleType<?>> particleTypeRegistry = ofModRegistry(Registries.PARTICLE_TYPE);
     public static final DeferredRegister<EntityType<?>> entityTypeRegistry = ofModRegistry(Registries.ENTITY_TYPE);
-    public static final DeferredRegister<ResourceLocation> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
+    public static final DeferredRegister<Identifier> statRegistry = ofModRegistry(Registries.CUSTOM_STAT);
     public static final DeferredRegister<PoiType> poiTypeRegistry = ofModRegistry(Registries.POINT_OF_INTEREST_TYPE);
-    public static final DeferredRegister<LootItemFunctionType<?>> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
+    public static final DeferredRegister<MapCodec<? extends LootItemFunction>> lootFunctionRegistry = ofModRegistry(Registries.LOOT_FUNCTION_TYPE);
     public static final DeferredRegister<CreativeModeTab> creativeTabRegistry = ofModRegistry(Registries.CREATIVE_MODE_TAB);
 
-    public static ResourceLocation id(String id) {
+    public static Identifier id(String id) {
         return ResourceLocationTool.create(SPRMain.MODID, id);
     }
 
@@ -83,7 +82,7 @@ public abstract class RegistryHelper {
     }
 
     public static <B extends Block> RegistrySupplier<B> block(ResourceKey<Block> resourceKey, Function<BlockBehaviour.Properties, B> function, BlockBehaviour.Properties properties) {
-        return blockRegistry.register(resourceKey.location(), () -> function.apply(properties.setId(resourceKey)));
+        return blockRegistry.register(resourceKey.identifier(), () -> function.apply(properties.setId(resourceKey)));
     }
 
     public static <I extends Item> RegistrySupplier<I> item(String id, Function<Item.Properties, I> function, Item.Properties properties) {
@@ -91,7 +90,7 @@ public abstract class RegistryHelper {
     }
 
     public static <I extends Item> RegistrySupplier<I> item(ResourceKey<Item> resourceKey, Function<Item.Properties, I> function, Item.Properties properties) {
-        return itemRegistry.register(resourceKey.location(), () -> function.apply(properties.setId(resourceKey)));
+        return itemRegistry.register(resourceKey.identifier(), () -> function.apply(properties.setId(resourceKey)));
     }
 
     public static RegistrySupplier<Item> defaultItem(String id, Item.Properties properties) {
@@ -124,7 +123,7 @@ public abstract class RegistryHelper {
     }
 
     public static <I extends RecipeInput, T extends Recipe<I>> RegistrySupplier<RecipeType<T>> recipeType(String id) {
-        ResourceLocation id2 = id(id);
+        Identifier id2 = id(id);
         return recipeTypeRegistry.register(id, () -> new RecipeType<>() {
             @Override
             public String toString() {
@@ -158,13 +157,13 @@ public abstract class RegistryHelper {
         return TagContainer.register(id(id), BuiltInRegistries.ITEM);
     }
 
-    public static ResourceLocation stat(String id, StatFormatter statFormatter) {
-        ResourceLocation id2 = id(id);
+    public static Identifier stat(String id, StatFormatter statFormatter) {
+        Identifier id2 = id(id);
         statRegistry.register(id, () -> id2);
         return id2;
     }
 
-    public static ResourceLocation stat(String id) {
+    public static Identifier stat(String id) {
         return stat(id, StatFormatter.DEFAULT);
     }
 
@@ -172,8 +171,8 @@ public abstract class RegistryHelper {
         return poiTypeRegistry.register(id, () -> new PoiType(matchingStatesSup.get(), maxTickets, validRange));
     }
 
-    public static <T extends LootItemFunction> RegistrySupplier<LootItemFunctionType<T>> lootFunction(String id, MapCodec<T> codec) {
-        return lootFunctionRegistry.register(id, () -> new LootItemFunctionType<>(codec));
+    public static <T extends LootItemFunction> RegistrySupplier<MapCodec<? extends LootItemFunction>> lootFunction(String id, MapCodec<T> codec) {
+        return lootFunctionRegistry.register(id, () -> codec);
     }
 
     public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab) {
