@@ -1,10 +1,6 @@
 {
-  "_comment": "This is the old translation of Sweet Potato Mod and may not work on Sweet Potato Reborn mod",
-  "tab.spmreborn": "Sweet Potato+",
   "mod.spmreborn": "Sweet Potato Reborn",
-  "mod.spmreborn.0": ", от Pigeonia Featurehouse",
-  "mod.spmreborn.1": "Авторы:",
-  "mod.spmreborn.2": "Агент в §oMinecraft Китай§: ",
+  "tab.spmreborn": "Sweet Potato+",
   "item.spmreborn.purple_potato": "Фиолетовый картофель",
   "item.spmreborn.red_potato": "Красный картофель",
   "item.spmreborn.white_potato": "Белый картофель",
