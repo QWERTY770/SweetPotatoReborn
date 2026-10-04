@@ -6,7 +6,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
-@EventBusSubscriber(modid = "spmreborn", bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = "spmreborn")
 public final class ModEventSubscribers {
     @SubscribeEvent
     public static void init(FMLCommonSetupEvent event) {

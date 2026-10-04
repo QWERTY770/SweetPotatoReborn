@@ -7,8 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-@EventBusSubscriber(modid = "spmreborn", bus = EventBusSubscriber.Bus.MOD,
-        value = Dist.CLIENT)
+@EventBusSubscriber(modid = "spmreborn", value = Dist.CLIENT)
 public final class ClientEventSubscribers {
     @SubscribeEvent
     public static void initClient(FMLClientSetupEvent event) {

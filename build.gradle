@@ -1,7 +1,8 @@
 //file:noinspection GroovyAssignabilityCheck
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
+    id 'dev.architectury.loom' version '1.17-SNAPSHOT' apply false
+    id 'architectury-plugin' version '3.5-SNAPSHOT'
+    id 'com.gradleup.shadow' version '9.4.3' apply false
 }
 
 architectury {
@@ -14,7 +15,7 @@ subprojects {
             name = 'ParchmentMC'
             url = 'https://maven.parchmentmc.org'
         }
-        maven { url = 'https://maven.neoforged.net/releases' }
+        maven { url "https://maven.neoforged.net/releases" }
         maven { url "https://maven.fabricmc.net/" }
         maven { url "https://maven.architectury.dev/" }
     }
@@ -23,7 +24,7 @@ subprojects {
     apply plugin: "maven-publish"
 
     base {
-        archivesName = "${archives_base_name}"
+        archivesName = rootProject.archives_base_name + "-" + project.name
     }
     loom {
         silentMojangMappingsLicense()
@@ -34,7 +35,7 @@ subprojects {
         // The following line declares the mojmap mappings, you may use other mappings as well
         mappings loom.layered {
             officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-1.21:${rootProject.parchment_version}")
+            parchment("org.parchmentmc.data:parchment-1.21.1:${rootProject.parchment_version}")
         }
         // The following line declares the yarn mappings you may select this one as well.
         // mappings "net.fabricmc:yarn:1.19.4+build.2:v2"

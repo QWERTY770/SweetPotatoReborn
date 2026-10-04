@@ -5,10 +5,11 @@ issueTrackerURL = "https://github.com/QWERTY770/SweetPotatoReborn/issues"
 
 [[mods]]
 modId = "spmreborn"
-version = "1.21.1-1.0.1"
+version = "${version}"
 displayName = "Sweet Potato Reborn"
 displayURL="https://github.com/QWERTY770/SweetPotatoReborn"
 authors = "QWERTY770"
+credits = "雨音浅夏"
 description = '''
 Try new kinds of food, crops & magic in Sweet Potato Mod!
 '''
@@ -16,7 +17,6 @@ logoFile = "icon.png"
 
 [[mixins]]
 config="spmreborn-common.mixins.json"
-config2="spmreborn.mixins.json"
 
 [[dependencies.spmreborn]]
 modId = "neoforge"
