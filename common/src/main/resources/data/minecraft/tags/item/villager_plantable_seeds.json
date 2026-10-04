@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "spmreborn:enchanted_wheat_seeds",
+    "spmreborn:enchanted_carrot",
+    "spmreborn:enchanted_potato",
+    "spmreborn:enchanted_beetroot_seeds",
+    "#spmreborn:raw_sweet_potatoes"
+  ]
+}
