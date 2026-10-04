@@ -41,7 +41,7 @@ public class EnchantedSweetPotatoItem extends EnchantedItem implements SweetPota
     public @NotNull ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
         if (user instanceof Player playerEntity) {
             playerEntity.awardStat(SweetPotatoStats.SWEET_POTATO_EATEN);
-            if (!((Player) user).getAbilities().instabuild)
+            if (!playerEntity.getAbilities().instabuild)
                 PeelInserter.run(playerEntity);
         }
 

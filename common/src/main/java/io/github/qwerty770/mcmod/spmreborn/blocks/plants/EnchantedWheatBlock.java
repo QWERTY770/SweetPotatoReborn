@@ -24,7 +24,7 @@ public class EnchantedWheatBlock extends CropBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, @NotNull ServerLevel world, BlockPos pos, RandomSource random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         RandomTickHelper.enchantedCropRandomTick(this, state, world, pos, random);
     }
 }

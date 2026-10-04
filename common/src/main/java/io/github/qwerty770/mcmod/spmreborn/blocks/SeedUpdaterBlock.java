@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-// Re：SmithingTableBlock
+// Re: SmithingTableBlock
 @ParametersAreNonnullByDefault
 public class SeedUpdaterBlock extends CraftingTableBlock {
     private static final Component SCREEN_TITLE = Component.translatable("container.spmreborn.seed_updating");
@@ -41,7 +41,7 @@ public class SeedUpdaterBlock extends CraftingTableBlock {
     }
 
     @Override
-    public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
+    public @NotNull MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
         return new SimpleMenuProvider((syncId, inv, player) -> new SeedUpdaterScreenHandler(
                 syncId, inv, ContainerLevelAccess.create(world, pos)
         ), SCREEN_TITLE);

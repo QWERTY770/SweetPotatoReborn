@@ -98,7 +98,7 @@ public abstract class RegistryHelper {
         return itemRegistry.register(id, () -> new BlockItem(block2.get(), settings));
     }
 
-    public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType){
+    public static <T> RegistrySupplier<DataComponentType<T>> componentType(String id, Supplier<DataComponentType<T>> componentType) {
         return dataComponentTypeRegistry.register(id, componentType);
     }
 
@@ -158,7 +158,9 @@ public abstract class RegistryHelper {
         return id2;
     }
 
-    public static ResourceLocation stat(String id) { return stat(id, StatFormatter.DEFAULT); }
+    public static ResourceLocation stat(String id) {
+        return stat(id, StatFormatter.DEFAULT);
+    }
 
     public static <P extends TreeDecorator> RegistrySupplier<TreeDecoratorType<P>> treeDecoratorType(String id, Supplier<MapCodec<P>> codecGetter) {
         return treeDecoratorTypeRegistry.register(id, () -> new TreeDecoratorType<>(codecGetter.get()));
@@ -172,7 +174,7 @@ public abstract class RegistryHelper {
         return lootFunctionRegistry.register(id, () -> new LootItemFunctionType<>(codec));
     }
 
-    public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab){
+    public static RegistrySupplier<CreativeModeTab> creativeModeTab(String id, CreativeModeTab tab) {
         return creativeTabRegistry.register(id, () -> tab);
     }
 
@@ -182,7 +184,7 @@ public abstract class RegistryHelper {
         return reg;
     }
 
-    public static void registerAll(){
+    public static void registerAll() {
         for (var reg : modRegistries) {
             reg.register();
         }

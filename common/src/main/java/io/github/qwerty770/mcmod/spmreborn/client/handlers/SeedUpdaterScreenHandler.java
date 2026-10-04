@@ -50,7 +50,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
                 .withResultSlot(2, 134, 47).build();
     }
 
-    protected boolean isValidBlock(@NotNull BlockState state) {
+    protected boolean isValidBlock(BlockState state) {
         return state.is(SweetPotatoBlocks.SEED_UPDATER.get());
     }
 
@@ -60,7 +60,7 @@ public class SeedUpdaterScreenHandler extends ItemCombinerMenu {
     }
 
     @Override
-    protected void onTake(Player player, @NotNull ItemStack stack) {
+    protected void onTake(Player player, ItemStack stack) {
         this.resultSlots.awardUsedRecipes(player, Collections.singletonList(stack));
         this.putStack(0);
         this.putStack(1);

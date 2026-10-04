@@ -137,7 +137,7 @@ public class GrinderBlockEntity extends AbstractLockableContainerBlockEntity imp
     }
 
     @Override
-    public void tick(@NotNull Level world, BlockPos pos, BlockState state) {
+    public void tick(Level world, BlockPos pos, BlockState state) {
         boolean shallMarkDirty = false;
 
         if (!world.isClientSide) {

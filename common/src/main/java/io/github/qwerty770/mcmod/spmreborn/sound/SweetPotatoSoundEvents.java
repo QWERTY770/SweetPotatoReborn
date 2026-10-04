@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 
 import static io.github.qwerty770.mcmod.spmreborn.util.registries.RegistryHelper.sound;
 
+@SuppressWarnings("unused")
 public class SweetPotatoSoundEvents {
     public static final InternalRegistryLogWrapper LOG_WRAPPER = InternalRegistryLogWrapper.of("sound_events");
     // Sounds

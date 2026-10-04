@@ -38,7 +38,7 @@ public class LevelPropertiesMixin implements SPRLevelProperties {
     }
 
     @Inject(at = @At("RETURN"), method = "setTagData")
-    private void onWriteNbt(RegistryAccess dynamicRegistryManager, CompoundTag root, CompoundTag playerData, CallbackInfo ci) {
-        root.put("spmreborn:custom_data", this.sweetPotato_sprMeta);
+    private void onWriteNbt(RegistryAccess registry, CompoundTag nbt, CompoundTag playerNBT, CallbackInfo ci) {
+        nbt.put("spmreborn:custom_data", this.sweetPotato_sprMeta);
     }
 }

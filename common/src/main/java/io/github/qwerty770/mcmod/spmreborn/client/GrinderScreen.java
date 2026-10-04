@@ -29,7 +29,7 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderScreenHandler>
         guiGraphics.drawString(this.font, Component.translatable(
                         "container.grinding.ingredientData",
                         ingredientData),
-                8, 59, 0);
+                8, 59, 0xff404040, false);
     }
 
     // Update to Minecraft 1.20 -- 2023/06/29

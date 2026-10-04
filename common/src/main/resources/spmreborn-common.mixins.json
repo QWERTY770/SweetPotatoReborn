@@ -10,8 +10,7 @@
   ],
   "client": [
     "WorldEventMixinC",
-    "modinfo.CreditsScreenMixinC",
-    "modinfo.TitleScreenMixinC"
+    "modinfo.CreditsScreenMixinC"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -31,11 +31,11 @@ public class WorldEventMixinC {
      * When {@link ClientLevel#levelEvent(Player, int, BlockPos, int)} calls.
      */
     @Inject(at = @At("HEAD"), method = "levelEvent", cancellable = true)
-    private void sprSounds(int eventId, BlockPos blockPos, int data, CallbackInfo ci) {
-        if (eventId == 1132119 && data == 805) {
+    private void sprSounds(int type, BlockPos pos, int data, CallbackInfo ci) {
+        if (type == 1132119 && data == 805) {
             assert minecraft.player != null;
             minecraft.getSoundManager().play(new KeepPlayingSoundInstance(SweetPotatoSoundEvents.GRINDER_GRIND.get(),
-                    1.0F, level, blockPos, minecraft.player, (world1, blockPos1) -> {
+                    1.0F, level, pos, minecraft.player, (world1, blockPos1) -> {
                 BlockState state = world1.getBlockState(blockPos1);
                 return state.getBlock() instanceof GrinderBlock // important
                         && state.getValue(GrinderBlock.GRINDING);
